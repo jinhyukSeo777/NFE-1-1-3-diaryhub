@@ -1,0 +1,19 @@
+.slick-prev,
+.slick-next {
+  border-radius: 50%;
+  z-index: 99;
+}
+.slick-prev {
+  left: 3rem;
+}
+.slick-next {
+  right: 3rem;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: #a2cdf4;
+}
+.slick-dots button::before {
+  color: #5caaf3 !important;
+}
