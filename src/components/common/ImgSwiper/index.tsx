@@ -18,7 +18,7 @@ const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
     <Slider {...settings}>
       {imgList.map((img, index) => {
         return (
-          <div className={slide}>
+          <div className={slide} key={index}>
             <img className={imgItem} src={img} alt="img"></img>
           </div>
         );
