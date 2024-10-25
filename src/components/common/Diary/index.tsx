@@ -1,3 +1,4 @@
+import { DiaryResponseType } from '../../../pages/DiaryDetail';
 import ImgSwiper from '../ImgSwiper';
 import {
   diaryWrapper,
@@ -9,17 +10,10 @@ import {
   diaryBodyText,
 } from './styles.css';
 interface diaryProps {
-  diaryInfo: {
-    title: string;
-    date: string;
-    imgList: string[];
-    mood: string;
-    weather: string;
-    body: string;
-  };
+  diaryInfo: DiaryResponseType;
 }
 const Diary = ({ diaryInfo }: diaryProps) => {
-  const date = new Date(diaryInfo.date);
+  const date = new Date(diaryInfo.diaryDate);
   const day = [
     '일요일',
     '월요일',
@@ -42,10 +36,10 @@ const Diary = ({ diaryInfo }: diaryProps) => {
         </div>
       </div>
       <div className={diaryslide}>
-        <ImgSwiper imgList={diaryInfo.imgList} />
+        <ImgSwiper imgList={diaryInfo.images} />
       </div>
       <div className={diaryBody}>
-        <p className={diaryBodyText}>{diaryInfo.body}</p>
+        <p className={diaryBodyText}>{diaryInfo.content}</p>
       </div>
     </div>
   );

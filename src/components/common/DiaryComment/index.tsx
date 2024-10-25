@@ -1,44 +1,33 @@
-import {
-  commentWrapper,
-  writeComment,
-  commentForm,
-  commentInput,
-  commentList,
-  commentItem,
-} from './styles.css';
+import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
+import * as S from './styles.css';
 
-const DiaryComment = () => {
+interface DiaryCommentProps {
+  commentsList: DiaryCommentResponseType[];
+}
+
+const DiaryComment = ({ commentsList }: DiaryCommentProps) => {
   return (
-    <div className={commentWrapper}>
-      <div className={writeComment}>
+    <div className={S.commentWrapper}>
+      <div className={S.writeComment}>
         <p>댓글</p>
-        <form className={commentForm}>
+        <form className={S.commentForm}>
           <input
             placeholder="댓글을 입력해주세요"
-            className={commentInput}
+            className={S.commentInput}
           ></input>
           <button>작성</button>
         </form>
       </div>
-      <ul className={commentList}>
-        <li className={commentItem}>
-          <p>
-            작성자 <span>작성 날짜</span>
-          </p>
-          <p>댓글</p>
-        </li>
-        <li className={commentItem}>
-          <p>
-            작성자 <span>작성 날짜</span>
-          </p>
-          <p>댓글</p>
-        </li>
-        <li className={commentItem}>
-          <p>
-            작성자 <span>작성 날짜</span>
-          </p>
-          <p>댓글</p>
-        </li>
+      <ul className={S.commentList}>
+        {commentsList.map((comment, index) => {
+          return (
+            <li className={S.commentItem}>
+              <span>{comment.user.username} </span>
+              <span>{comment.createdAt.split('T')[0]}</span>
+              <p>{comment.content}</p>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
