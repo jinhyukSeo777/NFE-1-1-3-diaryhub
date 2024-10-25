@@ -1,14 +1,8 @@
 import { DiaryResponseType } from '../../../pages/DiaryDetail';
 import ImgSwiper from '../ImgSwiper';
-import {
-  diaryWrapper,
-  diaryTitle,
-  diaryTitleText,
-  diaryMood,
-  diaryslide,
-  diaryBody,
-  diaryBodyText,
-} from './styles.css';
+import * as S from './styles.css';
+import feel1 from '../../../assets/feel1.svg';
+import sun from '../../../assets/sun.svg';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
 }
@@ -24,22 +18,33 @@ const Diary = ({ diaryInfo }: diaryProps) => {
     '토요일',
   ];
   return (
-    <div className={diaryWrapper}>
-      <div className={diaryTitle}>
-        <div className={diaryTitleText}>
+    <div className={S.diaryWrapper}>
+      <div className={S.diaryTitle}>
+        <div className={S.diaryTitleText}>
           {date.getFullYear()} 년 {date.getMonth() + 1} 월 {date.getDate()} 일{' '}
           {day[date.getDay()]}
         </div>
-        <div className={diaryTitleText}>{diaryInfo.title}</div>
-        <div className={diaryMood}>
-          {diaryInfo.mood} {diaryInfo.weather}
+        <div className={S.diaryTitleText}>제목: {diaryInfo.title}</div>
+        <div className={S.diaryMood}>
+          <div>
+            <div className={S.diaryMoodTitle}>오늘의 기분</div>
+            <div className={S.diaryIcon}>
+              <img className={S.diaryIconImg} src={feel1} alt="feel"></img>
+            </div>
+          </div>
+          <div>
+            <div className={S.diaryMoodTitle}>오늘의 날씨</div>
+            <div className={S.diaryIcon}>
+              <img className={S.diaryIconImg} src={sun} alt="weather"></img>
+            </div>
+          </div>
         </div>
       </div>
-      <div className={diaryslide}>
+      <div className={S.diaryslide}>
         <ImgSwiper imgList={diaryInfo.images} />
       </div>
-      <div className={diaryBody}>
-        <p className={diaryBodyText}>{diaryInfo.content}</p>
+      <div className={S.diaryBody}>
+        <p className={S.diaryBodyText}>{diaryInfo.content}</p>
       </div>
     </div>
   );
