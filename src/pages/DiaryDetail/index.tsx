@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 import Diary from '../../components/common/Diary';
+import DiaryComment from '../../components/common/DiaryComment';
+import { diaryDetailWrapper } from './styles.css';
 const DiaryDetail = () => {
   const param: { id?: string } = useParams();
   const diaryInfo = {
@@ -17,11 +19,12 @@ const DiaryDetail = () => {
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quasi repellendus, unde incidunt exercitationem mollitia sequi quia, neque beatae perferendis consectetur illum fuga excepturi soluta libero aliquid ea ipsa laudantium!',
   };
   return (
-    <div>
+    <div className={diaryDetailWrapper}>
       <h2>
         <span>{param.id}</span> 번 일기 상세 페이지
       </h2>
-      <Diary diaryInfo={diaryInfo}></Diary>
+      <Diary diaryInfo={diaryInfo} />
+      <DiaryComment />
     </div>
   );
 };
