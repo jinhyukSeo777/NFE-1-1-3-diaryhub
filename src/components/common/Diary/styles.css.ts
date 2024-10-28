@@ -11,17 +11,22 @@ export const diaryTitle = style({
 export const diaryTitleText = style({
   padding: '1rem',
   border: '1px solid',
+  height: '1.5rem',
+  lineHeight: '1.5rem',
 });
 
-export const diaryMood = style({
+export const diaryIconContainer = style({
   padding: '1rem',
   display: 'flex',
+  alignItems: 'center',
   justifyContent: 'center',
-  gap: '1rem',
   textAlign: 'center',
   border: '1px solid',
   gridColumn: '2 / 3',
   gridRow: '1 / 3',
+});
+export const diaryIconBox = style({
+  width: '50%',
 });
 
 export const diaryMoodTitle = style({
@@ -30,8 +35,9 @@ export const diaryMoodTitle = style({
 
 export const diaryIcon = style({
   position: 'relative',
-  width: '100%',
-  paddingTop: '100%',
+  width: '50%',
+  paddingTop: '50%',
+  margin: 'auto',
 });
 
 export const diaryIconImg = style({

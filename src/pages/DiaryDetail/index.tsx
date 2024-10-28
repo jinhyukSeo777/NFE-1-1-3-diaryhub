@@ -55,7 +55,7 @@ const DiaryDetail = () => {
       },
     },
     mood: 'feel1',
-    weather: 'weather1',
+    weather: 'sun',
     createdAt: '2024-10-21T12:00:00Z',
     isPublic: true,
     likes: ['user1', 'user2', 'user3'],
