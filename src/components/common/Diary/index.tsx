@@ -11,6 +11,7 @@ import cloud from '../../../assets/cloud.svg';
 import rain from '../../../assets/rain.svg';
 import thunder from '../../../assets/thunder.svg';
 import wind from '../../../assets/wind.svg';
+import { useEffect, useRef, useState } from 'react';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
 }
@@ -37,17 +38,44 @@ const Diary = ({ diaryInfo }: diaryProps) => {
     rain: rain,
     thunder: thunder,
   };
+  const [lineCount, setLineCount] = useState(0);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const calculateLineCount = () => {
+      if (textRef.current) {
+        const lineHeight = parseInt(
+          window.getComputedStyle(textRef.current).lineHeight
+        );
+        const height = textRef.current.clientHeight;
+        const lines = Math.floor(height / lineHeight);
+        setLineCount(lines);
+      }
+    };
+    calculateLineCount();
+    window.addEventListener('resize', calculateLineCount);
+    return () => {
+      window.removeEventListener('resize', calculateLineCount);
+    };
+  }, []);
+  const drawLine = () => {
+    const elements = [];
+    for (let i = 0; i < lineCount; i++) {
+      elements.push(<div className={S.diaryLineItem}></div>);
+    }
+    return elements;
+  };
   return (
-    <div className={S.diaryWrapper}>
-      <div className={S.diaryTitle}>
+    <div className={S.diaryContainer}>
+      <div className={S.diaryTitleBox}>
         <div className={S.diaryTitleText}>
           {date.getFullYear()}년 {date.getMonth() + 1}월 {date.getDate()}일{' '}
           {day[date.getDay()]}
         </div>
         <div className={S.diaryTitleText}>제목: {diaryInfo.title}</div>
-        <div className={S.diaryIconContainer}>
-          <div className={S.diaryIconBox}>
-            <div className={S.diaryMoodTitle}>그날의 날씨</div>
+        <div className={S.diaryTitleIcon}>
+          <div className={S.diaryIconInfo}>
+            <div className={S.diaryIconTitle}>그날의 날씨</div>
             <div className={S.diaryIcon}>
               <img
                 className={S.diaryIconImg}
@@ -56,8 +84,8 @@ const Diary = ({ diaryInfo }: diaryProps) => {
               ></img>
             </div>
           </div>
-          <div className={S.diaryIconBox}>
-            <div className={S.diaryMoodTitle}>그날의 기분</div>
+          <div className={S.diaryIconInfo}>
+            <div className={S.diaryIconTitle}>그날의 기분</div>
             <div className={S.diaryIcon}>
               <img
                 className={S.diaryIconImg}
@@ -72,7 +100,8 @@ const Diary = ({ diaryInfo }: diaryProps) => {
         <ImgSwiper imgList={diaryInfo.images} />
       </div>
       <div className={S.diaryBody}>
-        <p className={S.diaryBodyText}>{diaryInfo.content}</p>
+        <div ref={textRef}>{diaryInfo.content}</div>
+        <div className={S.diaryLine}>{drawLine()}</div>
       </div>
     </div>
   );
