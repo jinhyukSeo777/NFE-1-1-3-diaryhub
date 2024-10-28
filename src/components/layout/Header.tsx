@@ -1,43 +1,64 @@
-// Header.tsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { headerStyle, navStyle, ulStyle, liStyle } from './Header.css';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  headerStyle,
+  logoContainerStyle,
+  logoImageStyle,
+  navStyle,
+  ulStyle,
+  liStyle,
+  linkStyle,
+  h1Style,
+} from './Header.css';
+import { useAuth } from '../AuthContext'; // AuthContext에서 로그인 상태 가져오기
 
 const Header: React.FC = () => {
-  // 로그인 상태 관리 (예: false는 로그인 안 한 상태, true는 로그인 한 상태)
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
 
-  // 로그인/로그아웃 토글 함수 (실제 구현에서는 로그인 API를 사용할 것)
-  const handleLoginLogout = () => {
-    setIsLoggedIn((prev) => !prev);
+  const handleLogout = () => {
+    logout();
+    navigate('/'); // 홈으로 이동
   };
 
   return (
     <header className={headerStyle}>
+      <div className={logoContainerStyle}>
+        <img src="/assets/logo.svg" alt="logo" className={logoImageStyle} />
+        <h2 className={h1Style}>교환일기</h2>
+      </div>
+
       <nav className={navStyle}>
         <ul className={ulStyle}>
-          {/* 공통 메뉴 */}
           <li className={liStyle}>
-            <Link to="/">홈</Link>
+            <Link to="/" className={linkStyle}>
+              홈
+            </Link>
           </li>
-
-          {/* 로그인 상태에 따라 다른 메뉴 보여주기 */}
           {isLoggedIn ? (
             <>
               <li className={liStyle}>
-                <Link to="/my-diary">나의 일기</Link>
+                <Link to="/my-diary" className={linkStyle}>
+                  나의 일기
+                </Link>
               </li>
               <li className={liStyle}>
-                <button onClick={handleLoginLogout}>로그아웃</button>
+                <button onClick={handleLogout} className={linkStyle}>
+                  로그아웃
+                </button>
               </li>
             </>
           ) : (
             <>
               <li className={liStyle}>
-                <Link to="/signup">회원가입</Link>
+                <Link to="/signup" className={linkStyle}>
+                  회원가입
+                </Link>
               </li>
               <li className={liStyle}>
-                <button onClick={handleLoginLogout}>로그인</button>
+                <Link to="/login" className={linkStyle}>
+                  로그인
+                </Link>
               </li>
             </>
           )}
