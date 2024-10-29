@@ -14,14 +14,14 @@ const CreateMap = ({ position, setPosition }: IProps) => {
   const handleCenterChanged = () => {
     if (map) {
       const center = map.getCenter(); // 지도 중심 좌표 가져오기
-      setPosition({ lat: center.Ma, lng: center.La });
+      setPosition({ latitude: center.Ma, longitude: center.La });
     }
   };
 
   return (
     <div className={styles.container}>
       <Map
-        center={position}
+        center={{ lat: position.latitude, lng: position.longitude }}
         style={{
           width: '100%',
           height: '100%',

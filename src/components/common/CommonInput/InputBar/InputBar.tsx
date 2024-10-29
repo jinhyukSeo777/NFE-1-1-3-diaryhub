@@ -14,8 +14,8 @@ interface IResult {
   place_name: string;
   address_name: string;
   place_url: string;
-  lng: number;
-  lat: number;
+  longitude: number;
+  latitude: number;
 }
 
 interface IPagination {
@@ -39,8 +39,8 @@ const InputBar = ({ setPosition }: IProps) => {
           place_name: place.place_name,
           address_name: place.address_name,
           place_url: place.place_url,
-          lat: +place.y,
-          lng: +place.x,
+          latitude: +place.y,
+          longitude: +place.x,
         }));
         setResult((prev) => [...prev, ...newResult]);
         paginationRef.current = _pagination; // pagination 객체 저장
@@ -54,8 +54,8 @@ const InputBar = ({ setPosition }: IProps) => {
     }
   };
 
-  const changePosition = (lat: number, lng: number) => {
-    setPosition({ lat, lng });
+  const changePosition = (latitude: number, longitude: number) => {
+    setPosition({ latitude, longitude });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -105,12 +105,15 @@ const InputBar = ({ setPosition }: IProps) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>
-      <ul className={styles.resultarea}>
+      <ul
+        className={styles.resultarea}
+        style={{ marginTop: result.length !== 0 ? '0.5rem' : undefined }}
+      >
         {result.map((value, index) => (
           <li
             className={styles.result}
             key={index}
-            onClick={() => changePosition(value.lat, value.lng)}
+            onClick={() => changePosition(value.latitude, value.longitude)}
           >
             <span className={styles.placename}>{value.place_name}</span>
             <span className={styles.addressname}>{value.address_name}</span>

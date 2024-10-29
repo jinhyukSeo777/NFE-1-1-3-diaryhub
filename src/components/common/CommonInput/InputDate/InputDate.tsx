@@ -1,20 +1,20 @@
 import * as styles from './InputDate.css';
 
 interface IProps {
-  date: string;
-  setDate: React.Dispatch<React.SetStateAction<string>>;
+  diaryDate: Date;
+  setDiaryDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
-const InputDate = ({ date, setDate }: IProps) => {
+const InputDate = ({ diaryDate, setDiaryDate }: IProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDate(e.target.value);
+    setDiaryDate(new Date(e.target.value));
   };
 
   return (
     <div className={styles.container}>
       <span className={styles.span}>날짜</span>
       <input
-        value={date}
+        value={diaryDate.toISOString().slice(0, 10)}
         className={styles.input}
         type="date"
         onChange={(e) => handleChange(e)}
