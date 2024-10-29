@@ -3,7 +3,7 @@ import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import CreateDiary from './pages/CreateDiary';
+import CreateDiary from './pages/CreateDiary/CreateDiary';
 import MyDiary from './pages/MyDiary';
 import DiaryDetail from './pages/DiaryDetail';
 import Error from './pages/Error';
