@@ -59,6 +59,7 @@ export const diaryIconImg = style({
 export const diaryslide = style({
   border: '1px solid',
   padding: '3rem 0',
+  overflow: 'hidden',
 });
 
 export const diaryBody = style({
