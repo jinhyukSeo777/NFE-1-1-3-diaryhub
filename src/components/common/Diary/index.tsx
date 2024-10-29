@@ -11,6 +11,7 @@ import cloud from '../../../assets/cloud.svg';
 import rain from '../../../assets/rain.svg';
 import thunder from '../../../assets/thunder.svg';
 import wind from '../../../assets/wind.svg';
+import stamp from '../../../assets/stamp.svg';
 import { useEffect, useRef, useState } from 'react';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
@@ -102,6 +103,9 @@ const Diary = ({ diaryInfo }: diaryProps) => {
       <div className={S.diaryBody}>
         <div ref={textRef}>{diaryInfo.content}</div>
         <div className={S.diaryLine}>{drawLine()}</div>
+        <div className={S.diaryStamp}>
+          <img src={stamp} alt="stamp" className={S.diaryStampImage}></img>
+        </div>
       </div>
     </div>
   );

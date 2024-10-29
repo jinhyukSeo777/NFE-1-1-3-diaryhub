@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom';
 import Diary from '../../components/common/Diary';
 import DiaryComment from '../../components/common/DiaryComment';
-import { diaryDetailWrapper } from './styles.css';
+import * as S from './styles.css';
+import stamp from '../../assets/stamp.svg';
+
 export type DiaryResponseType = {
   _id: string;
   title: string;
@@ -98,11 +100,22 @@ const DiaryDetail = () => {
     },
   ];
   return (
-    <div className={diaryDetailWrapper}>
+    <div className={S.diaryDetailWrapper}>
       <h2>
         <span>{param.id}</span> 번 일기 상세 페이지
       </h2>
       <Diary diaryInfo={diaryInfo} />
+      <div className={S.diaryInfoButton}>
+        <div className={S.diaryStampCount}>
+          <img src={stamp} alt="stampCount" className={S.diaryStamp} />
+          <span>{diaryInfo.likes.length}</span>
+        </div>
+        <div className={S.diaryshare}>
+          {diaryInfo.isPublic ? '공개' : '비공개'}
+        </div>
+        <div style={{ flexGrow: '1' }}></div>
+        <div className={S.diaryEditButton}>일기 수정하기</div>
+      </div>
       <DiaryComment commentsList={diaryComments} />
     </div>
   );

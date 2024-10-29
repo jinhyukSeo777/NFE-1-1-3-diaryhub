@@ -89,3 +89,22 @@ export const diaryLineItem = style({
   boxSizing: 'border-box',
   borderBottom: `1.5px solid ${g2}`,
 });
+export const diaryStamp = style({
+  position: 'absolute',
+  bottom: '0',
+  right: '1rem',
+});
+
+export const diaryStampImage = style({
+  width: '5rem',
+  height: '5rem',
+  objectFit: 'contain',
+  opacity: '.5',
+  cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      opacity: '1',
+      transition: 'all 0.3s',
+    },
+  },
+});
