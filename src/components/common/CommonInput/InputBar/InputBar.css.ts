@@ -38,9 +38,22 @@ export const resultarea = style({
   overflowY: 'scroll',
 });
 
+// Webkit 스크롤바 스타일링
 globalStyle(`${resultarea}::-webkit-scrollbar`, {
-  width: '0px',
-  height: '0px',
+  width: '8px',
+  height: '8px',
+});
+globalStyle(`${resultarea}::-webkit-scrollbar-track`, {
+  background: '#f1f1f1',
+  borderRadius: '10px',
+});
+globalStyle(`${resultarea}::-webkit-scrollbar-thumb`, {
+  background: `${g3}`,
+  borderRadius: '10px',
+  cursor: 'pointer',
+});
+globalStyle(`${resultarea}::-webkit-scrollbar-thumb:hover`, {
+  background: `#C0C0C0`,
 });
 
 export const result = style({
