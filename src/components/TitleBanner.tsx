@@ -5,21 +5,17 @@ import {
   subtitleStyle,
   imageStyle,
 } from './TitleBanner.css';
+import tapeImage from '../assets/tape3.svg'; // 기본 이미지 import
 
 type TitleBannerProps = {
   title: string;
   subtitle: string;
-  imageUrl: string;
 };
 
-const TitleBanner: React.FC<TitleBannerProps> = ({
-  title,
-  subtitle,
-  imageUrl,
-}) => {
+const TitleBanner: React.FC<TitleBannerProps> = ({ title, subtitle }) => {
   return (
     <div className={bannerContainer}>
-      <img src="../assets/tape1.svg" alt="banner img" className={imageStyle} />
+      <img src={tapeImage} alt="banner img" className={imageStyle} />
       <h1 className={titleStyle}>{title}</h1>
       <p className={subtitleStyle}>{subtitle}</p>
     </div>
