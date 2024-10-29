@@ -18,7 +18,7 @@ const InputTitle = ({ title, SetTitle }: IProps) => {
         className={styles.input}
         type="text"
         placeholder="제목을 입력해주세요"
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
       />
     </div>
   );

@@ -12,9 +12,10 @@ export const container = style({
 
 // Span 스타일
 export const span = style({
-  fontSize: '1.5rem',
+  fontSize: '1.8rem',
   display: 'block',
   marginBottom: '1rem',
+  fontFamily: 'HakgyoansimGeurimilgi',
 });
 
 // Textarea 스타일

@@ -17,7 +17,7 @@ const InputContent = ({ content, setContent }: IProps) => {
         value={content}
         className={styles.textarea}
         placeholder="일기 내용을 입력해주세요"
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
       />
     </div>
   );
