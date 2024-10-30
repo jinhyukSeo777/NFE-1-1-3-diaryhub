@@ -14,10 +14,12 @@ import wind from '../../../assets/wind.svg';
 import stamp from '../../../assets/stamp.svg';
 import location from '../../../assets/location.svg';
 import { useEffect, useRef, useState } from 'react';
+import likeDiary from '../../../utils/likeDiary';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
 }
 const Diary = ({ diaryInfo }: diaryProps) => {
+  const userId = '672099fde44237755b604265';
   const date = new Date(diaryInfo.diaryDate);
   const day = [
     '일요일',
@@ -42,7 +44,13 @@ const Diary = ({ diaryInfo }: diaryProps) => {
   };
   const [lineCount, setLineCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
-
+  const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
+  const [isStamp, setIsStamp] = useState(diaryInfo.likes.includes(userId));
+  const onStamp = async () => {
+    setIsStamp(!isStamp);
+    const likes = await likeDiary(diaryInfo._id);
+    setStampCount(likes);
+  };
   useEffect(() => {
     const calculateLineCount = () => {
       if (textRef.current) {
@@ -52,7 +60,6 @@ const Diary = ({ diaryInfo }: diaryProps) => {
         const height = textRef.current.clientHeight;
         const lines = Math.floor(height / lineHeight);
         setLineCount(lines + 2);
-        console.log(lines + 2);
       }
     };
     calculateLineCount();
@@ -61,6 +68,7 @@ const Diary = ({ diaryInfo }: diaryProps) => {
       window.removeEventListener('resize', calculateLineCount);
     };
   }, []);
+
   const drawLine = () => {
     const elements = [];
     for (let i = 0; i < lineCount; i++) {
@@ -69,54 +77,73 @@ const Diary = ({ diaryInfo }: diaryProps) => {
     return elements;
   };
   return (
-    <div className={S.diaryContainer}>
-      <div className={S.diaryTitleBox}>
-        <div className={S.diaryTitleText}>
-          {date.getFullYear()}년 {date.getMonth() + 1}월 {date.getDate()}일{' '}
-          {day[date.getDay()]}
-        </div>
-        <div className={S.diaryTitleText}>제목: {diaryInfo.title}</div>
-        <div className={S.diaryTitleIcon}>
-          <div className={S.diaryIconInfo}>
-            <div className={S.diaryIconTitle}>그날의 날씨</div>
-            <div className={S.diaryIcon}>
-              <img
-                className={S.diaryIconImg}
-                src={icon[diaryInfo.weather] || sun}
-                alt="weather"
-              ></img>
+    <>
+      {' '}
+      <div className={S.diaryContainer}>
+        <div className={S.diaryTitleBox}>
+          <div className={S.diaryTitleText}>
+            {date.getFullYear()}년 {date.getMonth() + 1}월 {date.getDate()}일{' '}
+            {day[date.getDay()]}
+          </div>
+          <div className={S.diaryTitleText}>제목: {diaryInfo.title}</div>
+          <div className={S.diaryTitleIcon}>
+            <div className={S.diaryIconInfo}>
+              <div className={S.diaryIconTitle}>그날의 날씨</div>
+              <div className={S.diaryIcon}>
+                <img
+                  className={S.diaryIconImg}
+                  src={icon[diaryInfo.weather] || sun}
+                  alt="weather"
+                ></img>
+              </div>
+            </div>
+            <div className={S.diaryIconInfo}>
+              <div className={S.diaryIconTitle}>그날의 기분</div>
+              <div className={S.diaryIcon}>
+                <img
+                  className={S.diaryIconImg}
+                  src={icon[diaryInfo.mood] || feel1}
+                  alt="feel"
+                ></img>
+              </div>
             </div>
           </div>
-          <div className={S.diaryIconInfo}>
-            <div className={S.diaryIconTitle}>그날의 기분</div>
-            <div className={S.diaryIcon}>
-              <img
-                className={S.diaryIconImg}
-                src={icon[diaryInfo.mood] || feel1}
-                alt="feel"
-              ></img>
-            </div>
+        </div>
+        <div className={S.diaryslide}>
+          <ImgSwiper imgList={diaryInfo.images} />
+        </div>
+        <div className={S.diaryBody}>
+          <div ref={textRef}>{diaryInfo.content}</div>
+          <div style={{ height: '3rem' }}></div>
+          <div className={S.diaryAddress}>
+            <img width={15} src={location} alt="location"></img>
+            <span style={{ marginLeft: '0.7rem' }}>
+              장소: {diaryInfo.address || '집'}
+            </span>
+          </div>
+          <div className={S.diaryLine}>{drawLine()}</div>
+          <div className={S.diaryStamp}>
+            <img
+              src={stamp}
+              alt="stamp"
+              className={`${S.diaryStampImage} ${isStamp && S.diaryStamp2}`}
+              onClick={() => onStamp()}
+            ></img>
           </div>
         </div>
       </div>
-      <div className={S.diaryslide}>
-        <ImgSwiper imgList={diaryInfo.images} />
-      </div>
-      <div className={S.diaryBody}>
-        <div ref={textRef}>{diaryInfo.content}</div>
-        <div style={{ height: '3rem' }}></div>
-        <div className={S.diaryAddress}>
-          <img width={15} src={location} alt="location"></img>
-          <span style={{ marginLeft: '0.7rem' }}>
-            장소: {diaryInfo.address || '집'}
-          </span>
+      <div className={S.diaryInfoButton}>
+        <div className={S.diaryStampCount}>
+          <img src={stamp} alt="stampCount" className={S.diaryStampbtn} />
+          <span>{stampCount}</span>
         </div>
-        <div className={S.diaryLine}>{drawLine()}</div>
-        <div className={S.diaryStamp}>
-          <img src={stamp} alt="stamp" className={S.diaryStampImage}></img>
+        <div className={S.diaryshare}>
+          {diaryInfo.isPublic ? '공개' : '비공개'}
         </div>
+        <div style={{ flexGrow: '1' }}></div>
+        <div className={S.diaryEditButton}>일기 수정하기</div>
       </div>
-    </div>
+    </>
   );
 };
 export default Diary;
