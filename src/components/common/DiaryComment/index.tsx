@@ -1,14 +1,14 @@
-import { ReactEventHandler } from 'react';
 import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
+import writeComment from '../../../utils/writeComment';
 import * as S from './styles.css';
 
 interface DiaryCommentProps {
   commentsList?: DiaryCommentResponseType[];
+  diaryId?: string;
 }
 
-const DiaryComment = ({ commentsList }: DiaryCommentProps) => {
+const DiaryComment = ({ commentsList, diaryId = 'a' }: DiaryCommentProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const inputValue = formData.get('comment');
     saveComment(inputValue);
@@ -16,7 +16,7 @@ const DiaryComment = ({ commentsList }: DiaryCommentProps) => {
   };
   const saveComment = (comment: FormDataEntryValue | null) => {
     if (comment != null) {
-      console.log(comment + '저장');
+      writeComment(diaryId, comment);
     }
   };
   const deleteComment = (comment: DiaryCommentResponseType) => {

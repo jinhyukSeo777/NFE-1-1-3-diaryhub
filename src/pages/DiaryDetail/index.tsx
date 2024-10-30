@@ -66,7 +66,7 @@ const DiaryDetail = () => {
         <span>{param.id}</span> 번 일기 상세 페이지
       </h2>
       <Diary diaryInfo={diaryInfo} />
-      <DiaryComment commentsList={diaryComments} />
+      <DiaryComment commentsList={diaryComments} diaryId={param.id} />
     </div>
   ) : (
     <div>Loading</div>
