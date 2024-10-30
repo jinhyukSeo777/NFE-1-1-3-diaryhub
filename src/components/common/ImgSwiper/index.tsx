@@ -10,11 +10,12 @@ interface ImgSwiperProps {
 }
 const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
   const settings = {
-    dots: true,
-    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    infinite: imgList.length > 1 ? true : false,
+    arrows: imgList.length > 1 ? true : false,
+    dots: imgList.length > 1 ? true : false,
   };
   return (
     <Slider {...settings}>

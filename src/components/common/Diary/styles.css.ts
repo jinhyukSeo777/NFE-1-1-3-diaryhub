@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { g2 } from '../../../utils/color';
+import { g1, g2 } from '../../../utils/color';
 
 export const diaryContainer = style({
   border: '1px solid',
@@ -66,8 +66,15 @@ export const diaryBody = style({
   padding: '1rem',
   position: 'relative',
   border: '1px solid',
-  lineHeight: '3rem',
   overflow: 'hidden',
+  lineHeight: '3rem',
+});
+
+export const diaryAddress = style({
+  display: 'flex',
+  lineHeight: '3rem',
+  color: g2,
+  fontSize: '0.8rem',
 });
 
 export const diaryLine = style({
@@ -89,6 +96,7 @@ export const diaryLineItem = style({
   boxSizing: 'border-box',
   borderBottom: `1.5px solid ${g2}`,
 });
+
 export const diaryStamp = style({
   position: 'absolute',
   bottom: '0',

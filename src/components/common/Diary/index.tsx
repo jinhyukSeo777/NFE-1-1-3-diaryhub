@@ -12,6 +12,7 @@ import rain from '../../../assets/rain.svg';
 import thunder from '../../../assets/thunder.svg';
 import wind from '../../../assets/wind.svg';
 import stamp from '../../../assets/stamp.svg';
+import location from '../../../assets/location.svg';
 import { useEffect, useRef, useState } from 'react';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
@@ -50,7 +51,8 @@ const Diary = ({ diaryInfo }: diaryProps) => {
         );
         const height = textRef.current.clientHeight;
         const lines = Math.floor(height / lineHeight);
-        setLineCount(lines);
+        setLineCount(lines + 2);
+        console.log(lines + 2);
       }
     };
     calculateLineCount();
@@ -62,7 +64,7 @@ const Diary = ({ diaryInfo }: diaryProps) => {
   const drawLine = () => {
     const elements = [];
     for (let i = 0; i < lineCount; i++) {
-      elements.push(<div className={S.diaryLineItem}></div>);
+      elements.push(<div className={S.diaryLineItem} key={i}></div>);
     }
     return elements;
   };
@@ -102,6 +104,13 @@ const Diary = ({ diaryInfo }: diaryProps) => {
       </div>
       <div className={S.diaryBody}>
         <div ref={textRef}>{diaryInfo.content}</div>
+        <div style={{ height: '3rem' }}></div>
+        <div className={S.diaryAddress}>
+          <img width={15} src={location} alt="location"></img>
+          <span style={{ marginLeft: '0.7rem' }}>
+            장소: {diaryInfo.address || '집'}
+          </span>
+        </div>
         <div className={S.diaryLine}>{drawLine()}</div>
         <div className={S.diaryStamp}>
           <img src={stamp} alt="stamp" className={S.diaryStampImage}></img>

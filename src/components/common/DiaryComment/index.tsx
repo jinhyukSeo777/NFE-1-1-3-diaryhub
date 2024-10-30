@@ -3,7 +3,7 @@ import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
 import * as S from './styles.css';
 
 interface DiaryCommentProps {
-  commentsList: DiaryCommentResponseType[];
+  commentsList?: DiaryCommentResponseType[];
 }
 
 const DiaryComment = ({ commentsList }: DiaryCommentProps) => {
@@ -36,25 +36,26 @@ const DiaryComment = ({ commentsList }: DiaryCommentProps) => {
         </form>
       </div>
       <ul className={S.commentList}>
-        {commentsList.map((comment, index) => {
-          return (
-            <li className={S.commentItem} key={index}>
-              <span className={S.commentUser}>{comment.user.username} </span>
-              <span className={S.commentDate}>
-                {comment.createdAt.split('T')[0]}
-              </span>
-              <span
-                className={S.commentDeleteButton}
-                onClick={() => {
-                  deleteComment(comment);
-                }}
-              >
-                삭제하기
-              </span>
-              <p className={S.commentBody}>{comment.content}</p>
-            </li>
-          );
-        })}
+        {commentsList &&
+          commentsList.map((comment, index) => {
+            return (
+              <li className={S.commentItem} key={index}>
+                <span className={S.commentUser}>{comment.user.username} </span>
+                <span className={S.commentDate}>
+                  {comment.createdAt.split('T')[0]}
+                </span>
+                <span
+                  className={S.commentDeleteButton}
+                  onClick={() => {
+                    deleteComment(comment);
+                  }}
+                >
+                  삭제하기
+                </span>
+                <p className={S.commentBody}>{comment.content}</p>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );
