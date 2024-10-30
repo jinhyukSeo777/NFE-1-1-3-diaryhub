@@ -22,6 +22,8 @@ function App() {
           <Route path="/mydiary" element={<MyDiary />} />
           <Route path="/diarydetail/:id" element={<DiaryDetail />} />
           <Route path="/error" element={<Error />} />
+          {/* 잘못된 URL에 대한 라우팅 처리 */}
+          <Route path="*" element={<Error />} />
         </Routes>
       </AuthProvider>
     </>
