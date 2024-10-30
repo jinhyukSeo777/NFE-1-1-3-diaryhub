@@ -9,14 +9,27 @@ import {
   countPosition,
 } from '../styles/Article.css';
 import { Diary } from '../pages/Home';
+import { useNavigate } from 'react-router-dom';
+import { DiaryDate } from '../utils/date';
 
 const Article = ({ diary }: { diary: Diary }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/diarydetail/${diary._id}`);
+  };
+
   return (
-    <li className={article}>
+    <li className={article} onClick={handleClick}>
       <img
-        src={diary.images[0]}
+        src={`https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/${diary.images[0]}`}
         alt="Sample"
-        style={{ width: '80px', height: 'auto', borderRadius: '10px' }}
+        style={{
+          width: 90,
+          height: 90,
+          borderRadius: '10px',
+          objectFit: 'cover',
+        }}
       />
       <div className={innerDiv}>
         <div className={title}>
@@ -36,7 +49,7 @@ const Article = ({ diary }: { diary: Diary }) => {
         </div>
         <div>
           <p className={text}>{diary.content}</p>
-          <p className={text}>{diary.diaryDate.toLocaleDateString()}</p>
+          <p className={text}>{DiaryDate(diary.diaryDate)}</p>
           <p className={text}>{diary.location.state}</p>
           <div className={countPosition}>
             <Count likes={diary.likes} comments={diary.comments} />

@@ -3,7 +3,7 @@ import { texts } from '../../styles/Card.css';
 interface CardHeadProps {
   username: string;
   state: string;
-  diaryDate: Date;
+  diaryDate: string;
   mood: string;
   weather: string;
 }
@@ -20,7 +20,7 @@ const CardHead = ({
       <div className={text}>
         <p className={text}>{username}</p>
         <p className={texts}>
-          {state} {diaryDate.toLocaleDateString()}
+          {state} {diaryDate}
         </p>
       </div>
       <div className={icons}>
