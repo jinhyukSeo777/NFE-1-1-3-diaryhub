@@ -43,9 +43,16 @@ const Header: React.FC = () => {
                 </Link>
               </li>
               <li className={liStyle}>
-                <button onClick={handleLogout} className={linkStyle}>
+                <Link
+                  to="/"
+                  className={linkStyle}
+                  onClick={(e) => {
+                    e.preventDefault(); // 기본 동작 방지
+                    handleLogout(); // 로그아웃 함수 호출
+                  }}
+                >
                   로그아웃
-                </button>
+                </Link>
               </li>
             </>
           ) : (
