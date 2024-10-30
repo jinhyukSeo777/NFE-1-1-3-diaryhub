@@ -9,6 +9,8 @@ import InputBar from '../../components/common/CommonInput/InputBar/InputBar';
 import CreateMap from '../../components/CreateMap/CreateMap';
 import InputPublic from '../../components/common/CommonInput/InputPublic/InputPublic';
 import InputImg from '../../components/common/CommonInput/InputImg/InputImg';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export interface IPosition {
   latitude: number;
@@ -28,11 +30,13 @@ const CreateDiary = () => {
   const [content, setContent] = useState('');
   const [isPublic, setIsPublic] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const canSubmit = !!title && !!content && !!weather && !!mood;
+    const canSubmit =
+      !!weather && !!mood && !!title && !!content && images.length !== 0;
     setCanSubmit(canSubmit);
-  }, [content, mood, title, weather]);
+  }, [weather, mood, images, title, content]);
 
   const getRegionName = async () => {
     const apiKey = process.env.REACT_APP_KAKAO_REST_API_KEY;
@@ -56,17 +60,37 @@ const CreateDiary = () => {
 
   const handleSubmit = async () => {
     const state = await getRegionName();
-    console.log(
-      position,
-      state,
-      diaryDate,
-      weather,
-      mood,
-      images,
-      title,
-      content,
-      isPublic
-    );
+
+    // FormData 생성 및 파일 추가
+    const formData = new FormData();
+    images.forEach((file) => {
+      formData.append('images', file); // images라는 필드명으로 파일 배열 추가
+    });
+
+    // 다른 텍스트 데이터 추가
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('mood', mood);
+    formData.append('weather', weather);
+    formData.append('diaryDate', diaryDate.toISOString());
+    formData.append('state', state);
+    formData.append('latitude', position.latitude.toString());
+    formData.append('longitude', position.longitude.toString());
+    formData.append('isPublic', isPublic.toString());
+
+    axios
+      .post(
+        'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/diaries',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzIwZmUzNTIzNjlhYzg3MWZiMDI3ZjUiLCJpYXQiOjE3MzAyNDc3OTMsImV4cCI6MTczMDI1MTM5M30.RzP_sTkKk_fDdqo7gvtEBfxVQt3g2SwOLMpIyGbVbCI`,
+          },
+        }
+      )
+      .then(() => navigate('/'))
+      .catch((error) => console.error('업로드 실패:', error));
   };
 
   return (
