@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 export const container = style({
   display: 'flex',
+  width: 'fit-content',
   alignItems: 'center',
   padding: 8,
   gap: 4,

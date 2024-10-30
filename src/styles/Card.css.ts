@@ -7,6 +7,7 @@ export const card = style({
   border: '1px solid #ddd',
   borderRadius: '10px',
   width: '100%',
+  boxSizing: 'border-box',
   maxWidth: 300,
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   fontSize: '12px',
@@ -21,6 +22,7 @@ export const margin = style({
   marginTop: 5,
   marginBottom: 8,
 });
+
 export const texts = style({
   flex: 1,
   overflow: 'hidden',
