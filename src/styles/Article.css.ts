@@ -1,16 +1,50 @@
 import { style } from '@vanilla-extract/css';
+import { TABLET } from '../utils/size';
 
-export const article = style({
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: '10px',
-  padding: '15px',
+export const articleArea = style({
+  padding: 20,
   border: '1px solid #ddd',
   borderRadius: '20px',
   width: '100%',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   fontSize: '14px',
   position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+export const btn = style({
+  border: 'none',
+  backgroundColor: 'white',
+  cursor: 'pointer',
+  marginLeft: 'auto',
+  marginBottom: 10,
+});
+
+export const ul = style({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+  width: '100%',
+});
+
+export const article = style({
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: 10,
+  padding: '15px',
+  border: '1px solid #ddd',
+  borderRadius: '20px',
+  width: '100%',
+  boxSizing: 'border-box',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  fontSize: '14px',
+  position: 'relative',
+  marginBottom: 20,
+  transition: 'transform 0.2s ease',
+  ':hover': {
+    transform: 'scale(1.02)',
+  },
 });
 
 export const innerDiv = style({
@@ -52,4 +86,17 @@ export const countPosition = style({
   position: 'absolute',
   right: 20,
   bottom: 20,
+});
+
+export const cardContainer = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(1, 1fr)',
+  gap: '10px',
+  width: '100%',
+
+  '@media': {
+    [`screen and (min-width: ${TABLET})`]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+  },
 });
