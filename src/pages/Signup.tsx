@@ -75,14 +75,12 @@ const LoginPage: React.FC = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          icon={<i className="fas fa-eye"></i>} // 비밀번호 표시 아이콘
         />
         <Input
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          icon={<i className="fas fa-eye"></i>} // 비밀번호 표시 아이콘
         />
         <Button
           variant="login"

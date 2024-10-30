@@ -23,15 +23,14 @@ export const imgSection = style({
 export const formSection = style({
   flex: 1,
   padding: '2rem',
-  paddingRight: '80px',
-  maxWidth: '400px',
+  maxWidth: '410px',
   borderRadius: '8px',
   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
 });
 
 // 글로벌 스타일 설정
 globalStyle(`${welcomeSection} h1`, {
-  fontSize: '2.5rem',
+  fontSize: '36px',
   marginBottom: '1rem',
 });
 
@@ -50,7 +49,6 @@ globalStyle(`${welcomeSection} img`, {
 globalStyle(`${formSection} h2`, {
   fontSize: '1.5rem',
   marginBottom: '1.5rem',
-  marginLeft: '20px',
   textAlign: 'center',
 });
 globalStyle(`${formSection} input`, {
@@ -59,6 +57,7 @@ globalStyle(`${formSection} input`, {
 });
 
 globalStyle(`${formSection} Button`, {
-  marginLeft: '20px',
   width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
 });

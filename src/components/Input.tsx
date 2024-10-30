@@ -1,12 +1,14 @@
-import React from 'react';
-import { inputContainerStyle, inputStyle } from './Input.css';
+// Input.tsx
+import React, { useState } from 'react';
+import { inputContainerStyle, inputStyle, iconStyle } from './Input.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 type InputProps = {
   type?: string;
   placeholder?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  icon?: React.ReactNode; // 아이콘을 넣을 경우 사용
   className?: string; // 추가 스타일 적용 가능
 };
 
@@ -15,18 +17,29 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   value,
   onChange,
-  icon,
   className,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const isPasswordType = type === 'password';
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   return (
     <div className={`${inputContainerStyle} ${className || ''}`}>
       <input
-        type={type}
+        type={isPasswordType && !showPassword ? 'password' : 'text'}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         className={inputStyle}
       />
+      {isPasswordType && (
+        <span className={iconStyle} onClick={togglePasswordVisibility}>
+          <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+        </span>
+      )}
     </div>
   );
 };

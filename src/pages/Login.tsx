@@ -1,4 +1,3 @@
-// Login.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -9,7 +8,7 @@ import {
 } from './Login.css';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { useAuth } from '../components/AuthContext'; // AuthContext에서 로그인 함수 사용
+import { useAuth } from '../components/AuthContext';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -79,7 +78,6 @@ const LoginPage: React.FC = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          icon={<i className="fas fa-eye"></i>} // 비밀번호 표시 아이콘
         />
 
         <Button variant="login" onClick={handleLogin}>
