@@ -1,3 +1,4 @@
+// Login.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -8,10 +9,12 @@ import {
 } from './Login.css';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import { useAuth } from '../components/AuthContext'; // AuthContext에서 로그인 함수 사용
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -32,13 +35,14 @@ const LoginPage: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // 로그인 성공 시 처리 (예: 토큰 저장)
         console.log('로그인 성공:', data);
+
+        // 로그인 성공 시 AuthContext의 login 호출
+        login(data.token); // 받은 토큰을 login 함수에 전달
 
         // 예시: 홈 페이지로 리디렉션
         navigate('/');
       } else {
-        // 로그인 실패 시 처리
         console.error('로그인 실패');
         alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
       }
@@ -50,7 +54,6 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className={pageContainer}>
-      {/* 왼쪽 섹션 */}
       <div className={welcomeSection}>
         <h1>로그인하기</h1>
         <p>교환일기에 오신 걸 환영해요</p>
@@ -63,7 +66,6 @@ const LoginPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 로그인 폼 섹션 */}
       <div className={formSection}>
         <h2>로그인</h2>
         <Input
@@ -80,10 +82,7 @@ const LoginPage: React.FC = () => {
           icon={<i className="fas fa-eye"></i>} // 비밀번호 표시 아이콘
         />
 
-        <Button
-          variant="login" // login 스타일로 적용
-          onClick={handleLogin}
-        >
+        <Button variant="login" onClick={handleLogin}>
           Login
         </Button>
       </div>
