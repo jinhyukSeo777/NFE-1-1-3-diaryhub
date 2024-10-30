@@ -25,7 +25,8 @@ const InputImg = ({ images, setImages }: IProps) => {
     setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
   };
 
-  const handleButtonClick = () => {
+  // 파일 선택 창 열기
+  const handleMoreImageClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -45,7 +46,7 @@ const InputImg = ({ images, setImages }: IProps) => {
         <button
           type="button"
           className={styles.input}
-          onClick={handleButtonClick}
+          onClick={handleMoreImageClick}
         >
           <Svg
             style={{

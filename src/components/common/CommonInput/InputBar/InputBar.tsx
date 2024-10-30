@@ -25,10 +25,10 @@ interface IPagination {
 
 const InputBar = ({ setPosition }: IProps) => {
   const [keyword, setKeyword] = useState('');
-  const [result, setResult] = useState<IResult[]>([]);
+  const [result, setResult] = useState<IResult[]>([]); // 검색 결과
   const paginationRef = useRef<IPagination | null>(null); // pagination 객체를 저장하기 위한 useRef
-  const loadingRef = useRef<HTMLSpanElement | null>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadingRef = useRef<HTMLSpanElement | null>(null); // loading이 적힌 태그를 저장하기 위한 useRef
+  const observerRef = useRef<IntersectionObserver | null>(null); // IntersectionObserver 객체를 저장하기 위한 useRef
 
   const fetchData = () => {
     const ps = new kakao.maps.services.Places();
@@ -68,6 +68,7 @@ const InputBar = ({ setPosition }: IProps) => {
     setKeyword(e.target.value);
   };
 
+  // loading이 화면에 보이면 추가 데이터 패칭하는 함수
   useEffect(() => {
     const currentLoadingRef = loadingRef.current; // loadingRef.current 값을 복사
 
@@ -98,7 +99,7 @@ const InputBar = ({ setPosition }: IProps) => {
           value={keyword}
           className={styles.input}
           type="text"
-          placeholder="장소를 입력해주세요"
+          placeholder="장소를 검색해보세요"
           onChange={handleChange}
         />
         <button className={styles.searchbtn}>

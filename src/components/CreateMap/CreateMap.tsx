@@ -11,6 +11,7 @@ interface IProps {
 const CreateMap = ({ position, setPosition }: IProps) => {
   const [map, setMap] = useState<any>();
 
+  // 지도 위치 변경 시 호출
   const handleCenterChanged = () => {
     if (map) {
       const center = map.getCenter(); // 지도 중심 좌표 가져오기
