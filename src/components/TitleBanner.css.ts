@@ -12,16 +12,27 @@ export const bannerContainer = style({
 export const imageStyle = style({
   width: '100px', // 이미지 크기 조정
   height: 'auto',
-  marginBottom: '1rem',
+  marginRight: '-32px',
+  marginLeft: '10px',
+  paddingLeft: '-16spx',
+});
+
+export const imgWrap = style({
+  display: 'flex',
+  margin: 0,
+  gap: 0,
 });
 
 export const titleStyle = style({
-  fontSize: '1.8rem',
+  fontSize: '24px',
   color: '#5Caaf3', // 파란색 글씨
-  margin: '0.5rem 0',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginRight: '28px',
 });
 
 export const subtitleStyle = style({
-  fontSize: '1rem',
+  fontSize: '16px',
   color: '#5Caaf3',
 });

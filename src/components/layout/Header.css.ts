@@ -37,11 +37,12 @@ export const ulStyle = style({
   display: 'flex',
   listStyle: 'none',
   margin: 0,
-  padding: 0,
+  paddingRight: '8px',
+  gap: '16px',
 });
 
 export const liStyle = style({
-  marginRight: '1.5rem',
+  marginRight: '2rem',
 });
 
 export const linkStyle = style({
