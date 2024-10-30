@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import Diary from '../../components/common/Diary';
 import DiaryComment from '../../components/common/DiaryComment';
 import * as S from './styles.css';
-import stamp from '../../assets/stamp.svg';
 import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';

@@ -1,13 +1,16 @@
+import { Dispatch, SetStateAction } from 'react';
 import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
+import deleteComment from '../../../utils/deleteComment';
 import writeComment from '../../../utils/writeComment';
 import * as S from './styles.css';
+import getDiaryComments from '../../../utils/getDiaryComments';
 
 interface DiaryCommentProps {
   commentsList?: DiaryCommentResponseType[];
   diaryId?: string;
 }
 
-const DiaryComment = ({ commentsList, diaryId = 'a' }: DiaryCommentProps) => {
+const DiaryComment = ({ commentsList, diaryId = '' }: DiaryCommentProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
     const inputValue = formData.get('comment');
@@ -19,8 +22,9 @@ const DiaryComment = ({ commentsList, diaryId = 'a' }: DiaryCommentProps) => {
       writeComment(diaryId, comment);
     }
   };
-  const deleteComment = (comment: DiaryCommentResponseType) => {
-    console.log(comment.content + '삭제');
+  const delComment = (commentId: string) => {
+    window.location.reload();
+    deleteComment(diaryId, commentId);
   };
   return (
     <div className={S.commentContainer}>
@@ -47,7 +51,7 @@ const DiaryComment = ({ commentsList, diaryId = 'a' }: DiaryCommentProps) => {
                 <span
                   className={S.commentDeleteButton}
                   onClick={() => {
-                    deleteComment(comment);
+                    delComment(comment._id);
                   }}
                 >
                   삭제하기
