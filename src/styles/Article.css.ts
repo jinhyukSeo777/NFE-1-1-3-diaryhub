@@ -6,11 +6,15 @@ export const articleArea = style({
   border: '1px solid #ddd',
   borderRadius: '20px',
   width: '100%',
+  height: 'calc(100vh - 200px)',
+  overflowY: 'auto',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   fontSize: '14px',
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center',
+  marginTop: 15,
 });
 
 export const btn = style({
@@ -91,8 +95,9 @@ export const countPosition = style({
 export const cardContainer = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(1, 1fr)',
-  gap: '10px',
   width: '100%',
+  placeItems: 'center',
+  alignItems: 'stretch',
 
   '@media': {
     [`screen and (min-width: ${TABLET})`]: {
