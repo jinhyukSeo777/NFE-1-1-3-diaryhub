@@ -3,7 +3,6 @@ import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
 import deleteComment from '../../../utils/deleteComment';
 import writeComment from '../../../utils/writeComment';
 import * as S from './styles.css';
-import getDiaryComments from '../../../utils/getDiaryComments';
 
 interface DiaryCommentProps {
   commentsList?: DiaryCommentResponseType[];

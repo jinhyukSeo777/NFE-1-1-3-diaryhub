@@ -5,6 +5,7 @@ import * as S from './styles.css';
 import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';
+import TitleBanner from '../../components/TitleBanner';
 
 export type DiaryResponseType = {
   _id: string;
@@ -44,6 +45,7 @@ const DiaryDetail = () => {
   const [diaryInfo, setDiaryInfo] = useState<DiaryResponseType>();
   const [diaryComments, setDiaryComments] =
     useState<DiaryCommentResponseType[]>();
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,18 +54,18 @@ const DiaryDetail = () => {
         const commentInfo = await getDiaryComments(param.id);
         setDiaryInfo(diaryInfo);
         setDiaryComments(commentInfo);
-        console.log(diaryInfo);
-        console.log(commentInfo);
+        const date = new Date(diaryInfo?.createdAt);
+        setDate(date.getMonth() + '월' + date.getDate() + '일의 일기');
       }
     };
     fetchData();
   }, []);
-
   return diaryInfo ? (
     <div className={S.diaryDetailWrapper}>
-      <h2>
-        <span>{param.id}</span> 번 일기 상세 페이지
-      </h2>
+      <TitleBanner
+        title={date}
+        subtitle="생각과 감정을 기록한 일기를 만나보세요"
+      />
       <Diary diaryInfo={diaryInfo} />
       <DiaryComment commentsList={diaryComments} diaryId={param.id} />
     </div>

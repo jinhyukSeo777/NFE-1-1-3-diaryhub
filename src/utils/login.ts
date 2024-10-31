@@ -7,7 +7,7 @@ export default async function login() {
     username: 'u123',
     password: 'p123',
   };
-  const res = await fetch(process.env.REACT_APP_API_URL + 'auth/login', {
+  const res = await fetch(process.env.REACT_APP_API_BASE_URL + 'auth/login', {
     method: 'POST',
     body: JSON.stringify(id),
     headers: { 'Content-Type': 'application/json' },

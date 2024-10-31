@@ -25,7 +25,7 @@ const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
             <div className={S.slideItem}>
               <img
                 className={S.slideImg}
-                src={`${process.env.REACT_APP_API_URL}${img}`}
+                src={`${process.env.REACT_APP_API_BASE_URL}${img}`}
                 alt="img"
               ></img>
             </div>
