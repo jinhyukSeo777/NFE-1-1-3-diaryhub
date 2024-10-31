@@ -3,7 +3,7 @@ import MainMap from '../../components/MainMap/MainMap';
 import { home, article, map } from './Home.css';
 import ArticleArea from '../../components/Article/ArticleArea';
 import SelectBox from '../../components/SelectBox/SelectBox';
-import TitleBanner from '../../components/TitleBanner';
+import TitleBanner from '../../components/TitleBanner/TitleBanner';
 
 export interface Comment {
   _id: string;

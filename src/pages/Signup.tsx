@@ -5,9 +5,9 @@ import {
   welcomeSection,
   formSection,
   imgSection,
-} from './Login.css';
-import Input from '../components/Input';
-import Button from '../components/Button';
+} from './Login/Login.css';
+import Input from '../components/Input/Input';
+import Button from '../components/Button/Button';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');

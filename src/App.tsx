@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Home from './pages/Home/Home';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import CreateDiary from './pages/CreateDiary/CreateDiary';
 import MyDiary from './pages/MyDiary/MyDiary';
 import DiaryDetail from './pages/DiaryDetail/index';
-import Error from './pages/Error';
+import Error from './pages/Error/Error';
 import { AuthProvider } from './components/AuthContext';
 
 function App() {

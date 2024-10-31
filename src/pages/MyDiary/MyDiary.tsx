@@ -3,7 +3,7 @@ import { Diary } from '../Home/Home';
 import Card from '../../components/CommonCard/Card';
 import { mydiary, noteCon } from './MyDiary.css';
 import { home } from '../Home/Home.css';
-import TitleBanner from '../../components/TitleBanner';
+import TitleBanner from '../../components/TitleBanner/TitleBanner';
 import note from '../../assets/note.svg';
 const MyDiary = () => {
   const [diaryData, setDiaryData] = useState<Diary[]>([]);
