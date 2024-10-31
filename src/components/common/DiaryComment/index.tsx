@@ -1,34 +1,49 @@
 import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
 import deleteComment from '../../../utils/deleteComment';
+import getDiaryComments from '../../../utils/getDiaryComments';
 import writeComment from '../../../utils/writeComment';
 import * as S from './styles.css';
 
 interface DiaryCommentProps {
   commentsList: DiaryCommentResponseType[];
+  setDiaryComments: React.Dispatch<
+    React.SetStateAction<DiaryCommentResponseType[] | undefined>
+  >;
   diaryId: string;
 }
 
-const DiaryComment = ({ commentsList, diaryId }: DiaryCommentProps) => {
+const DiaryComment = ({
+  commentsList,
+  setDiaryComments,
+  diaryId,
+}: DiaryCommentProps) => {
+  const token = localStorage.getItem('authToken');
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const token = localStorage.getItem('authToken');
     if (token) {
       const formData = new FormData(e.currentTarget);
-      const inputValue = formData.get('comment');
+      const inputValue: string | null = formData.get('comment') + '';
       saveComment(inputValue);
     } else {
       alert('댓글을 작성하려면 로그인해야 합니다!');
     }
     e.currentTarget.reset();
   };
-  const saveComment = (comment: FormDataEntryValue | null) => {
-    if (comment != null) {
-      writeComment(diaryId, comment);
+  const saveComment = async (comment: string | null) => {
+    if (comment !== null && comment.length > 0) {
+      await writeComment(diaryId, comment);
+      const commentInfo = await getDiaryComments(diaryId);
+      console.log(commentInfo);
+      setDiaryComments(commentInfo);
+    } else {
+      alert('댓글을 입력해주세요!');
     }
   };
-  const delComment = (commentId: string) => {
-    window.location.reload();
-    deleteComment(diaryId, commentId);
+  const delComment = async (commentId: string) => {
+    await deleteComment(diaryId, commentId);
+    const commentInfo = await getDiaryComments(diaryId);
+    setDiaryComments(commentInfo);
   };
   return (
     <div className={S.commentContainer}>
@@ -52,14 +67,19 @@ const DiaryComment = ({ commentsList, diaryId }: DiaryCommentProps) => {
                 <span className={S.commentDate}>
                   {comment.createdAt.split('T')[0]}
                 </span>
-                <span
-                  className={S.commentDeleteButton}
-                  onClick={() => {
-                    delComment(comment._id);
-                  }}
-                >
-                  삭제하기
-                </span>
+                {comment.user._id ===
+                (token && JSON.parse(atob(token.split('.')[1])).userId) ? (
+                  <span
+                    className={S.commentDeleteButton}
+                    onClick={() => {
+                      delComment(comment._id);
+                    }}
+                  >
+                    삭제하기
+                  </span>
+                ) : (
+                  <></>
+                )}
                 <p className={S.commentBody}>{comment.content}</p>
               </li>
             );

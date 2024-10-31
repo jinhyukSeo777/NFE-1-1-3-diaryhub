@@ -1,12 +1,9 @@
-export default async function writeComment(
-  id: string,
-  comment: FormDataEntryValue
-) {
+export default async function writeComment(id: string, comment: string) {
   const token = localStorage.getItem('authToken');
   if (!token) return;
 
   const res = await fetch(
-    process.env.REACT_APP_API_BASE_URL + 'diaries/' + id + '/comments',
+    process.env.REACT_APP_API_BASE_URL + '/diaries/' + id + '/comments',
     {
       method: 'POST',
       headers: {

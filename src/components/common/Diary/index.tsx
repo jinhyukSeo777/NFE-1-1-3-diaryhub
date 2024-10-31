@@ -47,7 +47,7 @@ const Diary = ({ diaryInfo }: diaryProps) => {
   const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
   const [isStamp, setIsStamp] = useState(diaryInfo.likes.includes(userId));
   const onStamp = async () => {
-    const token = localStorage.getItem('authToken') || undefined;
+    const token = localStorage.getItem('authToken');
     if (token) {
       const likes = await likeDiary(diaryInfo._id);
       setIsStamp(!isStamp);

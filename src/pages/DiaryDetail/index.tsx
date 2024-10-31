@@ -74,7 +74,11 @@ const DiaryDetail = () => {
         subtitle="생각과 감정을 기록한 일기를 만나보세요"
       />
       <Diary diaryInfo={diaryInfo} />
-      <DiaryComment commentsList={diaryComments} diaryId={param.id} />
+      <DiaryComment
+        commentsList={diaryComments}
+        setDiaryComments={setDiaryComments}
+        diaryId={param.id}
+      />
     </div>
   ) : (
     <ErrorPage></ErrorPage>

@@ -1,11 +1,13 @@
-export default async function writeComment(diaryId: string, commentId: string) {
+export default async function deleteComment(
+  diaryId: string,
+  commentId: string
+) {
   const token = localStorage.getItem('authToken');
-
   if (!token) return;
 
   const res = await fetch(
-    process.env.REACT_APP_API_URL +
-      'diaries/' +
+    process.env.REACT_APP_API_BASE_URL +
+      '/diaries/' +
       diaryId +
       '/comments/' +
       commentId,
@@ -13,7 +15,6 @@ export default async function writeComment(diaryId: string, commentId: string) {
       method: 'DELETE',
       headers: {
         Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
       },
     }
   );

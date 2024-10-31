@@ -74,4 +74,5 @@ export const commentDeleteButton = style({
 
 export const commentBody = style({
   marginLeft: '0.5rem',
+  padding: '1rem',
 });
