@@ -7,7 +7,7 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "react/prop-types": "off",
-    "no-console": "warn",
+    "no-console": "off",
     "prettier/prettier": ["error", { "endOfLine": "crlf" }]
   }
 }
