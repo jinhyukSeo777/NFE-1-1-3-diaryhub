@@ -1,8 +1,8 @@
 import CardContent from './CardContent';
 import CardHead from './CardHead';
-import { Diary } from '../../pages/Home';
-import Count from '../Count';
-import { card, margin } from '../../styles/Card.css';
+import { Diary } from '../../pages/Home/Home';
+import Count from '../Count/Count';
+import { card, margin } from './Card.css';
 import { useNavigate } from 'react-router-dom';
 import { DiaryDate } from '../../utils/date';
 
