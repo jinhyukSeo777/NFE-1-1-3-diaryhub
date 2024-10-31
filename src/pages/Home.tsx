@@ -3,6 +3,7 @@ import MainMap from '../components/MainMap';
 import { home, article, map } from '../styles/Home.css';
 import ArticleArea from '../components/ArticleArea';
 import SelectBox from '../components/SelectBox';
+import TitleBanner from '../components/TitleBanner';
 
 export interface Comment {
   _id: string;
@@ -68,7 +69,7 @@ export default function Home() {
       const token = process.env.REACT_APP_API_TOKEN;
       try {
         const response = await fetch(
-          'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/diaries/public-diaries',
+          `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries`,
           {
             method: 'GET',
             headers: {
@@ -116,7 +117,7 @@ export default function Home() {
 
         try {
           const response = await fetch(
-            `https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/diaries/public-diaries/location/${selectedState}`,
+            `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries/location/${selectedState}`,
             {
               method: 'GET',
               headers: {
@@ -184,6 +185,10 @@ export default function Home() {
 
   return (
     <div>
+      <TitleBanner
+        title="모두의 일기"
+        subtitle="누군가의 하루를 함께 느껴보세요"
+      />
       <div className={home}>
         <section className={article}>
           <SelectBox options={options} onChange={setSelectedState} />

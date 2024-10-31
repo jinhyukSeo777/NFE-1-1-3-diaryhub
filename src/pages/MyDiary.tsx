@@ -3,6 +3,7 @@ import { Diary } from './Home';
 import Card from '../components/CommonCard/Card';
 import { mydiary } from '../styles/MyDiary.css';
 import { home } from '../styles/Home.css';
+import TitleBanner from '../components/TitleBanner';
 const MyDiary = () => {
   const [diaryData, setDiaryData] = useState<Diary[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -38,13 +39,16 @@ const MyDiary = () => {
   }, []);
 
   return (
-    <div className={home}>
-      <ul className={mydiary}>
-        {diaryData.map((diary) => (
-          <Card key={diary._id} diary={diary} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <TitleBanner title="나만의 일기" subtitle="나의 하루를 공유해보세요" />
+      <div className={home}>
+        <ul className={mydiary}>
+          {diaryData.map((diary) => (
+            <Card key={diary._id} diary={diary} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

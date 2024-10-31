@@ -7,20 +7,25 @@ import CreateDiary from './pages/CreateDiary';
 import MyDiary from './pages/MyDiary';
 import DiaryDetail from './pages/DiaryDetail';
 import Error from './pages/Error';
+import { AuthProvider } from './components/AuthContext';
 
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/creatediary" element={<CreateDiary />} />
-        <Route path="/mydiary" element={<MyDiary />} />
-        <Route path="/diarydetail/:id" element={<DiaryDetail />} />
-        <Route path="/error" element={<Error />} />
-      </Routes>
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/creatediary" element={<CreateDiary />} />
+          <Route path="/mydiary" element={<MyDiary />} />
+          <Route path="/diarydetail/:id" element={<DiaryDetail />} />
+          <Route path="/error" element={<Error />} />
+          {/* 잘못된 URL에 대한 라우팅 처리 */}
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }
