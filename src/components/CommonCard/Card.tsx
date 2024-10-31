@@ -23,7 +23,7 @@ const Card = ({ diary }: { diary: Diary }) => {
         weather={diary.weather}
       />
       <img
-        src={`https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/${diary.images[0]}`}
+        src={diary.images[0]}
         alt="Sample"
         style={{ width: 270, height: 270, objectFit: 'cover' }}
       />

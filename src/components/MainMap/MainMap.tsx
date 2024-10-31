@@ -50,9 +50,7 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
 
             // 커스텀 마커 이미지
             const img = document.createElement('img');
-            const apiUrl =
-              'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/';
-            img.src = `${apiUrl}${markerData.imageUrl}`;
+            img.src = markerData.imageUrl;
             img.classList.add(styles.markerImg);
 
             // 마커 div에 이미지 추가

@@ -6,7 +6,7 @@ export const home = style({
   alignItems: 'center',
   justifyContent: 'center',
   maxWidth: DESKTOP,
-  gap: '20px',
+  gap: '10px',
   margin: '0 auto',
 });
 
