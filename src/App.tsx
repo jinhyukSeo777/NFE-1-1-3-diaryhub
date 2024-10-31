@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CreateDiary from './pages/CreateDiary/CreateDiary';
 import MyDiary from './pages/MyDiary';
-import DiaryDetail from './pages/DiaryDetail';
+import DiaryDetail from './pages/DiaryDetail/index';
 import Error from './pages/Error';
 import { AuthProvider } from './components/AuthContext';
 
