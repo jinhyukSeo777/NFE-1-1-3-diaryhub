@@ -6,7 +6,7 @@ import {
   imageStyle,
   imgWrap,
 } from './TitleBanner.css';
-import tapeImage from '../assets/tape3.svg'; // 기본 이미지 import
+import tapeImage from '../../assets/titleTape.svg';
 
 type TitleBannerProps = {
   title: string;
