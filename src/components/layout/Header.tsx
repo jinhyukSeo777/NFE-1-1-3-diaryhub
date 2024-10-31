@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           {isLoggedIn ? (
             <>
               <li className={liStyle}>
-                <Link to="/my-diary" className={linkStyle}>
+                <Link to="/mydiary" className={linkStyle}>
                   나의 일기
                 </Link>
               </li>
