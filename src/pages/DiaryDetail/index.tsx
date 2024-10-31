@@ -5,7 +5,7 @@ import * as S from './styles.css';
 import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';
-import TitleBanner from '../../components/TitleBanner';
+import TitleBanner from '../../components/TitleBanner/TitleBanner';
 
 export type DiaryResponseType = {
   _id: string;
