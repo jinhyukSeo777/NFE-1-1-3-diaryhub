@@ -33,13 +33,18 @@ const CreateDiary = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const TOKEN = localStorage.getItem('authToken');
+    if (!TOKEN) navigate('/error');
+  });
+
+  useEffect(() => {
     const canSubmit =
       !!weather && !!mood && !!title && !!content && images.length !== 0;
     setCanSubmit(canSubmit);
   }, [weather, mood, images, title, content]);
 
   const getRegionName = async () => {
-    const apiKey = process.env.REACT_APP_KAKAO_REST_API_KEY;
+    const apiKey = process.env.REACT_APP_KAKAOMAP_API_KEY;
     const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${position.longitude}&y=${position.latitude}&input_coord=WGS84`;
 
     const response = await fetch(url, {
@@ -60,6 +65,8 @@ const CreateDiary = () => {
 
   const handleSubmit = async () => {
     const state = await getRegionName();
+    const TOKEN = localStorage.getItem('authToken');
+    const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     // FormData 생성 및 파일 추가
     const formData = new FormData();
@@ -79,16 +86,12 @@ const CreateDiary = () => {
     formData.append('isPublic', isPublic.toString());
 
     axios
-      .post(
-        'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/diaries',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzIwZmUzNTIzNjlhYzg3MWZiMDI3ZjUiLCJpYXQiOjE3MzAyNDc3OTMsImV4cCI6MTczMDI1MTM5M30.RzP_sTkKk_fDdqo7gvtEBfxVQt3g2SwOLMpIyGbVbCI`,
-          },
-        }
-      )
+      .post(`${BASE_URL}/diaries`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      })
       .then(() => navigate('/'))
       .catch((error) => console.error('업로드 실패:', error));
   };
