@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import * as styles from '../styles/MainMap.css';
 import backImg from '../assets/markerBack.svg';
 declare global {
@@ -13,8 +13,6 @@ interface MapMarker {
 }
 
 export default function MainMap({ latitude, longitude, markers }: MapMarker) {
-  const [map, setMap] = useState<any>();
-
   // 카카오맵 불러오기
   useEffect(() => {
     window.kakao.maps.load(() => {
@@ -25,7 +23,6 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
       };
 
       const newMap = new window.kakao.maps.Map(container, options);
-      setMap(newMap);
 
       // 현재 위치를 가져오는 함수 호출
       navigator.geolocation.getCurrentPosition(
@@ -53,14 +50,16 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
 
             // 커스텀 마커 이미지
             const img = document.createElement('img');
-            img.src = markerData.imageUrl;
+            const apiUrl =
+              'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/';
+            img.src = `${apiUrl}${markerData.imageUrl}`;
             img.classList.add(styles.markerImg);
 
             // 마커 div에 이미지 추가
             markerDiv.appendChild(img);
 
             // CustomOverlay 생성
-            const customOverlay = new window.kakao.maps.CustomOverlay({
+            new window.kakao.maps.CustomOverlay({
               position: markerPosition,
               content: markerDiv,
               map: newMap,
@@ -81,7 +80,11 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
     <div>
       <div
         id="map"
-        style={{ width: '100%', height: '650px', borderRadius: 20 }}
+        style={{
+          width: '100%',
+          height: 'calc(100vh - 200px)',
+          borderRadius: 20,
+        }}
       ></div>
     </div>
   );
