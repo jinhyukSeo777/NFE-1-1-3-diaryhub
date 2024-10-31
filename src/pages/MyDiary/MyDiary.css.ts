@@ -17,3 +17,12 @@ export const mydiary = style({
     },
   },
 });
+
+export const noteCon = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: 20,
+  marginTop: 20,
+});

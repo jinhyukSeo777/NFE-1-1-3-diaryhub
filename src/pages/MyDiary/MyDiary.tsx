@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Diary } from '../Home/Home';
 import Card from '../../components/CommonCard/Card';
-import { mydiary } from './MyDiary.css';
+import { mydiary, noteCon } from './MyDiary.css';
 import { home } from '../Home/Home.css';
 import TitleBanner from '../../components/TitleBanner';
+import note from '../../assets/note.svg';
 const MyDiary = () => {
   const [diaryData, setDiaryData] = useState<Diary[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const getToken = () => {
+    return localStorage.getItem('authToken');
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      const token = process.env.REACT_APP_API_TOKEN;
+      const token = getToken();
 
       try {
         const response = await fetch(
-          'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/diaries/my-diaries',
+          `${process.env.REACT_APP_API_BASE_URL}diaries/my-diaries`,
           {
             method: 'GET',
             headers: {
@@ -42,11 +47,18 @@ const MyDiary = () => {
     <>
       <TitleBanner title="나만의 일기" subtitle="나의 하루를 공유해보세요" />
       <div className={home}>
-        <ul className={mydiary}>
-          {diaryData.map((diary) => (
-            <Card key={diary._id} diary={diary} />
-          ))}
-        </ul>
+        {diaryData.length === 0 ? (
+          <div className={noteCon}>
+            <img src={note} alt="note" />
+            <p>작성한 일기가 없습니다.</p>
+          </div>
+        ) : (
+          <ul className={mydiary}>
+            {diaryData.map((diary) => (
+              <Card key={diary._id} diary={diary} />
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
