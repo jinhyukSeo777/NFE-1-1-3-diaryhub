@@ -50,14 +50,19 @@ const DiaryDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (param.id) {
-        const diaryInfo = await getDiaryDetail(param.id);
-        const commentInfo = await getDiaryComments(param.id);
-        setDiaryInfo(diaryInfo);
-        setDiaryComments(commentInfo);
-        const date = new Date(diaryInfo?.diaryDate);
-        setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
+      if (!param.id) return;
+      const diaryInfo = await getDiaryDetail(param.id);
+      const commentInfo = await getDiaryComments(param.id);
+      if (!diaryInfo.isPublic) {
+        const writer = diaryInfo.user._id;
+        const token = localStorage.getItem('authToken');
+        if (!token) return;
+        if (JSON.parse(atob(token.split('.')[1])).userId !== writer) return;
       }
+      setDiaryInfo(diaryInfo);
+      setDiaryComments(commentInfo);
+      const date = new Date(diaryInfo.diaryDate);
+      setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
     };
     fetchData();
   }, []);
