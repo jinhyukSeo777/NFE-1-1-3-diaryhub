@@ -36,12 +36,12 @@ const Article = ({ diary }: { diary: Diary }) => {
           <h3 className={titleText}>{diary.title}</h3>
           <div className={icons}>
             <img
-              src={diary.weather}
+              src={require(`../assets/${diary.weather}.svg`)}
               alt="weather"
               style={{ width: '24px', height: 'auto' }}
             />
             <img
-              src={diary.mood}
+              src={require(`../assets/${diary.mood}.svg`)}
               alt="emotion"
               style={{ width: '24px', height: 'auto' }}
             />
