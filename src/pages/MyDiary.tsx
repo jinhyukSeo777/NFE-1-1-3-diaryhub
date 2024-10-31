@@ -3,7 +3,7 @@ import { Diary } from './Home';
 import Card from '../components/CommonCard/Card';
 import { mydiary } from '../styles/MyDiary.css';
 import { home } from '../styles/Home.css';
-import TitleBanner from '../components/TitleBanner';
+import TitleBanner from '../components/TitleBanner/TitleBanner';
 const MyDiary = () => {
   const [diaryData, setDiaryData] = useState<Diary[]>([]);
   const [error, setError] = useState<string | null>(null);
