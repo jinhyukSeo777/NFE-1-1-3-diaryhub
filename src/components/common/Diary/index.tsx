@@ -47,9 +47,14 @@ const Diary = ({ diaryInfo }: diaryProps) => {
   const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
   const [isStamp, setIsStamp] = useState(diaryInfo.likes.includes(userId));
   const onStamp = async () => {
-    setIsStamp(!isStamp);
-    const likes = await likeDiary(diaryInfo._id);
-    setStampCount(likes);
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const likes = await likeDiary(diaryInfo._id);
+      setIsStamp(!isStamp);
+      setStampCount(likes);
+    } else {
+      alert('스탬프를 찍으려면 로그인해야 합니다!');
+    }
   };
   useEffect(() => {
     const calculateLineCount = () => {

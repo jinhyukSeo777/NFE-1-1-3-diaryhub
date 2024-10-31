@@ -3,6 +3,7 @@ import { g2, b1, b2 } from '../../../utils/color';
 
 export const diaryContainer = style({
   border: '1px solid',
+  marginTop: '3rem',
 });
 
 export const diaryTitleBox = style({
@@ -11,10 +12,10 @@ export const diaryTitleBox = style({
 });
 
 export const diaryTitleText = style({
-  padding: '1rem',
+  padding: '0 1rem',
   border: '1px solid',
-  height: '1.5rem',
-  lineHeight: '1.5rem',
+  height: '3rem',
+  lineHeight: '3rem',
 });
 
 export const diaryTitleIcon = style({
