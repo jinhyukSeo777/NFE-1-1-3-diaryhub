@@ -23,11 +23,7 @@ const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
         return (
           <div className={S.slide} key={index}>
             <div className={S.slideItem}>
-              <img
-                className={S.slideImg}
-                src={`${process.env.REACT_APP_API_BASE_URL}${img}`}
-                alt="img"
-              ></img>
+              <img className={S.slideImg} src={img} alt="img"></img>
             </div>
             <div className={S.slideTape}>
               <img src={tape3} className={S.slideTape1} alt="tape"></img>
