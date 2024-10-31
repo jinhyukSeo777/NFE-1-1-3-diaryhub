@@ -1,19 +1,24 @@
-import { Dispatch, SetStateAction } from 'react';
 import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
 import deleteComment from '../../../utils/deleteComment';
 import writeComment from '../../../utils/writeComment';
 import * as S from './styles.css';
 
 interface DiaryCommentProps {
-  commentsList?: DiaryCommentResponseType[];
-  diaryId?: string;
+  commentsList: DiaryCommentResponseType[];
+  diaryId: string;
 }
 
-const DiaryComment = ({ commentsList, diaryId = '' }: DiaryCommentProps) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
-    const inputValue = formData.get('comment');
-    saveComment(inputValue);
+const DiaryComment = ({ commentsList, diaryId }: DiaryCommentProps) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const formData = new FormData(e.currentTarget);
+      const inputValue = formData.get('comment');
+      saveComment(inputValue);
+    } else {
+      alert('댓글을 작성하려면 로그인해야 합니다!');
+    }
     e.currentTarget.reset();
   };
   const saveComment = (comment: FormDataEntryValue | null) => {
@@ -29,7 +34,7 @@ const DiaryComment = ({ commentsList, diaryId = '' }: DiaryCommentProps) => {
     <div className={S.commentContainer}>
       <div className={S.writeCommentBox}>
         <p className={S.writeCommentTitle}>댓글</p>
-        <form className={S.writeCommentForm} onSubmit={(e) => handleSubmit(e)}>
+        <form className={S.writeCommentForm} onSubmit={(e) => onSubmit(e)}>
           <input
             placeholder="댓글을 입력해주세요"
             className={S.writeCommentInput}

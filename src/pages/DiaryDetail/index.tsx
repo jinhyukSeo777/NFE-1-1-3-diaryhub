@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
+import ErrorPage from '../Error/Error';
 
 export type DiaryResponseType = {
   _id: string;
@@ -54,13 +55,14 @@ const DiaryDetail = () => {
         const commentInfo = await getDiaryComments(param.id);
         setDiaryInfo(diaryInfo);
         setDiaryComments(commentInfo);
-        const date = new Date(diaryInfo?.createdAt);
-        setDate(date.getMonth() + '월' + date.getDate() + '일의 일기');
+        const date = new Date(diaryInfo?.diaryDate);
+        setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
       }
     };
     fetchData();
   }, []);
-  return diaryInfo ? (
+
+  return diaryInfo && diaryComments && param.id ? (
     <div className={S.diaryDetailWrapper}>
       <TitleBanner
         title={date}
@@ -70,7 +72,7 @@ const DiaryDetail = () => {
       <DiaryComment commentsList={diaryComments} diaryId={param.id} />
     </div>
   ) : (
-    <div>Loading</div>
+    <ErrorPage></ErrorPage>
   );
 };
 export default DiaryDetail;
