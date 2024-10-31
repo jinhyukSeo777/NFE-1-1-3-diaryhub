@@ -95,7 +95,6 @@ const CreateDiary = () => {
       .then(() => navigate('/'))
       .catch((error) => console.error('업로드 실패:', error));
   };
-
   return (
     <main className={styles.main}>
       <div className={styles.container}>

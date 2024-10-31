@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
+import ErrorPage from '../Error/Error';
 
 export type DiaryResponseType = {
   _id: string;
@@ -49,28 +50,38 @@ const DiaryDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (param.id) {
-        const diaryInfo = await getDiaryDetail(param.id);
-        const commentInfo = await getDiaryComments(param.id);
-        setDiaryInfo(diaryInfo);
-        setDiaryComments(commentInfo);
-        const date = new Date(diaryInfo?.createdAt);
-        setDate(date.getMonth() + '월' + date.getDate() + '일의 일기');
+      if (!param.id) return;
+      const diaryInfo = await getDiaryDetail(param.id);
+      const commentInfo = await getDiaryComments(param.id);
+      if (!diaryInfo.isPublic) {
+        const writer = diaryInfo.user._id;
+        const token = localStorage.getItem('authToken');
+        if (!token) return;
+        if (JSON.parse(atob(token.split('.')[1])).userId !== writer) return;
       }
+      setDiaryInfo(diaryInfo);
+      setDiaryComments(commentInfo);
+      const date = new Date(diaryInfo.diaryDate);
+      setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
     };
     fetchData();
   }, []);
-  return diaryInfo ? (
+
+  return diaryInfo && diaryComments && param.id ? (
     <div className={S.diaryDetailWrapper}>
       <TitleBanner
         title={date}
         subtitle="생각과 감정을 기록한 일기를 만나보세요"
       />
       <Diary diaryInfo={diaryInfo} />
-      <DiaryComment commentsList={diaryComments} diaryId={param.id} />
+      <DiaryComment
+        commentsList={diaryComments}
+        setDiaryComments={setDiaryComments}
+        diaryId={param.id}
+      />
     </div>
   ) : (
-    <div>Loading</div>
+    <ErrorPage></ErrorPage>
   );
 };
 export default DiaryDetail;
