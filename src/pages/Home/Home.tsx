@@ -66,15 +66,13 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = process.env.REACT_APP_API_TOKEN;
       try {
         const response = await fetch(
-          'https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/diaries/public-diaries',
+          `${process.env.REACT_APP_API_BASE_URL}diaries/public-diaries`,
           {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzIxOWQ4NmI0MWVjZWU5NDdjZTIxZjYiLCJpYXQiOjE3MzAzNDI4MzcsImV4cCI6MTczMDM0NjQzN30.b_wZlEvHnl4fGPgEa0DC6gDy7lTNzUTX8D1EauzU3LM`,
             },
           }
         );
@@ -83,6 +81,7 @@ export default function Home() {
           const data = await response.json();
           setDiaryData(data);
           setFilteredDiaries(data);
+          console.log(data);
         } else {
           setError('데이터를 가져오는 데 실패했습니다.');
         }
@@ -113,8 +112,6 @@ export default function Home() {
   useEffect(() => {
     const fetchDiariesByState = async () => {
       if (selectedState) {
-        const token = process.env.REACT_APP_API_TOKEN;
-
         try {
           const response = await fetch(
             `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries/location/${selectedState}`,
@@ -122,7 +119,6 @@ export default function Home() {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
               },
             }
           );
