@@ -11,6 +11,10 @@ export const writeCommentBox = style({
   fontWeight: '700',
 });
 
+export const writeCommentTitle = style({
+  padding: '1rem',
+});
+
 export const writeCommentForm = style({
   display: 'flex',
   justifyContent: 'space-between',

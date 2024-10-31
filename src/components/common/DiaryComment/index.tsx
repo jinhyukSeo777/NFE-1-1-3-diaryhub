@@ -28,7 +28,7 @@ const DiaryComment = ({ commentsList, diaryId = '' }: DiaryCommentProps) => {
   return (
     <div className={S.commentContainer}>
       <div className={S.writeCommentBox}>
-        <p>댓글</p>
+        <p className={S.writeCommentTitle}>댓글</p>
         <form className={S.writeCommentForm} onSubmit={(e) => handleSubmit(e)}>
           <input
             placeholder="댓글을 입력해주세요"
