@@ -12,9 +12,9 @@ export const bannerContainer = style({
 export const imageStyle = style({
   width: '100px', // 이미지 크기 조정
   height: 'auto',
-  marginRight: '-32px',
-  marginLeft: '10px',
-  paddingLeft: '-16spx',
+  marginRight: '-55px',
+  marginBottom: 15,
+  marginLeft: '-15px',
 });
 
 export const imgWrap = style({

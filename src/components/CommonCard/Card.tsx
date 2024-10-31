@@ -1,8 +1,8 @@
 import CardContent from './CardContent';
 import CardHead from './CardHead';
-import { Diary } from '../../pages/Home';
-import Count from '../Count';
-import { card, margin } from '../../styles/Card.css';
+import { Diary } from '../../pages/Home/Home';
+import Count from '../Count/Count';
+import { card, margin } from './Card.css';
 import { useNavigate } from 'react-router-dom';
 import { DiaryDate } from '../../utils/date';
 
@@ -23,7 +23,7 @@ const Card = ({ diary }: { diary: Diary }) => {
         weather={diary.weather}
       />
       <img
-        src={`https://port-0-nfe-1-1-3-diaryhub-backend-m2tsapjdb0fe072f.sel4.cloudtype.app/${diary.images[0]}`}
+        src={diary.images[0]}
         alt="Sample"
         style={{ width: 270, height: 270, objectFit: 'cover' }}
       />
