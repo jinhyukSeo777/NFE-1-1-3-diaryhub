@@ -1,4 +1,4 @@
-import { titleText, text } from '../../styles/Article.css';
+import { titleText, text } from '../Article/Article.css';
 interface CardContentProps {
   title: string;
   content: string;

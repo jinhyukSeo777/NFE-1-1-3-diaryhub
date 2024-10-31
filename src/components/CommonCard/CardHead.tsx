@@ -1,5 +1,5 @@
-import { icons, text } from '../../styles/Article.css';
-import { texts } from '../../styles/Card.css';
+import { icons, text } from '../Article/Article.css';
+import { texts } from './Card.css';
 
 interface CardHeadProps {
   username: string;
