@@ -31,6 +31,41 @@ export const navStyle = style({
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
+  '@media': {
+    '(max-width: 768px)': {
+      display: 'none', // 모바일에서 기본 네비게이션 숨김
+    },
+  },
+});
+export const mobileMenuStyle = style({
+  display: 'none', // 기본적으로 숨김
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '1rem',
+  position: 'absolute',
+  top: '60px',
+  right: '20px',
+  backgroundColor: '#f8f9fa',
+  borderRadius: '8px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  padding: '1rem',
+  zIndex: 1,
+  '@media': {
+    '(max-width: 768px)': {
+      display: 'flex', // 모바일에서만 표시
+    },
+  },
+});
+
+export const hamburgerButtonStyle = style({
+  display: 'none',
+  fontSize: '1.5rem',
+  cursor: 'pointer',
+  '@media': {
+    '(max-width: 768px)': {
+      display: 'block', // 모바일에서만 표시
+    },
+  },
 });
 
 export const ulStyle = style({
