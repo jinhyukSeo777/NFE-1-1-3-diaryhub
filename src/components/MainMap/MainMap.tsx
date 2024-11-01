@@ -80,7 +80,7 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
         id="map"
         style={{
           width: '100%',
-          height: 'calc(100vh - 200px)',
+          height: 'calc(100vh - 280px)',
           borderRadius: 20,
         }}
       ></div>

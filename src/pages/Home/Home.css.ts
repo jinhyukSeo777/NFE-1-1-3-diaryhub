@@ -6,18 +6,17 @@ export const home = style({
   alignItems: 'center',
   justifyContent: 'center',
   maxWidth: DESKTOP,
-  gap: '10px',
+  gap: 20,
   margin: '0 auto',
+  padding: 20,
 });
 
 export const article = style({
-  padding: 20,
   flexBasis: '40%',
   boxSizing: 'border-box',
 });
 
 export const map = style({
-  padding: 20,
   flexBasis: '60%',
   boxSizing: 'border-box',
   '@media': {
