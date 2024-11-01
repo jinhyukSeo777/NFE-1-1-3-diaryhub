@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import Diary from '../../components/common/Diary';
-import DiaryComment from '../../components/common/DiaryComment';
+import Diary from '../../components/Diary';
+import DiaryComment from '../../components/DiaryComment';
 import * as S from './styles.css';
 import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
@@ -68,11 +68,13 @@ const DiaryDetail = () => {
         const token = localStorage.getItem('authToken');
         const isMine =
           token && JSON.parse(atob(token.split('.')[1])).userId === writer;
-
-        if (!diaryInfo.isPublic && isMine) {
+        if (isMine) {
           setIsMyDiary(true);
         }
-
+        if (!diaryInfo.isPublic && !isMine) {
+          setDiaryInfo(null);
+          setDiaryComments(null);
+        }
         const date = new Date(diaryInfo.diaryDate);
         setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
       }
