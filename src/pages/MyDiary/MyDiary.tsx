@@ -19,7 +19,7 @@ const MyDiary = () => {
 
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}diaries/my-diaries`,
+          `${process.env.REACT_APP_API_BASE_URL}/diaries/my-diaries`,
           {
             method: 'GET',
             headers: {

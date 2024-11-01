@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import MainMap from '../../components/MainMap/MainMap';
-import { home, article, map } from './Home.css';
+import { home, article, map, homeCon } from './Home.css';
 import ArticleArea from '../../components/Article/ArticleArea';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
@@ -13,6 +13,12 @@ export interface Comment {
   };
   content: string;
   createdAt: Date;
+}
+
+interface Image {
+  public_id: string;
+  url: string;
+  _id: string;
 }
 
 export interface Diary {
@@ -35,7 +41,7 @@ export interface Diary {
   weather: string;
   createdAt: Date;
   isPublic: boolean;
-  images: string[];
+  images: Image[];
   likes: string[];
   comments: Comment[];
 }
@@ -51,6 +57,7 @@ export default function Home() {
   const [selectedState, setSelectedState] = useState<string>('');
 
   const options = [
+    { value: '현재 위치', label: '현재 위치' },
     { value: '서울', label: '서울' },
     { value: '인천', label: '인천' },
     { value: '경기', label: '경기' },
@@ -68,7 +75,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}diaries/public-diaries`,
+          `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries`,
           {
             method: 'GET',
             headers: {
@@ -98,6 +105,7 @@ export default function Home() {
       (pos) => {
         const { latitude, longitude } = pos.coords;
         setCurrentPosition({ latitude, longitude });
+        setSelectedState('현재 위치');
       },
       () => alert('위치 정보를 가져오는 데 실패했습니다.'),
       {
@@ -111,6 +119,11 @@ export default function Home() {
   // 지역별 검색
   useEffect(() => {
     const fetchDiariesByState = async () => {
+      if (selectedState === '현재 위치') {
+        setFilteredDiaries(diaryData);
+        return;
+      }
+
       if (selectedState) {
         try {
           const response = await fetch(
@@ -158,7 +171,6 @@ export default function Home() {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
-
   const sortedDiaryData = currentPosition
     ? [...filteredDiaries]
         .sort((a, b) => {
@@ -179,28 +191,47 @@ export default function Home() {
         .slice(0, 5)
     : filteredDiaries;
 
+  // 선택된 지역에 따라 지도 위치 변경
+  const mapLatitude =
+    selectedState === '현재 위치' && currentPosition
+      ? currentPosition.latitude
+      : filteredDiaries.length > 0
+        ? filteredDiaries[0].location.coordinates.latitude
+        : currentPosition?.latitude || 37.5665;
+  const mapLongitude =
+    selectedState === '현재 위치' && currentPosition
+      ? currentPosition.longitude
+      : filteredDiaries.length > 0
+        ? filteredDiaries[0].location.coordinates.longitude
+        : currentPosition?.longitude || 126.978;
+
   return (
     <div>
       <TitleBanner
         title="모두의 일기"
         subtitle="누군가의 하루를 함께 느껴보세요"
       />
-      <div className={home}>
-        <section className={article}>
-          <SelectBox options={options} onChange={setSelectedState} />
-          <ArticleArea diaries={sortedDiaryData} />
-        </section>
-        <section className={map}>
-          <MainMap
-            latitude={currentPosition?.latitude || 37.5665}
-            longitude={currentPosition?.longitude || 126.978}
-            markers={sortedDiaryData.map((diary) => ({
-              latitude: diary.location.coordinates.latitude,
-              longitude: diary.location.coordinates.longitude,
-              imageUrl: diary.images[0],
-            }))}
-          />
-        </section>
+      <div className={homeCon}>
+        <SelectBox options={options} onChange={setSelectedState} />
+        <div className={home}>
+          <section className={article}>
+            <ArticleArea
+              diaries={sortedDiaryData}
+              selectedState={selectedState}
+            />
+          </section>
+          <section className={map}>
+            <MainMap
+              latitude={mapLatitude}
+              longitude={mapLongitude}
+              markers={sortedDiaryData.map((diary) => ({
+                latitude: diary.location.coordinates.latitude,
+                longitude: diary.location.coordinates.longitude,
+                imageUrl: diary.images[0].url,
+              }))}
+            />
+          </section>
+        </div>
       </div>
     </div>
   );

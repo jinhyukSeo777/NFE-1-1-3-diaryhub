@@ -5,24 +5,30 @@ export const home = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  maxWidth: DESKTOP,
-  gap: '10px',
-  margin: '0 auto',
+  gap: 20,
+  marginTop: 10,
 });
 
 export const article = style({
-  padding: 20,
   flexBasis: '40%',
-  boxSizing: 'border-box',
 });
 
 export const map = style({
-  padding: 20,
   flexBasis: '60%',
-  boxSizing: 'border-box',
+
+  position: 'relative',
+  height: 'calc(100vh - 300px)',
   '@media': {
     '(max-width: 950px)': {
       display: 'none',
     },
   },
+});
+
+export const homeCon = style({
+  alignItems: 'center',
+  justifyContent: 'center',
+  maxWidth: DESKTOP,
+  margin: '0 auto',
+  padding: '0 20px',
 });

@@ -6,7 +6,7 @@ export const articleArea = style({
   border: '1px solid #ddd',
   borderRadius: '20px',
   width: '100%',
-  height: 'calc(100vh - 200px)',
+  height: 'calc(100vh - 300px)',
   overflowY: 'auto',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   fontSize: '14px',
@@ -14,15 +14,15 @@ export const articleArea = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  marginTop: 15,
-});
-
-export const btn = style({
-  border: 'none',
-  backgroundColor: 'white',
-  cursor: 'pointer',
-  marginLeft: 'auto',
-  marginBottom: 10,
+  '@media': {
+    'screen and (max-width: 950px)': {
+      padding: 0,
+      border: 'none',
+      borderRadius: 0,
+      height: 'auto',
+      boxShadow: 'none',
+    },
+  },
 });
 
 export const ul = style({
@@ -102,6 +102,14 @@ export const cardContainer = style({
   '@media': {
     [`screen and (min-width: ${TABLET})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: 20,
     },
   },
+});
+
+export const stateText = style({
+  color: '#5cAAF3',
+  fontWeight: 'bold',
+  padding: 20,
+  marginBottom: 10,
 });

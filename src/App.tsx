@@ -8,6 +8,7 @@ import MyDiary from './pages/MyDiary/MyDiary';
 import DiaryDetail from './pages/DiaryDetail/index';
 import Error from './pages/Error/Error';
 import { AuthProvider } from './components/AuthContext';
+import EditDiary from './pages/EditDiary/EditDiary';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/creatediary" element={<CreateDiary />} />
+          <Route path="/editdiary" element={<EditDiary />} />
           <Route path="/mydiary" element={<MyDiary />} />
           <Route path="/diarydetail/:id" element={<DiaryDetail />} />
           <Route path="/error" element={<Error />} />

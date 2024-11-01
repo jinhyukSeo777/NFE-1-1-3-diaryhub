@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as styles from './InputImg.css';
 import { ReactComponent as Svg } from '../../../../assets/addphoto.svg';
 
@@ -11,7 +11,18 @@ const InputImg = ({ images, setImages }: IProps) => {
   const [previews, setPreviews] = useState<string[]>([]); // 이미지 미리보기 URL을 저장
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // 파일 선택 시 이미지 배열에 추가하고 미리보기를 위해 URL 생성
+  // 이미지 파일가 변경될때마다 프리뷰 만들기
+  useEffect(() => {
+    const newPreviews = images.map((file) => URL.createObjectURL(file));
+    setPreviews(newPreviews);
+
+    // 메모리 누수 방지: 컴포넌트가 언마운트되거나 images가 변경될 때 이전 URL을 해제
+    return () => {
+      newPreviews.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [images]);
+
+  // 파일 선택 시 이미지 배열에 추가
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
@@ -19,10 +30,6 @@ const InputImg = ({ images, setImages }: IProps) => {
 
     // 새로 추가된 이미지 파일을 상태에 저장
     setImages((prevImages) => [...prevImages, ...selectedFiles]);
-
-    // 미리보기를 위한 URL 생성 및 상태 저장
-    const newPreviews = selectedFiles.map((file) => URL.createObjectURL(file));
-    setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
   };
 
   // 파일 선택 창 열기
@@ -32,12 +39,18 @@ const InputImg = ({ images, setImages }: IProps) => {
     }
   };
 
+  const deleteImage = (index: number) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+  };
+
   return (
     <div className={styles.container}>
       <span className={styles.span}>그날의 사진</span>
       <div className={styles.imagesarea}>
         {previews.map((src, index) => (
           <div
+            onClick={() => deleteImage(index)}
             className={styles.image}
             key={index}
             style={{ backgroundImage: `url(${src})` }}

@@ -1,7 +1,8 @@
 import { style } from '@vanilla-extract/css';
-import { g2, b1, b2 } from '../../utils/color';
+import { TABLET } from '../../utils/size';
 
 export const diaryDetailWrapper = style({
+  maxWidth: TABLET,
   width: '80%',
   margin: 'auto',
   cursor: 'default',

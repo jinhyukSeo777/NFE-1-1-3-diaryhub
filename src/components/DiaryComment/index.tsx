@@ -1,13 +1,13 @@
-import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
-import deleteComment from '../../../utils/deleteComment';
-import getDiaryComments from '../../../utils/getDiaryComments';
-import writeComment from '../../../utils/writeComment';
+import { DiaryCommentResponseType } from '../../pages/DiaryDetail';
+import getDiaryComments from '../../utils/getDiaryComments';
+import writeComment from '../../utils/writeComment';
+import deleteComment from '../../utils/deleteComment';
 import * as S from './styles.css';
 
 interface DiaryCommentProps {
   commentsList: DiaryCommentResponseType[];
   setDiaryComments: React.Dispatch<
-    React.SetStateAction<DiaryCommentResponseType[] | undefined>
+    React.SetStateAction<DiaryCommentResponseType[] | undefined | null>
   >;
   diaryId: string;
 }
@@ -34,7 +34,6 @@ const DiaryComment = ({
     if (comment !== null && comment.length > 0) {
       await writeComment(diaryId, comment);
       const commentInfo = await getDiaryComments(diaryId);
-      console.log(commentInfo);
       setDiaryComments(commentInfo);
     } else {
       alert('댓글을 입력해주세요!');

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { g2, b1, b2 } from '../../../utils/color';
+import { g2, b1, b2 } from '../../utils/color';
 
 export const diaryContainer = style({
   border: '1px solid',
@@ -151,6 +151,11 @@ export const diaryshare = style({
   alignItems: 'center',
   backgroundColor: b1,
   color: 'white',
+});
+
+export const diaryButtons = style({
+  display: 'flex',
+  gap: '0.5rem',
 });
 
 export const diaryEditButton = style({

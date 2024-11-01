@@ -1,25 +1,33 @@
-import { DiaryResponseType } from '../../../pages/DiaryDetail';
+import feel1 from '../../assets/feel1.svg';
+import feel2 from '../../assets/feel2.svg';
+import feel3 from '../../assets/feel3.svg';
+import feel4 from '../../assets/feel4.svg';
+import feel5 from '../../assets/feel5.svg';
+import sun from '../../assets/sun.svg';
+import cloud from '../../assets/cloud.svg';
+import rain from '../../assets/rain.svg';
+import thunder from '../../assets/thunder.svg';
+import wind from '../../assets/wind.svg';
+import stamp from '../../assets/stamp.svg';
+import location from '../../assets/location.svg';
+
+import { DiaryResponseType } from '../../pages/DiaryDetail';
+import likeDiary from '../../utils/likeDiary';
+import deleteDiary from '../../utils/deleteDiary';
 import ImgSwiper from '../ImgSwiper';
 import * as S from './styles.css';
-import feel1 from '../../../assets/feel1.svg';
-import feel2 from '../../../assets/feel2.svg';
-import feel3 from '../../../assets/feel3.svg';
-import feel4 from '../../../assets/feel4.svg';
-import feel5 from '../../../assets/feel5.svg';
-import sun from '../../../assets/sun.svg';
-import cloud from '../../../assets/cloud.svg';
-import rain from '../../../assets/rain.svg';
-import thunder from '../../../assets/thunder.svg';
-import wind from '../../../assets/wind.svg';
-import stamp from '../../../assets/stamp.svg';
-import location from '../../../assets/location.svg';
+
 import { useEffect, useRef, useState } from 'react';
-import likeDiary from '../../../utils/likeDiary';
+import { useNavigate } from 'react-router-dom';
+
 interface diaryProps {
   diaryInfo: DiaryResponseType;
+  isMyDiary: boolean;
 }
-const Diary = ({ diaryInfo }: diaryProps) => {
-  const userId = '672099fde44237755b604265';
+
+const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
+  const token = localStorage.getItem('authToken');
+  const userId = token && JSON.parse(atob(token.split('.')[1])).userId;
   const date = new Date(diaryInfo.diaryDate);
   const day = [
     '일요일',
@@ -45,8 +53,12 @@ const Diary = ({ diaryInfo }: diaryProps) => {
   const [lineCount, setLineCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
   const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
-  const [isStamp, setIsStamp] = useState(diaryInfo.likes.includes(userId));
+  const [isStamp, setIsStamp] = useState(
+    diaryInfo.likes.includes(userId) || isMyDiary
+  );
   const onStamp = async () => {
+    if (isMyDiary) return;
+
     const token = localStorage.getItem('authToken');
     if (token) {
       const likes = await likeDiary(diaryInfo._id);
@@ -55,6 +67,10 @@ const Diary = ({ diaryInfo }: diaryProps) => {
     } else {
       alert('스탬프를 찍으려면 로그인해야 합니다!');
     }
+  };
+  const delDiary = async () => {
+    await deleteDiary(diaryInfo._id);
+    navigate('/');
   };
   useEffect(() => {
     const calculateLineCount = () => {
@@ -81,9 +97,13 @@ const Diary = ({ diaryInfo }: diaryProps) => {
     }
     return elements;
   };
+
+  const navigate = useNavigate();
+  const goEditPage = () => {
+    navigate('/editdiary', { state: { diaryInfo } });
+  };
   return (
     <>
-      {' '}
       <div className={S.diaryContainer}>
         <div className={S.diaryTitleBox}>
           <div className={S.diaryTitleText}>
@@ -123,7 +143,7 @@ const Diary = ({ diaryInfo }: diaryProps) => {
           <div className={S.diaryAddress}>
             <img width={15} src={location} alt="location"></img>
             <span style={{ marginLeft: '0.7rem' }}>
-              장소: {diaryInfo.address || '집'}
+              장소: {diaryInfo.location.state || '집'}
             </span>
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>
@@ -146,7 +166,16 @@ const Diary = ({ diaryInfo }: diaryProps) => {
           {diaryInfo.isPublic ? '공개' : '비공개'}
         </div>
         <div style={{ flexGrow: '1' }}></div>
-        <div className={S.diaryEditButton}>일기 수정하기</div>
+        {isMyDiary && (
+          <div className={S.diaryButtons}>
+            <div className={S.diaryEditButton} onClick={goEditPage}>
+              일기 수정하기
+            </div>
+            <div className={S.diaryEditButton} onClick={delDiary}>
+              일기 삭제하기
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
