@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   headerStyle,
@@ -9,25 +9,63 @@ import {
   liStyle,
   linkStyle,
   h1Style,
+  hamburgerButtonStyle,
+  mobileMenuStyle,
 } from './Header.css';
 import { useAuth } from '../AuthContext'; // AuthContext에서 로그인 상태 가져오기
 
 const Header: React.FC = () => {
   const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
     logout();
     navigate('/'); // 홈으로 이동
   };
 
+  const handleLogoClick = () => {
+    navigate('/'); // 홈으로 이동
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header className={headerStyle}>
-      <div className={logoContainerStyle}>
+      <div
+        className={logoContainerStyle}
+        onClick={handleLogoClick}
+        style={{ cursor: 'pointer' }}
+      >
         <img src="/assets/logo.svg" alt="logo" className={logoImageStyle} />
         <h2 className={h1Style}>교환일기</h2>
       </div>
 
+      {/* 데스크탑 네비게이션 */}
       <nav className={navStyle}>
         <ul className={ulStyle}>
           <li className={liStyle}>
@@ -43,12 +81,17 @@ const Header: React.FC = () => {
                 </Link>
               </li>
               <li className={liStyle}>
+                <Link to="/creatediary" className={linkStyle}>
+                  일기 작성
+                </Link>
+              </li>
+              <li className={liStyle}>
                 <Link
                   to="/"
                   className={linkStyle}
                   onClick={(e) => {
-                    e.preventDefault(); // 기본 동작 방지
-                    handleLogout(); // 로그아웃 함수 호출
+                    e.preventDefault();
+                    handleLogout();
                   }}
                 >
                   로그아웃
@@ -71,6 +114,70 @@ const Header: React.FC = () => {
           )}
         </ul>
       </nav>
+
+      {/* 모바일 햄버거 메뉴 버튼 */}
+      <div className={hamburgerButtonStyle} onClick={toggleMobileMenu}>
+        &#9776;
+      </div>
+
+      {/* 모바일 메뉴: 모바일 해상도에서만 렌더링 */}
+      {isMobileMenuOpen && (
+        <nav className={mobileMenuStyle} ref={mobileMenuRef}>
+          <Link
+            to="/"
+            className={linkStyle}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            홈
+          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link
+                to="/mydiary"
+                className={linkStyle}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                나의 일기
+              </Link>
+              <Link
+                to="/creatediary"
+                className={linkStyle}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                일기 작성
+              </Link>
+              <Link
+                to="/"
+                className={linkStyle}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  handleLogout();
+                }}
+              >
+                로그아웃
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/signup"
+                className={linkStyle}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                회원가입
+              </Link>
+              <Link
+                to="/login"
+                className={linkStyle}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                로그인
+              </Link>
+            </>
+          )}
+        </nav>
+      )}
     </header>
   );
 };
