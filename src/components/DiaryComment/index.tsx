@@ -1,7 +1,7 @@
-import { DiaryCommentResponseType } from '../../../pages/DiaryDetail';
-import deleteComment from '../../../utils/deleteComment';
-import getDiaryComments from '../../../utils/getDiaryComments';
-import writeComment from '../../../utils/writeComment';
+import { DiaryCommentResponseType } from '../../pages/DiaryDetail';
+import getDiaryComments from '../../utils/getDiaryComments';
+import writeComment from '../../utils/writeComment';
+import deleteComment from '../../utils/deleteComment';
 import * as S from './styles.css';
 
 interface DiaryCommentProps {

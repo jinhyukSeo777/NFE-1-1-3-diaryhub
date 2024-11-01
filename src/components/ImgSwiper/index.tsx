@@ -1,9 +1,9 @@
-import tape2 from '../../../assets/tape2.svg';
-import tape3 from '../../../assets/tape3.svg';
-import * as S from './styles.css';
+import tape2 from '../../assets/tape2.svg';
+import tape3 from '../../assets/tape3.svg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import * as S from './styles.css';
 import './sliderBtnStyle.css';
 interface ImgSwiperProps {
   imgList: string[];

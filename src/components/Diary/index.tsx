@@ -1,27 +1,33 @@
-import { DiaryResponseType } from '../../../pages/DiaryDetail';
+import feel1 from '../../assets/feel1.svg';
+import feel2 from '../../assets/feel2.svg';
+import feel3 from '../../assets/feel3.svg';
+import feel4 from '../../assets/feel4.svg';
+import feel5 from '../../assets/feel5.svg';
+import sun from '../../assets/sun.svg';
+import cloud from '../../assets/cloud.svg';
+import rain from '../../assets/rain.svg';
+import thunder from '../../assets/thunder.svg';
+import wind from '../../assets/wind.svg';
+import stamp from '../../assets/stamp.svg';
+import location from '../../assets/location.svg';
+
+import { DiaryResponseType } from '../../pages/DiaryDetail';
+import likeDiary from '../../utils/likeDiary';
+import deleteDiary from '../../utils/deleteDiary';
 import ImgSwiper from '../ImgSwiper';
 import * as S from './styles.css';
-import feel1 from '../../../assets/feel1.svg';
-import feel2 from '../../../assets/feel2.svg';
-import feel3 from '../../../assets/feel3.svg';
-import feel4 from '../../../assets/feel4.svg';
-import feel5 from '../../../assets/feel5.svg';
-import sun from '../../../assets/sun.svg';
-import cloud from '../../../assets/cloud.svg';
-import rain from '../../../assets/rain.svg';
-import thunder from '../../../assets/thunder.svg';
-import wind from '../../../assets/wind.svg';
-import stamp from '../../../assets/stamp.svg';
-import location from '../../../assets/location.svg';
+
 import { useEffect, useRef, useState } from 'react';
-import likeDiary from '../../../utils/likeDiary';
 import { useNavigate } from 'react-router-dom';
+
 interface diaryProps {
   diaryInfo: DiaryResponseType;
   isMyDiary: boolean;
 }
+
 const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
-  const userId = '672099fde44237755b604265';
+  const token = localStorage.getItem('authToken');
+  const userId = token && JSON.parse(atob(token.split('.')[1])).userId;
   const date = new Date(diaryInfo.diaryDate);
   const day = [
     '일요일',
@@ -61,6 +67,10 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     } else {
       alert('스탬프를 찍으려면 로그인해야 합니다!');
     }
+  };
+  const delDiary = async () => {
+    await deleteDiary(diaryInfo._id);
+    navigate('/');
   };
   useEffect(() => {
     const calculateLineCount = () => {
@@ -157,8 +167,13 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
         </div>
         <div style={{ flexGrow: '1' }}></div>
         {isMyDiary && (
-          <div className={S.diaryEditButton} onClick={goEditPage}>
-            일기 수정하기
+          <div className={S.diaryButtons}>
+            <div className={S.diaryEditButton} onClick={goEditPage}>
+              일기 수정하기
+            </div>
+            <div className={S.diaryEditButton} onClick={delDiary}>
+              일기 삭제하기
+            </div>
           </div>
         )}
       </div>
