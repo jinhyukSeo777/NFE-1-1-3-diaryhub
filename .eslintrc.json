@@ -8,6 +8,6 @@
   "rules": {
     "react/prop-types": "off",
     "no-console": "off",
-    "prettier/prettier": ["error", { "endOfLine": "crlf" }]
+    "prettier/prettier": ["error", { "endOfLine": "lf" }]
   }
 }
