@@ -25,14 +25,6 @@ export const articleArea = style({
   },
 });
 
-export const btn = style({
-  border: 'none',
-  backgroundColor: 'white',
-  cursor: 'pointer',
-  marginLeft: 'auto',
-  marginBottom: 10,
-});
-
 export const ul = style({
   listStyle: 'none',
   padding: 0,
