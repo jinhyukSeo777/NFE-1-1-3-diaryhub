@@ -1,5 +1,4 @@
-import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
-
+import { VanillaExtractPlugin } from './src/webpack-plugin';
 module.exports = {
   webpack: {
     plugins: [new VanillaExtractPlugin()],
