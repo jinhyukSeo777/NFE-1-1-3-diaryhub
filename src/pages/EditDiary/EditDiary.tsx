@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as styles from './CreateDiary.css';
+import * as styles from './EditDiary.css';
 import InputDate from '../../components/common/CommonInput/InputDate/InputDate';
 import InputTitle from '../../components/common/CommonInput/InputTitle/InputTitle';
 import InputContent from '../../components/common/CommonInput/InputContent/InputContent';
@@ -10,14 +10,19 @@ import CreateMap from '../../components/CreateMap/CreateMap';
 import InputPublic from '../../components/common/CommonInput/InputPublic/InputPublic';
 import InputImg from '../../components/common/CommonInput/InputImg/InputImg';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { DiaryResponseType } from '../DiaryDetail';
 
 export interface IPosition {
   latitude: number;
   longitude: number;
 }
 
-const CreateDiary = () => {
+interface IData {
+  diaryInfo: DiaryResponseType;
+}
+
+const EditDiary = () => {
   const [position, setPosition] = useState<IPosition>({
     latitude: 37.566826,
     longitude: 126.9786567,
@@ -31,17 +36,62 @@ const CreateDiary = () => {
   const [isPublic, setIsPublic] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation() as { state: IData };
 
   useEffect(() => {
     const TOKEN = localStorage.getItem('authToken');
-    if (!TOKEN) navigate('/login');
+    if (!TOKEN) navigate('/error');
   });
+
+  // 초기 일기 정보 설정
+  useEffect(() => {
+    const setData = async () => {
+      const { diaryInfo } = location.state || {};
+      if (!diaryInfo) {
+        navigate('/error');
+        return;
+      }
+
+      const images = await urlsToFiles(diaryInfo.images);
+
+      setPosition({
+        latitude: diaryInfo.location.coordinates.latitude,
+        longitude: diaryInfo.location.coordinates.longitude,
+      });
+      setDiaryDate(new Date(diaryInfo.diaryDate));
+      setWeather(diaryInfo.weather);
+      setMood(diaryInfo.mood);
+      setImages(images);
+      setTitle(diaryInfo.title);
+      setContent(diaryInfo.content);
+      setIsPublic(diaryInfo.isPublic);
+    };
+
+    setData();
+  }, [location.state, navigate]);
 
   useEffect(() => {
     const canSubmit =
       !!weather && !!mood && !!title && !!content && images.length !== 0;
     setCanSubmit(canSubmit);
   }, [weather, mood, images, title, content]);
+
+  const urlsToFiles = async (urls: string[]) => {
+    // URL 배열을 File 객체 배열로 변환
+    const filePromises = urls.map(async (url, index) => {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      // MIME 타입 추정 (Blob에서 추출됨)
+      const mimeType = blob.type;
+      // File 객체 생성, index를 파일명에 포함
+      return new File([blob], `image_${index + 1}.${mimeType.split('/')[1]}`, {
+        type: mimeType,
+      });
+    });
+
+    // 모든 File 객체 반환
+    return Promise.all(filePromises);
+  };
 
   const getRegionName = async () => {
     const apiKey = process.env.REACT_APP_KAKAOMAP_API_KEY;
@@ -86,15 +136,15 @@ const CreateDiary = () => {
     formData.append('longitude', position.longitude.toString());
     formData.append('isPublic', isPublic.toString());
 
-    axios
-      .post(`${BASE_URL}/diaries`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      })
-      .then(() => navigate('/'))
-      .catch(() => navigate('/error'));
+    // axios
+    //   .post(`${BASE_URL}/diaries`, formData, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
+    //       Authorization: `Bearer ${TOKEN}`,
+    //     },
+    //   })
+    //   .then(() => navigate('/'))
+    //   .catch(() => navigate('/error'));
   };
 
   return (
@@ -122,4 +172,4 @@ const CreateDiary = () => {
   );
 };
 
-export default CreateDiary;
+export default EditDiary;
