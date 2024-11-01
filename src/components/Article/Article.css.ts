@@ -6,7 +6,7 @@ export const articleArea = style({
   border: '1px solid #ddd',
   borderRadius: '20px',
   width: '100%',
-  height: 'calc(100vh - 200px)',
+  height: 'calc(100vh - 340px)',
   overflowY: 'auto',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   fontSize: '14px',
@@ -102,6 +102,14 @@ export const cardContainer = style({
   '@media': {
     [`screen and (min-width: ${TABLET})`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: 20,
     },
   },
+});
+
+export const stateText = style({
+  color: '#5cAAF3',
+  fontWeight: 'bold',
+  padding: 20,
+  marginBottom: 10,
 });

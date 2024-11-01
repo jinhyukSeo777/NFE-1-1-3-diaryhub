@@ -8,7 +8,7 @@ interface SelectBoxProps {
 
 const CustomSelectBox = ({ options, onChange }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [selectedOption, setSelectedOption] = useState<string>('현재 위치');
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
@@ -21,7 +21,7 @@ const CustomSelectBox = ({ options, onChange }: SelectBoxProps) => {
   return (
     <div className={select}>
       <div className={dropdown} onClick={toggleDropdown}>
-        {selectedOption || '지역선택'}
+        {selectedOption}
         <span className={arrow} />
       </div>
       {isOpen && (
