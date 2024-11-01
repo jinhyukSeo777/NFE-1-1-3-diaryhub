@@ -68,7 +68,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}diaries/public-diaries`,
+          `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries`,
           {
             method: 'GET',
             headers: {
