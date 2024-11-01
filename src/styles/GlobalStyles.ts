@@ -17,6 +17,11 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
   body {
     font-family: 'NanumSquareNeo', sans-serif;
     color: ${g1};
