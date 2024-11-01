@@ -64,8 +64,8 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     }
   };
   const delDiary = async () => {
-    const a = await deleteDiary(diaryInfo._id);
-    console.log(a);
+    await deleteDiary(diaryInfo._id);
+    navigate('/');
   };
   useEffect(() => {
     const calculateLineCount = () => {
