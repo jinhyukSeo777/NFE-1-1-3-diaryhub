@@ -2,12 +2,12 @@ import * as styles from './InputTitle.css';
 
 interface IProps {
   title: string;
-  SetTitle: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputTitle = ({ title, SetTitle }: IProps) => {
+const InputTitle = ({ title, setTitle }: IProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SetTitle(e.target.value);
+    setTitle(e.target.value);
   };
 
   return (

@@ -15,6 +15,7 @@ import stamp from '../../../assets/stamp.svg';
 import location from '../../../assets/location.svg';
 import { useEffect, useRef, useState } from 'react';
 import likeDiary from '../../../utils/likeDiary';
+import { useNavigate } from 'react-router-dom';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
 }
@@ -81,9 +82,13 @@ const Diary = ({ diaryInfo }: diaryProps) => {
     }
     return elements;
   };
+
+  const navigate = useNavigate();
+  const goEditPage = () => {
+    navigate('/editdiary', { state: { diaryInfo } });
+  };
   return (
     <>
-      {' '}
       <div className={S.diaryContainer}>
         <div className={S.diaryTitleBox}>
           <div className={S.diaryTitleText}>
@@ -146,7 +151,9 @@ const Diary = ({ diaryInfo }: diaryProps) => {
           {diaryInfo.isPublic ? '공개' : '비공개'}
         </div>
         <div style={{ flexGrow: '1' }}></div>
-        <div className={S.diaryEditButton}>일기 수정하기</div>
+        <div className={S.diaryEditButton} onClick={goEditPage}>
+          일기 수정하기
+        </div>
       </div>
     </>
   );
