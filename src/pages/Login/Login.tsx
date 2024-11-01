@@ -59,6 +59,7 @@ const LoginPage: React.FC = () => {
         <div className={imgSection}>
           <p>
             계정이 없으신가요? <br />
+            <br />
             <Link to="/signup">여기</Link>를 눌러 회원가입 해주세요!
           </p>
           <img src="/assets/logo.svg" alt="logo" />
