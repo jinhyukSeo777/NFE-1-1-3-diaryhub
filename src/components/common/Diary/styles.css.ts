@@ -153,6 +153,11 @@ export const diaryshare = style({
   color: 'white',
 });
 
+export const diaryButtons = style({
+  display: 'flex',
+  gap: '0.5rem',
+});
+
 export const diaryEditButton = style({
   display: 'flex',
   borderRadius: '0.5rem',

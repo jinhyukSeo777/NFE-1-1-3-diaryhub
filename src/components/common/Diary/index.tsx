@@ -16,6 +16,7 @@ import location from '../../../assets/location.svg';
 import { useEffect, useRef, useState } from 'react';
 import likeDiary from '../../../utils/likeDiary';
 import { useNavigate } from 'react-router-dom';
+import deleteDiary from '../../../utils/deleteDiary';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
   isMyDiary: boolean;
@@ -61,6 +62,10 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     } else {
       alert('스탬프를 찍으려면 로그인해야 합니다!');
     }
+  };
+  const delDiary = async () => {
+    const a = await deleteDiary(diaryInfo._id);
+    console.log(a);
   };
   useEffect(() => {
     const calculateLineCount = () => {
@@ -157,8 +162,13 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
         </div>
         <div style={{ flexGrow: '1' }}></div>
         {isMyDiary && (
-          <div className={S.diaryEditButton} onClick={goEditPage}>
-            일기 수정하기
+          <div className={S.diaryButtons}>
+            <div className={S.diaryEditButton} onClick={goEditPage}>
+              일기 수정하기
+            </div>
+            <div className={S.diaryEditButton} onClick={delDiary}>
+              일기 삭제하기
+            </div>
           </div>
         )}
       </div>

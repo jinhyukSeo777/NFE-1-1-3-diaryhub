@@ -69,7 +69,7 @@ const DiaryDetail = () => {
         const isMine =
           token && JSON.parse(atob(token.split('.')[1])).userId === writer;
 
-        if (!diaryInfo.isPublic && isMine) {
+        if (isMine) {
           setIsMyDiary(true);
         }
 
