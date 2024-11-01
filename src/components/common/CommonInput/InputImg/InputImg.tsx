@@ -39,12 +39,18 @@ const InputImg = ({ images, setImages }: IProps) => {
     }
   };
 
+  const deleteImage = (index: number) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+  };
+
   return (
     <div className={styles.container}>
       <span className={styles.span}>그날의 사진</span>
       <div className={styles.imagesarea}>
         {previews.map((src, index) => (
           <div
+            onClick={() => deleteImage(index)}
             className={styles.image}
             key={index}
             style={{ backgroundImage: `url(${src})` }}
