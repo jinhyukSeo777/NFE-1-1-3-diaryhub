@@ -26,7 +26,8 @@ interface diaryProps {
 }
 
 const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
-  const userId = '672099fde44237755b604265';
+  const token = localStorage.getItem('authToken');
+  const userId = token && JSON.parse(atob(token.split('.')[1])).userId;
   const date = new Date(diaryInfo.diaryDate);
   const day = [
     '일요일',
