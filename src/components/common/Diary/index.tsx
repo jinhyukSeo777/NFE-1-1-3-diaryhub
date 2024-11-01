@@ -18,8 +18,9 @@ import likeDiary from '../../../utils/likeDiary';
 import { useNavigate } from 'react-router-dom';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
+  isMyDiary: boolean;
 }
-const Diary = ({ diaryInfo }: diaryProps) => {
+const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const userId = '672099fde44237755b604265';
   const date = new Date(diaryInfo.diaryDate);
   const day = [
@@ -151,9 +152,11 @@ const Diary = ({ diaryInfo }: diaryProps) => {
           {diaryInfo.isPublic ? '공개' : '비공개'}
         </div>
         <div style={{ flexGrow: '1' }}></div>
-        <div className={S.diaryEditButton} onClick={goEditPage}>
-          일기 수정하기
-        </div>
+        {isMyDiary && (
+          <div className={S.diaryEditButton} onClick={goEditPage}>
+            일기 수정하기
+          </div>
+        )}
       </div>
     </>
   );
