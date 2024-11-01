@@ -208,7 +208,10 @@ export default function Home() {
       <div className={home}>
         <section className={article}>
           <SelectBox options={options} onChange={setSelectedState} />
-          <ArticleArea diaries={sortedDiaryData} />
+          <ArticleArea
+            diaries={sortedDiaryData}
+            selectedState={selectedState}
+          />
         </section>
         <section className={map}>
           <MainMap

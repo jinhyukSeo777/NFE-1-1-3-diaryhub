@@ -106,3 +106,10 @@ export const cardContainer = style({
     },
   },
 });
+
+export const stateText = style({
+  color: '#5cAAF3',
+  fontWeight: 'bold',
+  padding: 20,
+  marginBottom: 10,
+});

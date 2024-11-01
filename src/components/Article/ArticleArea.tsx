@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
 import Article from './Article';
 import Card from '../CommonCard/Card';
-import { articleArea, btn, ul, cardContainer } from './Article.css';
+import { articleArea, btn, ul, cardContainer, stateText } from './Article.css';
 import { noteCon } from '../../pages/MyDiary/MyDiary.css';
 import { Diary } from '../../pages/Home/Home';
-import btnImg from '../../assets/btn.svg';
-import { useNavigate } from 'react-router-dom';
 import note from '../../assets/note.svg';
 interface ArticleAreaProps {
   diaries: Diary[];
+  selectedState: string;
 }
 
-const ArticleArea = ({ diaries }: ArticleAreaProps) => {
+const ArticleArea = ({ diaries, selectedState }: ArticleAreaProps) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -22,19 +20,9 @@ const ArticleArea = ({ diaries }: ArticleAreaProps) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleOnclick = () => {
-    navigate('/createDiary');
-  };
-
   return (
     <section className={articleArea}>
-      <button className={btn} onClick={handleOnclick}>
-        <img
-          src={btnImg}
-          alt="btnImg"
-          style={{ width: '50px', height: 'auto' }}
-        />
-      </button>
+      <p className={stateText}>{selectedState}의 일기입니다.</p>
       {diaries.length > 0 ? (
         <ul className={ul}>
           {windowWidth >= 950 ? (
