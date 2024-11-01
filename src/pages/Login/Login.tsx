@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}auth/login`,
+        `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
         {
           method: 'POST',
           headers: {
