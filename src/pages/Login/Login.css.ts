@@ -5,12 +5,26 @@ export const pageContainer = style({
   alignItems: 'center',
   justifyContent: 'center',
   height: ' 90vh',
+  '@media': {
+    '(max-width: 768px)': {
+      flexDirection: 'column',
+      padding: '1rem',
+    },
+  },
 });
 
 export const welcomeSection = style({
   width: '30%',
   textAlign: 'center',
   marginRight: '2rem',
+  '@media': {
+    '(max-width: 768px)': {
+      width: '100%',
+      height: '25%',
+      marginTop: '32px',
+      marginBottom: '32px',
+    },
+  },
 });
 
 export const imgSection = style({
@@ -18,6 +32,11 @@ export const imgSection = style({
   alignItems: 'center',
   textAlign: 'center',
   justifyContent: 'center',
+  '@media': {
+    '(max-width: 768px)': {
+      marginTop: '40px',
+    },
+  },
 });
 
 export const formSection = style({
@@ -26,6 +45,17 @@ export const formSection = style({
   maxWidth: '410px',
   borderRadius: '8px',
   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+  '@media': {
+    '(max-width: 768px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '16px',
+      width: '100%',
+      marginBottom: '32px',
+    },
+  },
 });
 
 // 글로벌 스타일 설정
@@ -44,6 +74,11 @@ globalStyle(`${welcomeSection} img`, {
   marginTop: '1rem',
   width: '150px',
   height: '150px',
+  '@media': {
+    '(max-width: 768px)': {
+      display: 'none',
+    },
+  },
 });
 
 globalStyle(`${formSection} h2`, {
