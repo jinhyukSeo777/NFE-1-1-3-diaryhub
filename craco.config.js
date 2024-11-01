@@ -1,6 +1,4 @@
-const {
-  VanillaExtractPlugin,
-} = require('./src/node_modules/@vanilla-extract/webpack-plugin');
+import { VanillaExtractPlugin } from '@vanilla-extract/webpack-plugin';
 
 module.exports = {
   webpack: {
