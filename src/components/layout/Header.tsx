@@ -20,10 +20,17 @@ const Header: React.FC = () => {
     logout();
     navigate('/'); // 홈으로 이동
   };
+  const handleLogoClick = () => {
+    navigate('/'); // 홈으로 이동
+  };
 
   return (
     <header className={headerStyle}>
-      <div className={logoContainerStyle}>
+      <div
+        className={logoContainerStyle}
+        onClick={handleLogoClick}
+        style={{ cursor: 'pointer' }}
+      >
         <img src="/assets/logo.svg" alt="logo" className={logoImageStyle} />
         <h2 className={h1Style}>교환일기</h2>
       </div>
@@ -40,6 +47,11 @@ const Header: React.FC = () => {
               <li className={liStyle}>
                 <Link to="/mydiary" className={linkStyle}>
                   나의 일기
+                </Link>
+              </li>
+              <li className={liStyle}>
+                <Link to="/creatediary" className={linkStyle}>
+                  일기 작성
                 </Link>
               </li>
               <li className={liStyle}>
