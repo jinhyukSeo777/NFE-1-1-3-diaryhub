@@ -51,6 +51,7 @@ export default function Home() {
   const [selectedState, setSelectedState] = useState<string>('');
 
   const options = [
+    { value: '현재 위치', label: '현재 위치' },
     { value: '서울', label: '서울' },
     { value: '인천', label: '인천' },
     { value: '경기', label: '경기' },
@@ -98,6 +99,7 @@ export default function Home() {
       (pos) => {
         const { latitude, longitude } = pos.coords;
         setCurrentPosition({ latitude, longitude });
+        setSelectedState('현재 위치');
       },
       () => alert('위치 정보를 가져오는 데 실패했습니다.'),
       {
@@ -111,6 +113,11 @@ export default function Home() {
   // 지역별 검색
   useEffect(() => {
     const fetchDiariesByState = async () => {
+      if (selectedState === '현재 위치') {
+        setFilteredDiaries(diaryData);
+        return;
+      }
+
       if (selectedState) {
         try {
           const response = await fetch(
@@ -158,7 +165,6 @@ export default function Home() {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
-
   const sortedDiaryData = currentPosition
     ? [...filteredDiaries]
         .sort((a, b) => {
@@ -179,6 +185,20 @@ export default function Home() {
         .slice(0, 5)
     : filteredDiaries;
 
+  // 선택된 지역에 따라 지도 위치 변경
+  const mapLatitude =
+    selectedState === '현재 위치' && currentPosition
+      ? currentPosition.latitude
+      : filteredDiaries.length > 0
+        ? filteredDiaries[0].location.coordinates.latitude
+        : currentPosition?.latitude || 37.5665;
+  const mapLongitude =
+    selectedState === '현재 위치' && currentPosition
+      ? currentPosition.longitude
+      : filteredDiaries.length > 0
+        ? filteredDiaries[0].location.coordinates.longitude
+        : currentPosition?.longitude || 126.978;
+
   return (
     <div>
       <TitleBanner
@@ -192,8 +212,8 @@ export default function Home() {
         </section>
         <section className={map}>
           <MainMap
-            latitude={currentPosition?.latitude || 37.5665}
-            longitude={currentPosition?.longitude || 126.978}
+            latitude={mapLatitude}
+            longitude={mapLongitude}
             markers={sortedDiaryData.map((diary) => ({
               latitude: diary.location.coordinates.latitude,
               longitude: diary.location.coordinates.longitude,
