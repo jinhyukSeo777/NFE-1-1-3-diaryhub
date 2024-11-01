@@ -50,6 +50,7 @@ const DiaryDetail = () => {
   const [diaryComments, setDiaryComments] = useState<
     DiaryCommentResponseType[] | null | undefined
   >();
+  const [isMyDiary, setIsMyDiary] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,30 +58,26 @@ const DiaryDetail = () => {
       const diaryInfo: DiaryResponseType | null = await getDiaryDetail(
         param.id
       );
-      const commentInfo: DiaryCommentResponseType[] | null =
+      const diaryComments: DiaryCommentResponseType[] | null =
         await getDiaryComments(param.id);
-      if (diaryInfo && commentInfo) {
-        if (!diaryInfo.isPublic) {
-          const writer = diaryInfo.user._id;
-          const token = localStorage.getItem('authToken');
-          if (
-            !token ||
-            JSON.parse(atob(token.split('.')[1])).userId !== writer
-          ) {
-            setDiaryInfo(null);
-            setDiaryComments(null);
-            return;
-          }
+      setDiaryInfo(diaryInfo);
+      setDiaryComments(diaryComments);
+
+      if (diaryInfo && diaryComments) {
+        const writer = diaryInfo.user._id;
+        const token = localStorage.getItem('authToken');
+        const isMine =
+          token && JSON.parse(atob(token.split('.')[1])).userId === writer;
+
+        if (!diaryInfo.isPublic && isMine) {
+          setIsMyDiary(true);
         }
-        setDiaryInfo(diaryInfo);
-        setDiaryComments(commentInfo);
+
         const date = new Date(diaryInfo.diaryDate);
         setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
-      } else {
-        setDiaryInfo(null);
-        setDiaryComments(null);
       }
     };
+
     fetchData();
   }, []);
 
@@ -90,14 +87,14 @@ const DiaryDetail = () => {
         title={date}
         subtitle="생각과 감정을 기록한 일기를 만나보세요"
       />
-      <Diary diaryInfo={diaryInfo} />
+      <Diary diaryInfo={diaryInfo} isMyDiary={isMyDiary} />
       <DiaryComment
         commentsList={diaryComments}
         setDiaryComments={setDiaryComments}
         diaryId={param.id}
       />
     </div>
-  ) : diaryInfo === null ? (
+  ) : diaryInfo === null || diaryComments === null ? (
     <ErrorPage></ErrorPage>
   ) : (
     <></>

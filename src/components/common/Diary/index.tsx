@@ -18,8 +18,9 @@ import likeDiary from '../../../utils/likeDiary';
 import { useNavigate } from 'react-router-dom';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
+  isMyDiary: boolean;
 }
-const Diary = ({ diaryInfo }: diaryProps) => {
+const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const userId = '672099fde44237755b604265';
   const date = new Date(diaryInfo.diaryDate);
   const day = [
@@ -46,8 +47,12 @@ const Diary = ({ diaryInfo }: diaryProps) => {
   const [lineCount, setLineCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
   const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
-  const [isStamp, setIsStamp] = useState(diaryInfo.likes.includes(userId));
+  const [isStamp, setIsStamp] = useState(
+    diaryInfo.likes.includes(userId) || isMyDiary
+  );
   const onStamp = async () => {
+    if (isMyDiary) return;
+
     const token = localStorage.getItem('authToken');
     if (token) {
       const likes = await likeDiary(diaryInfo._id);
@@ -128,7 +133,7 @@ const Diary = ({ diaryInfo }: diaryProps) => {
           <div className={S.diaryAddress}>
             <img width={15} src={location} alt="location"></img>
             <span style={{ marginLeft: '0.7rem' }}>
-              장소: {diaryInfo.address || '집'}
+              장소: {diaryInfo.location.state || '집'}
             </span>
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>
@@ -151,9 +156,11 @@ const Diary = ({ diaryInfo }: diaryProps) => {
           {diaryInfo.isPublic ? '공개' : '비공개'}
         </div>
         <div style={{ flexGrow: '1' }}></div>
-        <div className={S.diaryEditButton} onClick={goEditPage}>
-          일기 수정하기
-        </div>
+        {isMyDiary && (
+          <div className={S.diaryEditButton} onClick={goEditPage}>
+            일기 수정하기
+          </div>
+        )}
       </div>
     </>
   );
