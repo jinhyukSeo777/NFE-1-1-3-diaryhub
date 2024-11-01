@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import MainMap from '../../components/MainMap/MainMap';
-import { home, article, map } from './Home.css';
+import { home, article, map, homeCon } from './Home.css';
 import ArticleArea from '../../components/Article/ArticleArea';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
@@ -13,6 +13,12 @@ export interface Comment {
   };
   content: string;
   createdAt: Date;
+}
+
+interface Image {
+  public_id: string;
+  url: string;
+  _id: string;
 }
 
 export interface Diary {
@@ -35,7 +41,7 @@ export interface Diary {
   weather: string;
   createdAt: Date;
   isPublic: boolean;
-  images: string[];
+  images: Image[];
   likes: string[];
   comments: Comment[];
 }
@@ -205,25 +211,27 @@ export default function Home() {
         title="모두의 일기"
         subtitle="누군가의 하루를 함께 느껴보세요"
       />
-      <div className={home}>
-        <section className={article}>
-          <SelectBox options={options} onChange={setSelectedState} />
-          <ArticleArea
-            diaries={sortedDiaryData}
-            selectedState={selectedState}
-          />
-        </section>
-        <section className={map}>
-          <MainMap
-            latitude={mapLatitude}
-            longitude={mapLongitude}
-            markers={sortedDiaryData.map((diary) => ({
-              latitude: diary.location.coordinates.latitude,
-              longitude: diary.location.coordinates.longitude,
-              imageUrl: diary.images[0],
-            }))}
-          />
-        </section>
+      <div className={homeCon}>
+        <SelectBox options={options} onChange={setSelectedState} />
+        <div className={home}>
+          <section className={article}>
+            <ArticleArea
+              diaries={sortedDiaryData}
+              selectedState={selectedState}
+            />
+          </section>
+          <section className={map}>
+            <MainMap
+              latitude={mapLatitude}
+              longitude={mapLongitude}
+              markers={sortedDiaryData.map((diary) => ({
+                latitude: diary.location.coordinates.latitude,
+                longitude: diary.location.coordinates.longitude,
+                imageUrl: diary.images[0].url,
+              }))}
+            />
+          </section>
+        </div>
       </div>
     </div>
   );
