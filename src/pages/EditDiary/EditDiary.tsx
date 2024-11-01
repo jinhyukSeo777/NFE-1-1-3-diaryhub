@@ -38,6 +38,7 @@ const EditDiary = () => {
   const navigate = useNavigate();
   const location = useLocation() as { state: IData };
 
+  // 비로그인 유저 필터
   useEffect(() => {
     const TOKEN = localStorage.getItem('authToken');
     if (!TOKEN) navigate('/error');
@@ -46,7 +47,7 @@ const EditDiary = () => {
   // 초기 일기 정보 설정
   useEffect(() => {
     const setData = async () => {
-      const { diaryInfo } = location.state || {};
+      const { diaryInfo } = location.state;
       if (!diaryInfo) {
         navigate('/error');
         return;
@@ -70,6 +71,7 @@ const EditDiary = () => {
     setData();
   }, [location.state, navigate]);
 
+  // 제출에 필요한 요소 전부 있는지 확인
   useEffect(() => {
     const canSubmit =
       !!weather && !!mood && !!title && !!content && images.length !== 0;
@@ -115,6 +117,9 @@ const EditDiary = () => {
 
   const handleSubmit = async () => {
     setCanSubmit(false);
+    const {
+      diaryInfo: { _id },
+    } = location.state;
     const state = await getRegionName();
     const TOKEN = localStorage.getItem('authToken');
     const BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -136,21 +141,21 @@ const EditDiary = () => {
     formData.append('longitude', position.longitude.toString());
     formData.append('isPublic', isPublic.toString());
 
-    // axios
-    //   .post(`${BASE_URL}/diaries`, formData, {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
-    //       Authorization: `Bearer ${TOKEN}`,
-    //     },
-    //   })
-    //   .then(() => navigate('/'))
-    //   .catch(() => navigate('/error'));
+    axios
+      .put(`${BASE_URL}/diaries/${_id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      })
+      .then(() => navigate('/'))
+      .catch((e) => console.log(e));
   };
 
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h2 className={styles.h2}>일기를 작성해주세요</h2>
+        <h2 className={styles.h2}>일기를 수정해주세요</h2>
         <InputBar setPosition={setPosition} />
         <CreateMap position={position} setPosition={setPosition} />
         <InputDate diaryDate={diaryDate} setDiaryDate={setDiaryDate} />
