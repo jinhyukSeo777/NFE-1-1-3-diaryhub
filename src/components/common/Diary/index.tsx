@@ -47,8 +47,12 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const [lineCount, setLineCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
   const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
-  const [isStamp, setIsStamp] = useState(diaryInfo.likes.includes(userId));
+  const [isStamp, setIsStamp] = useState(
+    diaryInfo.likes.includes(userId) || isMyDiary
+  );
   const onStamp = async () => {
+    if (isMyDiary) return;
+
     const token = localStorage.getItem('authToken');
     if (token) {
       const likes = await likeDiary(diaryInfo._id);
@@ -129,7 +133,7 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
           <div className={S.diaryAddress}>
             <img width={15} src={location} alt="location"></img>
             <span style={{ marginLeft: '0.7rem' }}>
-              장소: {diaryInfo.address || '집'}
+              장소: {diaryInfo.location.state || '집'}
             </span>
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>
