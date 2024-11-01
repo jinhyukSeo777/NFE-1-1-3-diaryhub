@@ -12,6 +12,6 @@ export default async function getDiaryComments(id: string) {
     const data = await res.json();
     return data;
   } catch (error) {
-    return undefined;
+    return null;
   }
 }

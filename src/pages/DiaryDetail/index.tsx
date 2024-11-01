@@ -43,26 +43,43 @@ export type DiaryCommentResponseType = {
 };
 const DiaryDetail = () => {
   const param: { id?: string } = useParams();
-  const [diaryInfo, setDiaryInfo] = useState<DiaryResponseType>();
-  const [diaryComments, setDiaryComments] =
-    useState<DiaryCommentResponseType[]>();
   const [date, setDate] = useState('');
+  const [diaryInfo, setDiaryInfo] = useState<
+    DiaryResponseType | null | undefined
+  >();
+  const [diaryComments, setDiaryComments] = useState<
+    DiaryCommentResponseType[] | null | undefined
+  >();
 
   useEffect(() => {
     const fetchData = async () => {
       if (!param.id) return;
-      const diaryInfo = await getDiaryDetail(param.id);
-      const commentInfo = await getDiaryComments(param.id);
-      if (!diaryInfo.isPublic) {
-        const writer = diaryInfo.user._id;
-        const token = localStorage.getItem('authToken');
-        if (!token) return;
-        if (JSON.parse(atob(token.split('.')[1])).userId !== writer) return;
+      const diaryInfo: DiaryResponseType | null = await getDiaryDetail(
+        param.id
+      );
+      const commentInfo: DiaryCommentResponseType[] | null =
+        await getDiaryComments(param.id);
+      if (diaryInfo && commentInfo) {
+        if (!diaryInfo.isPublic) {
+          const writer = diaryInfo.user._id;
+          const token = localStorage.getItem('authToken');
+          if (
+            !token ||
+            JSON.parse(atob(token.split('.')[1])).userId !== writer
+          ) {
+            setDiaryInfo(null);
+            setDiaryComments(null);
+            return;
+          }
+        }
+        setDiaryInfo(diaryInfo);
+        setDiaryComments(commentInfo);
+        const date = new Date(diaryInfo.diaryDate);
+        setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
+      } else {
+        setDiaryInfo(null);
+        setDiaryComments(null);
       }
-      setDiaryInfo(diaryInfo);
-      setDiaryComments(commentInfo);
-      const date = new Date(diaryInfo.diaryDate);
-      setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
     };
     fetchData();
   }, []);
@@ -80,8 +97,10 @@ const DiaryDetail = () => {
         diaryId={param.id}
       />
     </div>
-  ) : (
+  ) : diaryInfo === null ? (
     <ErrorPage></ErrorPage>
+  ) : (
+    <></>
   );
 };
 export default DiaryDetail;
