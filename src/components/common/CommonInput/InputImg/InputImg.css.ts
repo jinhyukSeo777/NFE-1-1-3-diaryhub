@@ -53,7 +53,29 @@ export const image = style({
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
   cursor: 'pointer',
-  flexShrink: '0',
+  flexShrink: '0', // Hover 효과: 삭제 아이콘 및 스타일 변경
+  position: 'relative',
+
+  selectors: {
+    '&:hover::after': {
+      content: `'삭제'`,
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      color: 'white',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+      padding: '0.5rem 1rem',
+      borderRadius: '0.5rem',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      zIndex: 1,
+    },
+    '&:hover': {
+      opacity: 0.8,
+    },
+  },
 });
 
 export const input = style({

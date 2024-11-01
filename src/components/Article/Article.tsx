@@ -22,7 +22,7 @@ const Article = ({ diary }: { diary: Diary }) => {
   return (
     <li className={article} onClick={handleClick}>
       <img
-        src={diary.images[0]}
+        src={diary.images[0].url}
         alt="Sample"
         style={{
           width: 90,

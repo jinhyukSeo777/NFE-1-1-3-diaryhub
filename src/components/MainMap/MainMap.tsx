@@ -63,15 +63,14 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
   });
 
   return (
-    <div>
-      <div
-        id="map"
-        style={{
-          width: '100%',
-          height: 'calc(100vh - 280px)',
-          borderRadius: 20,
-        }}
-      ></div>
-    </div>
+    <div
+      id="map"
+      style={{
+        width: '100%',
+        height: '100%',
+        borderRadius: 20,
+        position: 'absolute',
+      }}
+    ></div>
   );
 }
