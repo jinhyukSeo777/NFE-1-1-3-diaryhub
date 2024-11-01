@@ -63,16 +63,20 @@ const DiaryDetail = () => {
       setDiaryInfo(diaryInfo);
       setDiaryComments(diaryComments);
 
+      console.log(diaryInfo);
+      console.log(diaryComments);
       if (diaryInfo && diaryComments) {
         const writer = diaryInfo.user._id;
         const token = localStorage.getItem('authToken');
         const isMine =
           token && JSON.parse(atob(token.split('.')[1])).userId === writer;
-
         if (isMine) {
           setIsMyDiary(true);
         }
-
+        if (!diaryInfo.isPublic && !isMine) {
+          setDiaryInfo(null);
+          setDiaryComments(null);
+        }
         const date = new Date(diaryInfo.diaryDate);
         setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
       }
