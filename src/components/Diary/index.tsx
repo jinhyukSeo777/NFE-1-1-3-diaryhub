@@ -1,26 +1,30 @@
-import { DiaryResponseType } from '../../../pages/DiaryDetail';
+import feel1 from '../../assets/feel1.svg';
+import feel2 from '../../assets/feel2.svg';
+import feel3 from '../../assets/feel3.svg';
+import feel4 from '../../assets/feel4.svg';
+import feel5 from '../../assets/feel5.svg';
+import sun from '../../assets/sun.svg';
+import cloud from '../../assets/cloud.svg';
+import rain from '../../assets/rain.svg';
+import thunder from '../../assets/thunder.svg';
+import wind from '../../assets/wind.svg';
+import stamp from '../../assets/stamp.svg';
+import location from '../../assets/location.svg';
+
+import { DiaryResponseType } from '../../pages/DiaryDetail';
+import likeDiary from '../../utils/likeDiary';
+import deleteDiary from '../../utils/deleteDiary';
 import ImgSwiper from '../ImgSwiper';
 import * as S from './styles.css';
-import feel1 from '../../../assets/feel1.svg';
-import feel2 from '../../../assets/feel2.svg';
-import feel3 from '../../../assets/feel3.svg';
-import feel4 from '../../../assets/feel4.svg';
-import feel5 from '../../../assets/feel5.svg';
-import sun from '../../../assets/sun.svg';
-import cloud from '../../../assets/cloud.svg';
-import rain from '../../../assets/rain.svg';
-import thunder from '../../../assets/thunder.svg';
-import wind from '../../../assets/wind.svg';
-import stamp from '../../../assets/stamp.svg';
-import location from '../../../assets/location.svg';
+
 import { useEffect, useRef, useState } from 'react';
-import likeDiary from '../../../utils/likeDiary';
 import { useNavigate } from 'react-router-dom';
-import deleteDiary from '../../../utils/deleteDiary';
+
 interface diaryProps {
   diaryInfo: DiaryResponseType;
   isMyDiary: boolean;
 }
+
 const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const userId = '672099fde44237755b604265';
   const date = new Date(diaryInfo.diaryDate);

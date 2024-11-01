@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import Diary from '../../components/common/Diary';
-import DiaryComment from '../../components/common/DiaryComment';
+import Diary from '../../components/Diary';
+import DiaryComment from '../../components/DiaryComment';
 import * as S from './styles.css';
 import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
@@ -63,8 +63,6 @@ const DiaryDetail = () => {
       setDiaryInfo(diaryInfo);
       setDiaryComments(diaryComments);
 
-      console.log(diaryInfo);
-      console.log(diaryComments);
       if (diaryInfo && diaryComments) {
         const writer = diaryInfo.user._id;
         const token = localStorage.getItem('authToken');

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { b2, g2 } from '../../../utils/color';
+import { b2, g2 } from '../../utils/color';
 export const commentContainer = style({
   margin: '2rem 0',
 });

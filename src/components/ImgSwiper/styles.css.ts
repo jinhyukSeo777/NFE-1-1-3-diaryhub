@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { g2, g3 } from '../../../utils/color';
+import { g3 } from '../../utils/color';
 export const slide = style({
   position: 'relative',
 });

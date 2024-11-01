@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { g2, b1, b2 } from '../../../utils/color';
+import { g2, b1, b2 } from '../../utils/color';
 
 export const diaryContainer = style({
   border: '1px solid',
