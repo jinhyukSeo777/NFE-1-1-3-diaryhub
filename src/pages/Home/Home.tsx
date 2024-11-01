@@ -15,6 +15,12 @@ export interface Comment {
   createdAt: Date;
 }
 
+interface Image {
+  public_id: string;
+  url: string;
+  _id: string;
+}
+
 export interface Diary {
   _id: string;
   title: string;
@@ -35,7 +41,7 @@ export interface Diary {
   weather: string;
   createdAt: Date;
   isPublic: boolean;
-  images: string[];
+  images: Image[];
   likes: string[];
   comments: Comment[];
 }
@@ -221,7 +227,7 @@ export default function Home() {
               markers={sortedDiaryData.map((diary) => ({
                 latitude: diary.location.coordinates.latitude,
                 longitude: diary.location.coordinates.longitude,
-                imageUrl: diary.images[0],
+                imageUrl: diary.images[0].url,
               }))}
             />
           </section>

@@ -23,7 +23,7 @@ const Card = ({ diary }: { diary: Diary }) => {
         weather={diary.weather}
       />
       <img
-        src={diary.images[0]}
+        src={diary.images[0].url}
         alt="Sample"
         style={{ width: 270, height: 270, objectFit: 'cover' }}
       />
