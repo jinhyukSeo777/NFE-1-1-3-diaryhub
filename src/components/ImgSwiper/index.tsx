@@ -5,9 +5,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as S from './styles.css';
 import './sliderBtnStyle.css';
+import { ImageType } from '../../pages/DiaryDetail';
+
 interface ImgSwiperProps {
-  imgList: string[];
+  imgList: ImageType[];
 }
+
 const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
   const settings = {
     speed: 500,
@@ -23,7 +26,7 @@ const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
         return (
           <div className={S.slide} key={index}>
             <div className={S.slideItem}>
-              <img className={S.slideImg} src={img} alt="img"></img>
+              <img className={S.slideImg} src={img.url} alt="img"></img>
             </div>
             <div className={S.slideTape}>
               <img src={tape3} className={S.slideTape1} alt="tape"></img>
