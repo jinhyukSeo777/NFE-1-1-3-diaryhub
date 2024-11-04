@@ -11,11 +11,18 @@ export const home = style({
 
 export const article = style({
   flexBasis: '40%',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  '@media': {
+    'screen and (max-width: 950px)': {
+      flex: '100%',
+    },
+  },
 });
 
 export const map = style({
   flexBasis: '60%',
-
   position: 'relative',
   height: 'calc(100vh - 300px)',
   '@media': {

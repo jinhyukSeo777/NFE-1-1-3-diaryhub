@@ -1,8 +1,9 @@
 import { style } from '@vanilla-extract/css';
-import { g2, b1, b2 } from '../../utils/color';
+import { g2, g3, b1, b2 } from '../../utils/color';
 
 export const diaryContainer = style({
-  border: '1px solid',
+  fontFamily: 'HakgyoansimNadeuri',
+  border: `1px solid ${g3}`,
   marginTop: '3rem',
 });
 
@@ -13,13 +14,13 @@ export const diaryTitleBox = style({
 
 export const diaryTitleText = style({
   padding: '0 1rem',
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   height: '3rem',
   lineHeight: '3rem',
 });
 
 export const diaryTitleIcon = style({
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   padding: '1rem 0',
   gridColumn: '2 / 3',
   gridRow: '1 / 3',
@@ -58,7 +59,7 @@ export const diaryIconImg = style({
 });
 
 export const diaryslide = style({
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   padding: '3rem 0',
   overflow: 'hidden',
 });
@@ -66,7 +67,7 @@ export const diaryslide = style({
 export const diaryBody = style({
   padding: '1rem',
   position: 'relative',
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   overflow: 'hidden',
   lineHeight: '3rem',
 });
@@ -95,7 +96,7 @@ export const diaryLine = style({
 export const diaryLineItem = style({
   height: '3rem',
   boxSizing: 'border-box',
-  borderBottom: `1.5px solid ${g2}`,
+  borderBottom: `1.5px solid ${g3}`,
 });
 
 export const diaryStamp = style({
@@ -132,9 +133,10 @@ export const diaryStampCount = style({
   borderRadius: '1rem',
   padding: '0 0.8rem',
   height: '2rem',
-  boxShadow: `0 0 0.3rem ${g2}`,
+  boxShadow: `0 0 0.3rem ${g3}`,
   alignItems: 'center',
   marginRight: '1rem',
+  fontSize: '0.8rem',
 });
 
 export const diaryStampbtn = style({
@@ -147,15 +149,17 @@ export const diaryshare = style({
   borderRadius: '1rem',
   padding: '0 0.8rem',
   height: '2rem',
-  boxShadow: `0 0 0.3rem ${g2}`,
+  boxShadow: `0 0 0.3rem ${g3}`,
   alignItems: 'center',
   backgroundColor: b1,
   color: 'white',
+  fontSize: '0.8rem',
 });
 
 export const diaryButtons = style({
   display: 'flex',
   gap: '0.5rem',
+  fontSize: '0.8rem',
 });
 
 export const diaryEditButton = style({
