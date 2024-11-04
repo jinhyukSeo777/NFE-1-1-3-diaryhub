@@ -8,6 +8,11 @@ import getDiaryComments from '../../utils/getDiaryComments';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
 import ErrorPage from '../Error/Error';
 
+export type ImageType = {
+  public_id: string;
+  url: string;
+  _id: string;
+};
 export type DiaryResponseType = {
   _id: string;
   title: string;
@@ -29,7 +34,7 @@ export type DiaryResponseType = {
   createdAt: string;
   isPublic: boolean;
   likes: string[];
-  images: string[];
+  images: ImageType[];
   address: string;
 };
 export type DiaryCommentResponseType = {
@@ -41,6 +46,7 @@ export type DiaryCommentResponseType = {
   content: string;
   createdAt: string;
 };
+
 const DiaryDetail = () => {
   const param: { id?: string } = useParams();
   const [date, setDate] = useState('');
