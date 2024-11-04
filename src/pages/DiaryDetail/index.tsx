@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom';
+import TitleBanner from '../../components/TitleBanner/TitleBanner';
 import Diary from '../../components/Diary';
 import DiaryComment from '../../components/DiaryComment';
+import ErrorPage from '../Error/Error';
 import * as S from './styles.css';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getDiaryDetail from '../../utils/getDiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';
-import TitleBanner from '../../components/TitleBanner/TitleBanner';
-import ErrorPage from '../Error/Error';
 
 export type ImageType = {
   public_id: string;
