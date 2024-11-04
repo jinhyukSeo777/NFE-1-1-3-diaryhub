@@ -16,7 +16,7 @@ export const articleArea = style({
   alignItems: 'center',
   '@media': {
     'screen and (max-width: 950px)': {
-      padding: 0,
+      padding: '0 10px',
       border: 'none',
       borderRadius: 0,
       height: 'auto',
@@ -53,6 +53,9 @@ export const article = style({
 
 export const innerDiv = style({
   width: '100%',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
 });
 
 export const title = style({
@@ -96,12 +99,12 @@ export const cardContainer = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(1, 1fr)',
   width: '100%',
+  justifyContent: 'center',
   placeItems: 'center',
   alignItems: 'stretch',
-
   '@media': {
     [`screen and (min-width: ${TABLET})`]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
+      gridTemplateColumns: 'repeat(2, auto)',
       gap: 20,
     },
   },

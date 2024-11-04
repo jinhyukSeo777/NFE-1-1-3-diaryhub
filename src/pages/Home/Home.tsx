@@ -228,6 +228,7 @@ export default function Home() {
                 latitude: diary.location.coordinates.latitude,
                 longitude: diary.location.coordinates.longitude,
                 imageUrl: diary.images[0].url,
+                id: diary._id,
               }))}
             />
           </section>
