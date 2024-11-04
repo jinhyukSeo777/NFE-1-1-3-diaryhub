@@ -10,13 +10,11 @@ import thunder from '../../assets/thunder.svg';
 import wind from '../../assets/wind.svg';
 import stamp from '../../assets/stamp.svg';
 import location from '../../assets/location.svg';
-
 import { DiaryResponseType } from '../../pages/DiaryDetail';
 import likeDiary from '../../utils/likeDiary';
 import deleteDiary from '../../utils/deleteDiary';
 import ImgSwiper from '../ImgSwiper';
 import * as S from './styles.css';
-
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -72,6 +70,17 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     await deleteDiary(diaryInfo._id);
     navigate('/');
   };
+  const drawLine = () => {
+    const elements = [];
+    for (let i = 0; i < lineCount; i++) {
+      elements.push(<div className={S.diaryLineItem} key={i}></div>);
+    }
+    return elements;
+  };
+  const navigate = useNavigate();
+  const goEditPage = () => {
+    navigate('/editdiary', { state: { diaryInfo } });
+  };
   useEffect(() => {
     const calculateLineCount = () => {
       if (textRef.current) {
@@ -90,18 +99,6 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     };
   }, []);
 
-  const drawLine = () => {
-    const elements = [];
-    for (let i = 0; i < lineCount; i++) {
-      elements.push(<div className={S.diaryLineItem} key={i}></div>);
-    }
-    return elements;
-  };
-
-  const navigate = useNavigate();
-  const goEditPage = () => {
-    navigate('/editdiary', { state: { diaryInfo } });
-  };
   return (
     <>
       <div className={S.diaryContainer}>
@@ -143,7 +140,7 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
           <div className={S.diaryAddress}>
             <img width={15} src={location} alt="location"></img>
             <span style={{ marginLeft: '0.7rem' }}>
-              장소: {diaryInfo.location.state || '집'}
+              장소: {diaryInfo.location.state || ''}
             </span>
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>

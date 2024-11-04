@@ -11,7 +11,7 @@ import InputPublic from '../../components/common/CommonInput/InputPublic/InputPu
 import InputImg from '../../components/common/CommonInput/InputImg/InputImg';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { DiaryResponseType } from '../DiaryDetail';
+import { DiaryResponseType, ImageType } from '../DiaryDetail';
 
 export interface IPosition {
   latitude: number;
@@ -78,10 +78,10 @@ const EditDiary = () => {
     setCanSubmit(canSubmit);
   }, [weather, mood, images, title, content]);
 
-  const urlsToFiles = async (urls: string[]) => {
+  const urlsToFiles = async (urls: ImageType[]) => {
     // URL 배열을 File 객체 배열로 변환
     const filePromises = urls.map(async (url, index) => {
-      const response = await fetch(url);
+      const response = await fetch(url.url);
       const blob = await response.blob();
       // MIME 타입 추정 (Blob에서 추출됨)
       const mimeType = blob.type;
