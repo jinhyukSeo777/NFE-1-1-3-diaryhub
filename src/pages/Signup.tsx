@@ -5,9 +5,12 @@ import {
   welcomeSection,
   formSection,
   imgSection,
+  welcomeSectionSpan,
+  imgSectionSpan,
 } from './Login/Login.css';
 import Input from '../components/Input/Input';
 import Button from '../components/Button/Button';
+import { b2 } from '../utils/color';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -50,13 +53,21 @@ const LoginPage: React.FC = () => {
     <div className={pageContainer}>
       {/* 왼쪽 섹션 */}
       <div className={welcomeSection}>
-        <h1>회원가입 하기</h1>
-        <p>교환일기에 오신 걸 환영해요</p>
+        <h2>회원가입 하기</h2>
+        <span className={welcomeSectionSpan}>교환일기에 오신 걸 환영해요</span>
         <div className={imgSection}>
-          <p>
-            계정이 있으신가요? <br />
-            <Link to="/login">여기</Link>를 눌러 로그인 해주세요!
-          </p>
+          <div>
+            <span className={imgSectionSpan}>계정이 이미 있으시다면</span>
+            <span className={imgSectionSpan}>
+              <Link
+                to="/login"
+                style={{ color: `${b2}`, textDecoration: 'none' }}
+              >
+                여기
+              </Link>
+              를 눌러 로그인 해주세요!
+            </span>
+          </div>
           <img src="/assets/logo.svg" alt="logo" />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import MainMap from '../../components/MainMap/MainMap';
-import { home, article, map, homeCon } from './Home.css';
+import { home, article, map, homeCon, container } from './Home.css';
 import ArticleArea from '../../components/Article/ArticleArea';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
@@ -88,7 +88,6 @@ export default function Home() {
           const data = await response.json();
           setDiaryData(data);
           setFilteredDiaries(data);
-          console.log(data);
         } else {
           setError('데이터를 가져오는 데 실패했습니다.');
         }
@@ -206,7 +205,7 @@ export default function Home() {
         : currentPosition?.longitude || 126.978;
 
   return (
-    <div>
+    <div className={container}>
       <TitleBanner
         title="모두의 일기"
         subtitle="누군가의 하루를 함께 느껴보세요"
@@ -228,6 +227,7 @@ export default function Home() {
                 latitude: diary.location.coordinates.latitude,
                 longitude: diary.location.coordinates.longitude,
                 imageUrl: diary.images[0].url,
+                id: diary._id,
               }))}
             />
           </section>

@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { g3 } from '../../../../utils/color';
 
 // Container 스타일
@@ -23,10 +23,28 @@ export const textarea = style({
   width: '100%',
   outline: 'none',
   padding: '0.5rem',
-  border: `1px solid ${g3}`, // g3 변수를 사용할 경우 import 필요
+  border: `1px solid ${g3}`,
   borderRadius: '0.5rem',
   fontSize: '1rem',
-  height: '25rem',
+  height: '20rem',
   resize: 'none',
   fontFamily: 'HakgyoansimGeurimilgi',
+});
+
+// Webkit 스크롤바 스타일링
+globalStyle(`${textarea}::-webkit-scrollbar`, {
+  width: '6px',
+  height: '6px',
+});
+globalStyle(`${textarea}::-webkit-scrollbar-track`, {
+  background: '#f1f1f1',
+  borderRadius: '10px',
+});
+globalStyle(`${textarea}::-webkit-scrollbar-thumb`, {
+  background: `${g3}`,
+  borderRadius: '10px',
+  cursor: 'pointer',
+});
+globalStyle(`${textarea}::-webkit-scrollbar-thumb:hover`, {
+  background: `#C0C0C0`,
 });

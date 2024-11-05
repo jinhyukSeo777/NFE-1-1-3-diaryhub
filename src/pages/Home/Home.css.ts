@@ -11,11 +11,20 @@ export const home = style({
 
 export const article = style({
   flexBasis: '40%',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  height: 'calc(100vh - 300px)',
+  textOverflow: 'ellipsis',
+  '@media': {
+    'screen and (max-width: 950px)': {
+      flex: '100%',
+      height: 'auto',
+    },
+  },
 });
 
 export const map = style({
   flexBasis: '60%',
-
   position: 'relative',
   height: 'calc(100vh - 300px)',
   '@media': {
@@ -30,5 +39,23 @@ export const homeCon = style({
   justifyContent: 'center',
   maxWidth: DESKTOP,
   margin: '0 auto',
-  padding: '0 20px',
+  width: '90%',
+  '@media': {
+    '(max-width: 950px)': {
+      width: 'auto',
+      display: ' inline-block',
+    },
+  },
+});
+
+export const container = style({
+  height: '100vh',
+  overflow: 'hidden',
+  '@media': {
+    '(max-width: 950px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      height: 'auto',
+    },
+  },
 });

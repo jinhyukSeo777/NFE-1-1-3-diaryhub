@@ -5,10 +5,13 @@ import {
   welcomeSection,
   formSection,
   imgSection,
+  welcomeSectionSpan,
+  imgSectionSpan,
 } from './Login.css';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { useAuth } from '../../components/AuthContext';
+import { b2 } from '../../utils/color';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -54,14 +57,21 @@ const LoginPage: React.FC = () => {
   return (
     <div className={pageContainer}>
       <div className={welcomeSection}>
-        <h1>로그인하기</h1>
-        <p>교환일기에 오신 걸 환영해요</p>
+        <h2>로그인하기</h2>
+        <span className={welcomeSectionSpan}>교환일기에 오신 걸 환영해요</span>
         <div className={imgSection}>
-          <p>
-            계정이 없으신가요? <br />
-            <br />
-            <Link to="/signup">여기</Link>를 눌러 회원가입 해주세요!
-          </p>
+          <div>
+            <span className={imgSectionSpan}>계정이 없으시다면</span>
+            <span className={imgSectionSpan}>
+              <Link
+                to="/signup"
+                style={{ color: `${b2}`, textDecoration: 'none' }}
+              >
+                여기
+              </Link>
+              를 눌러 회원가입 해주세요!
+            </span>
+          </div>
           <img src="/assets/logo.svg" alt="logo" />
         </div>
       </div>
@@ -70,7 +80,7 @@ const LoginPage: React.FC = () => {
         <h2>로그인</h2>
         <Input
           type="text"
-          placeholder="user name"
+          placeholder="User name"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -80,7 +90,6 @@ const LoginPage: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <Button variant="login" onClick={handleLogin}>
           Login
         </Button>

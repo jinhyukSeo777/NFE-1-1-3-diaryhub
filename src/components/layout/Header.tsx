@@ -11,8 +11,11 @@ import {
   h1Style,
   hamburgerButtonStyle,
   mobileMenuStyle,
+  headerArea,
 } from './Header.css';
 import { useAuth } from '../AuthContext'; // AuthContext에서 로그인 상태 가져오기
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Header: React.FC = () => {
   const { isLoggedIn, logout } = useAuth();
@@ -56,128 +59,125 @@ const Header: React.FC = () => {
 
   return (
     <header className={headerStyle}>
-      <div
-        className={logoContainerStyle}
-        onClick={handleLogoClick}
-        style={{ cursor: 'pointer' }}
-      >
-        <img src="/assets/logo.svg" alt="logo" className={logoImageStyle} />
-        <h2 className={h1Style}>교환일기</h2>
-      </div>
+      <div className={headerArea}>
+        <div
+          className={logoContainerStyle}
+          onClick={handleLogoClick}
+          style={{ cursor: 'pointer' }}
+        >
+          <img src="/assets/logo.svg" alt="logo" className={logoImageStyle} />
+          <h1 className={h1Style}>교환일기</h1>
+        </div>
 
-      {/* 데스크탑 네비게이션 */}
-      <nav className={navStyle}>
-        <ul className={ulStyle}>
-          <li className={liStyle}>
-            <Link to="/" className={linkStyle}>
+        {/* 데스크탑 네비게이션 */}
+        <nav className={navStyle}>
+          <ul className={ulStyle}>
+            {isLoggedIn ? (
+              <>
+                <li className={liStyle}>
+                  <Link to="/creatediary" className={linkStyle}>
+                    일기 작성
+                  </Link>
+                </li>
+                <li className={liStyle}>
+                  <Link to="/mydiary" className={linkStyle}>
+                    나의 일기
+                  </Link>
+                </li>
+                <li className={liStyle}>
+                  <Link
+                    to="/"
+                    className={linkStyle}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLogout();
+                    }}
+                  >
+                    로그아웃
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className={liStyle}>
+                  <Link to="/signup" className={linkStyle}>
+                    회원가입
+                  </Link>
+                </li>
+                <li className={liStyle}>
+                  <Link to="/login" className={linkStyle}>
+                    로그인
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+
+        {/* 모바일 햄버거 메뉴 버튼 */}
+        <div className={hamburgerButtonStyle} onClick={toggleMobileMenu}>
+          <FontAwesomeIcon icon={faBars} />
+        </div>
+
+        {/* 모바일 메뉴: 모바일 해상도에서만 렌더링 */}
+        {isMobileMenuOpen && (
+          <nav className={mobileMenuStyle} ref={mobileMenuRef}>
+            <Link
+              to="/"
+              className={linkStyle}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               홈
             </Link>
-          </li>
-          {isLoggedIn ? (
-            <>
-              <li className={liStyle}>
-                <Link to="/mydiary" className={linkStyle}>
-                  나의 일기
-                </Link>
-              </li>
-              <li className={liStyle}>
-                <Link to="/creatediary" className={linkStyle}>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  to="/creatediary"
+                  className={linkStyle}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   일기 작성
                 </Link>
-              </li>
-              <li className={liStyle}>
+                <Link
+                  to="/mydiary"
+                  className={linkStyle}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  나의 일기
+                </Link>
                 <Link
                   to="/"
                   className={linkStyle}
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsMobileMenuOpen(false);
                     handleLogout();
                   }}
                 >
                   로그아웃
                 </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className={liStyle}>
-                <Link to="/signup" className={linkStyle}>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/signup"
+                  className={linkStyle}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   회원가입
                 </Link>
-              </li>
-              <li className={liStyle}>
-                <Link to="/login" className={linkStyle}>
+                <Link
+                  to="/login"
+                  className={linkStyle}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   로그인
                 </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-
-      {/* 모바일 햄버거 메뉴 버튼 */}
-      <div className={hamburgerButtonStyle} onClick={toggleMobileMenu}>
-        &#9776;
+              </>
+            )}
+          </nav>
+        )}
       </div>
-
-      {/* 모바일 메뉴: 모바일 해상도에서만 렌더링 */}
-      {isMobileMenuOpen && (
-        <nav className={mobileMenuStyle} ref={mobileMenuRef}>
-          <Link
-            to="/"
-            className={linkStyle}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            홈
-          </Link>
-          {isLoggedIn ? (
-            <>
-              <Link
-                to="/mydiary"
-                className={linkStyle}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                나의 일기
-              </Link>
-              <Link
-                to="/creatediary"
-                className={linkStyle}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                일기 작성
-              </Link>
-              <Link
-                to="/"
-                className={linkStyle}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMobileMenuOpen(false);
-                  handleLogout();
-                }}
-              >
-                로그아웃
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/signup"
-                className={linkStyle}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                회원가입
-              </Link>
-              <Link
-                to="/login"
-                className={linkStyle}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                로그인
-              </Link>
-            </>
-          )}
-        </nav>
-      )}
     </header>
   );
 };

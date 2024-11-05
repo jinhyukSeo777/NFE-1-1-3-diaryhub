@@ -1,8 +1,9 @@
 import { style } from '@vanilla-extract/css';
-import { g2, b1, b2 } from '../../utils/color';
+import { g2, g3, b1, b2, g1 } from '../../utils/color';
 
 export const diaryContainer = style({
-  border: '1px solid',
+  fontFamily: 'HakgyoansimNadeuri',
+  border: `1px solid ${g3}`,
   marginTop: '3rem',
 });
 
@@ -13,13 +14,14 @@ export const diaryTitleBox = style({
 
 export const diaryTitleText = style({
   padding: '0 1rem',
-  border: '1px solid',
-  height: '3rem',
+  border: `1px solid ${g3}`,
   lineHeight: '3rem',
+  fontSize: '1.2rem',
+  color: '#3A3A3A',
 });
 
 export const diaryTitleIcon = style({
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   padding: '1rem 0',
   gridColumn: '2 / 3',
   gridRow: '1 / 3',
@@ -34,9 +36,10 @@ export const diaryIconInfo = style({
 
 export const diaryIconTitle = style({
   fontSize: '0.5rem',
+  color: '#3A3A3A',
   '@media': {
     'screen and (min-width: 576px)': {
-      fontSize: '0.8rem',
+      fontSize: '1rem',
     },
   },
 });
@@ -58,7 +61,7 @@ export const diaryIconImg = style({
 });
 
 export const diaryslide = style({
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   padding: '3rem 0',
   overflow: 'hidden',
 });
@@ -66,9 +69,11 @@ export const diaryslide = style({
 export const diaryBody = style({
   padding: '1rem',
   position: 'relative',
-  border: '1px solid',
+  border: `1px solid ${g3}`,
   overflow: 'hidden',
   lineHeight: '3rem',
+  fontSize: '1.2rem',
+  color: '#3A3A3A',
 });
 
 export const diaryAddress = style({
@@ -95,7 +100,7 @@ export const diaryLine = style({
 export const diaryLineItem = style({
   height: '3rem',
   boxSizing: 'border-box',
-  borderBottom: `1.5px solid ${g2}`,
+  borderBottom: `1.5px solid ${g3}`,
 });
 
 export const diaryStamp = style({
@@ -132,9 +137,11 @@ export const diaryStampCount = style({
   borderRadius: '1rem',
   padding: '0 0.8rem',
   height: '2rem',
-  boxShadow: `0 0 0.3rem ${g2}`,
+  boxShadow: `0 0 0.3rem ${g3}`,
   alignItems: 'center',
   marginRight: '1rem',
+  fontSize: '1.1rem',
+  fontFamily: 'HakgyoansimNadeuri',
 });
 
 export const diaryStampbtn = style({
@@ -145,31 +152,38 @@ export const diaryStampbtn = style({
 export const diaryshare = style({
   display: 'flex',
   borderRadius: '1rem',
-  padding: '0 0.8rem',
+  width: '4.5rem',
+  justifyContent: 'center',
   height: '2rem',
-  boxShadow: `0 0 0.3rem ${g2}`,
+  boxShadow: `0 0 0.3rem ${g3}`,
   alignItems: 'center',
   backgroundColor: b1,
   color: 'white',
+  fontSize: '1rem',
+  fontFamily: 'HakgyoansimNadeuri',
 });
 
 export const diaryButtons = style({
   display: 'flex',
   gap: '0.5rem',
+  fontSize: '0.8rem',
 });
 
 export const diaryEditButton = style({
   display: 'flex',
-  borderRadius: '0.5rem',
-  padding: '0 0.8rem',
-  height: '2rem',
+  borderRadius: '1.1rem',
+  width: '6rem',
+  justifyContent: 'center',
+  height: '2.2rem',
   alignItems: 'center',
   backgroundColor: b2,
+  fontFamily: 'HakgyoansimNadeuri',
   color: 'white',
   cursor: 'pointer',
+  fontSize: '1.0rem',
   selectors: {
     '&:hover': {
-      filter: 'brightness(1.05)',
+      backgroundColor: b1,
       transition: 'all 0.3s',
     },
   },
