@@ -25,8 +25,8 @@ const Article = ({ diary }: { diary: Diary }) => {
         src={diary.images[0].url}
         alt="Sample"
         style={{
-          width: 90,
-          height: 90,
+          width: 95,
+          height: 95,
           borderRadius: '10px',
           objectFit: 'cover',
         }}
@@ -38,12 +38,12 @@ const Article = ({ diary }: { diary: Diary }) => {
             <img
               src={require(`../../assets/${diary.weather}.svg`)}
               alt="weather"
-              style={{ width: '24px', height: 'auto' }}
+              style={{ width: '2.5rem', height: 'auto' }}
             />
             <img
               src={require(`../../assets/${diary.mood}.svg`)}
               alt="emotion"
-              style={{ width: '24px', height: 'auto' }}
+              style={{ width: '2.3rem', height: 'auto' }}
             />
           </div>
         </div>

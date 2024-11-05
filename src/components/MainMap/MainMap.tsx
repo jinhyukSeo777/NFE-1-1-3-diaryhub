@@ -71,8 +71,8 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
       id="map"
       style={{
         width: '100%',
-        height: '100%',
-        borderRadius: 20,
+        height: '90%',
+        borderRadius: '0.5rem',
         position: 'absolute',
       }}
     ></div>

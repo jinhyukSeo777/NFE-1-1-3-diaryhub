@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { g2, g3, b1, b2 } from '../../utils/color';
+import { g2, g3, b1, b2, g1 } from '../../utils/color';
 
 export const diaryContainer = style({
   fontFamily: 'HakgyoansimNadeuri',
@@ -15,8 +15,9 @@ export const diaryTitleBox = style({
 export const diaryTitleText = style({
   padding: '0 1rem',
   border: `1px solid ${g3}`,
-  height: '3rem',
   lineHeight: '3rem',
+  fontSize: '1.2rem',
+  color: '#3A3A3A',
 });
 
 export const diaryTitleIcon = style({
@@ -35,9 +36,10 @@ export const diaryIconInfo = style({
 
 export const diaryIconTitle = style({
   fontSize: '0.5rem',
+  color: '#3A3A3A',
   '@media': {
     'screen and (min-width: 576px)': {
-      fontSize: '0.8rem',
+      fontSize: '1rem',
     },
   },
 });
@@ -70,6 +72,8 @@ export const diaryBody = style({
   border: `1px solid ${g3}`,
   overflow: 'hidden',
   lineHeight: '3rem',
+  fontSize: '1.2rem',
+  color: '#3A3A3A',
 });
 
 export const diaryAddress = style({
@@ -136,7 +140,8 @@ export const diaryStampCount = style({
   boxShadow: `0 0 0.3rem ${g3}`,
   alignItems: 'center',
   marginRight: '1rem',
-  fontSize: '0.8rem',
+  fontSize: '1.1rem',
+  fontFamily: 'HakgyoansimNadeuri',
 });
 
 export const diaryStampbtn = style({
@@ -147,13 +152,15 @@ export const diaryStampbtn = style({
 export const diaryshare = style({
   display: 'flex',
   borderRadius: '1rem',
-  padding: '0 0.8rem',
+  width: '4.5rem',
+  justifyContent: 'center',
   height: '2rem',
   boxShadow: `0 0 0.3rem ${g3}`,
   alignItems: 'center',
   backgroundColor: b1,
   color: 'white',
-  fontSize: '0.8rem',
+  fontSize: '1rem',
+  fontFamily: 'HakgyoansimNadeuri',
 });
 
 export const diaryButtons = style({
@@ -164,16 +171,19 @@ export const diaryButtons = style({
 
 export const diaryEditButton = style({
   display: 'flex',
-  borderRadius: '0.5rem',
-  padding: '0 0.8rem',
-  height: '2rem',
+  borderRadius: '1.1rem',
+  width: '6rem',
+  justifyContent: 'center',
+  height: '2.2rem',
   alignItems: 'center',
   backgroundColor: b2,
+  fontFamily: 'HakgyoansimNadeuri',
   color: 'white',
   cursor: 'pointer',
+  fontSize: '1.0rem',
   selectors: {
     '&:hover': {
-      filter: 'brightness(1.05)',
+      backgroundColor: b1,
       transition: 'all 0.3s',
     },
   },

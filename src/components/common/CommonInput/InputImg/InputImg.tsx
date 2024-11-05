@@ -11,7 +11,7 @@ const InputImg = ({ images, setImages }: IProps) => {
   const [previews, setPreviews] = useState<string[]>([]); // 이미지 미리보기 URL을 저장
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // 이미지 파일가 변경될때마다 프리뷰 만들기
+  // 이미지 파일이 변경될때마다 프리뷰 만들기
   useEffect(() => {
     const newPreviews = images.map((file) => URL.createObjectURL(file));
     setPreviews(newPreviews);

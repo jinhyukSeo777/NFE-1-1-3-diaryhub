@@ -1,14 +1,16 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { TABLET } from '../../utils/size';
+import { g3, g4 } from '../../utils/color';
 
 export const articleArea = style({
   padding: 20,
-  border: '1px solid #ddd',
-  borderRadius: '20px',
+  paddingBottom: '0',
+  border: `1px solid ${g4}`,
+  borderRadius: '10px',
   width: '100%',
-  height: 'calc(100vh - 300px)',
-  overflowY: 'auto',
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  height: '90%',
+  overflow: 'auto',
+  boxShadow: '0 0 3px rgba(0, 0, 0, 0.1)',
   fontSize: '14px',
   position: 'relative',
   display: 'flex',
@@ -16,13 +18,37 @@ export const articleArea = style({
   alignItems: 'center',
   '@media': {
     'screen and (max-width: 950px)': {
-      padding: '0 10px',
       border: 'none',
       borderRadius: 0,
       height: 'auto',
       boxShadow: 'none',
+      width: 'auto',
+      padding: '5px 20px',
+      display: ' inline-block',
     },
   },
+});
+
+globalStyle(`${articleArea}::-webkit-scrollbar`, {
+  width: '6px',
+});
+
+globalStyle(`${articleArea}::-webkit-scrollbar-track`, {
+  background: '#f1f1f1',
+  borderRadius: '10px',
+  marginTop: '25%' /* 스크롤바 트랙의 시작 위치를 아래로 이동 */,
+  marginBottom: '25%' /* 스크롤바 트랙의 끝 위치를 위로 이동 */,
+});
+
+globalStyle(`${articleArea}::-webkit-scrollbar-thumb`, {
+  background: `${g3}`,
+  borderRadius: '10px',
+  cursor: 'pointer',
+  height: '50%' /* 썸의 높이를 전체의 절반 정도로 설정 */,
+});
+
+globalStyle(`${articleArea}::-webkit-scrollbar-thumb:hover`, {
+  background: '#C0C0C0',
 });
 
 export const ul = style({
@@ -49,6 +75,7 @@ export const article = style({
   ':hover': {
     transform: 'scale(1.02)',
   },
+  cursor: 'pointer',
 });
 
 export const innerDiv = style({
@@ -70,9 +97,10 @@ export const titleText = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontSize: 14,
+  fontSize: '0.95rem',
   fontWeight: 'bold',
   margin: 5,
+  marginTop: '0',
 });
 
 export const text = style({
@@ -80,19 +108,23 @@ export const text = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontSize: 12,
+  fontSize: '0.75rem',
   margin: 5,
 });
 
 export const icons = style({
   display: 'flex',
   gap: '10px',
+  position: 'relative',
+  '@media': {
+    '(max-width: 950px)': { top: '-5px' },
+  },
 });
 
 export const countPosition = style({
   position: 'absolute',
   right: 20,
-  bottom: 20,
+  bottom: 15,
 });
 
 export const cardContainer = style({

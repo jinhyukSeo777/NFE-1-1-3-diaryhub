@@ -78,10 +78,11 @@ const EditDiary = () => {
     setCanSubmit(canSubmit);
   }, [weather, mood, images, title, content]);
 
-  const urlsToFiles = async (urls: ImageType[]) => {
+  const urlsToFiles = async (images: ImageType[]) => {
+    const urls = images.map((image) => image.url);
     // URL 배열을 File 객체 배열로 변환
     const filePromises = urls.map(async (url, index) => {
-      const response = await fetch(url.url);
+      const response = await fetch(url);
       const blob = await response.blob();
       // MIME 타입 추정 (Blob에서 추출됨)
       const mimeType = blob.type;

@@ -1,33 +1,30 @@
 import { style } from '@vanilla-extract/css';
+import { b2, b3 } from '../../utils/color';
 
 export const iconStyle = style({
   position: 'absolute',
-  top: '23px',
+  top: '1rem',
   right: '20px',
-  color: '#ccc',
+  color: b2,
   cursor: 'pointer',
 });
 
 export const inputContainerStyle = style({
   position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  width: '100%',
 });
 
 export const inputStyle = style({
   width: '100%',
-  padding: '12px',
-  borderRadius: '4px',
-  margin: '8px',
-  border: '1px solid #ccc',
+  height: '3rem',
+  border: 'none',
+  borderRadius: '0.5rem',
+  textIndent: '1rem',
   fontSize: '1rem',
   outline: 'none',
-  color: '#333',
-  backgroundColor: '#EBF2FA',
+  backgroundColor: b3,
   selectors: {
     '&::placeholder': {
-      color: '#a0a0a0',
+      color: b2,
     },
   },
 });

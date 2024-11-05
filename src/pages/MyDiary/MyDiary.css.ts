@@ -23,6 +23,15 @@ export const noteCon = style({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
+  fontSize: '1.2rem',
   gap: 20,
-  marginTop: 20,
+  position: 'relative',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  '@media': {
+    '(max-width: 950px)': {
+      transform: 'translateY(0%)',
+      marginTop: '9rem',
+    },
+  },
 });

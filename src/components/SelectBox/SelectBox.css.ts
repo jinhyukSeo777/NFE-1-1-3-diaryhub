@@ -11,10 +11,16 @@ export const dropdown = style({
   borderRadius: '10px',
   cursor: 'pointer',
   backgroundColor: '#fff',
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 0 3px rgba(0, 0, 0, 0.05)',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  marginBottom: '0.3rem',
+  '@media': {
+    '(max-width: 950px)': {
+      marginLeft: '20px',
+    },
+  },
 });
 
 export const arrow = style({
@@ -27,7 +33,7 @@ export const arrow = style({
 
 export const optionList = style({
   listStyle: 'none',
-  padding: 0,
+  padding: '0.5rem',
   margin: 0,
   position: 'absolute',
   zIndex: 1,
@@ -40,6 +46,7 @@ export const optionList = style({
 export const option = style({
   padding: '8px 10px',
   cursor: 'pointer',
+  borderRadius: '0.5rem',
   selectors: {
     '&:hover': {
       backgroundColor: '#f0f0f0',

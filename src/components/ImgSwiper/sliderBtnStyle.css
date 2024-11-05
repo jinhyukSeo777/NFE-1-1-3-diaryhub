@@ -18,7 +18,7 @@
 }
 .slick-prev:hover,
 .slick-next:hover {
-  filter: brightness(1.05);
+  opacity: 1;
 }
 .slick-prev {
   left: 3rem;

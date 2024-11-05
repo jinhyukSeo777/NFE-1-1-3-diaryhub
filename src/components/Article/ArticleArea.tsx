@@ -22,7 +22,7 @@ const ArticleArea = ({ diaries, selectedState }: ArticleAreaProps) => {
 
   return (
     <section className={articleArea}>
-      <p className={stateText}>{selectedState}의 일기입니다.</p>
+      {/* <p className={stateText}>{selectedState}의 일기입니다.</p> */}
       {diaries.length > 0 ? (
         <ul className={ul}>
           {windowWidth >= 950 ? (

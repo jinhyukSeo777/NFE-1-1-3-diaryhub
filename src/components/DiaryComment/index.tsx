@@ -3,6 +3,8 @@ import getDiaryComments from '../../utils/getDiaryComments';
 import writeComment from '../../utils/writeComment';
 import deleteComment from '../../utils/deleteComment';
 import * as S from './styles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 interface DiaryCommentProps {
   commentsList: DiaryCommentResponseType[];
@@ -79,7 +81,19 @@ const DiaryComment = ({
                 ) : (
                   <></>
                 )}
-                <p className={S.commentBody}>{comment.content}</p>
+                <p className={S.commentBody}>
+                  <FontAwesomeIcon
+                    style={{
+                      marginRight: '0.7rem',
+                      opacity: '0.5',
+                      position: 'relative',
+                      top: '3px',
+                      fontSize: '0.95rem',
+                    }}
+                    icon={faComments}
+                  />
+                  {comment.content}
+                </p>
               </li>
             );
           })}

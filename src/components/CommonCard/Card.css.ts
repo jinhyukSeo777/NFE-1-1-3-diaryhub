@@ -9,10 +9,11 @@ export const card = style({
   width: '100%',
   boxSizing: 'border-box',
   maxWidth: 300,
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
   fontSize: '12px',
-  marginBottom: 20,
+  marginBottom: '1rem',
   transition: 'transform 0.2s ease',
+  cursor: 'pointer',
   ':hover': {
     transform: 'scale(1.02)',
   },
@@ -28,7 +29,12 @@ export const texts = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontSize: 10,
-  margin: 5,
+  fontSize: '0.75rem',
+  margin: '0.3rem 0',
   color: 'gray',
+});
+
+export const cardusername = style({
+  fontSize: '1.05rem',
+  fontWeight: 'bold',
 });
