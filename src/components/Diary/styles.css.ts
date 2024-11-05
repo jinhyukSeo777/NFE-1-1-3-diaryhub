@@ -4,7 +4,7 @@ import { g2, g3, b1, b2, g1 } from '../../utils/color';
 export const diaryContainer = style({
   fontFamily: 'HakgyoansimNadeuri',
   border: `1px solid ${g3}`,
-  marginTop: '3rem',
+  marginTop: '2.5rem',
 });
 
 export const diaryTitleBox = style({

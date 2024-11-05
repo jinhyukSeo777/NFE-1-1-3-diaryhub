@@ -87,7 +87,7 @@ const DiaryDetail = () => {
     };
 
     fetchData();
-  }, []);
+  }, [param.id]);
 
   return diaryInfo && diaryComments && param.id ? (
     <div className={S.diaryDetailWrapper}>
