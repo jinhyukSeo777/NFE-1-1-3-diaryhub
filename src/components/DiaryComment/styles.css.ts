@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { b1, b2, g1, g2, g3 } from '../../utils/color';
+import { b1, g1, g2, g3 } from '../../utils/color';
 export const commentContainer = style({
   margin: '5rem 0 8rem 0',
 });
@@ -44,6 +44,7 @@ export const writeCommentButton = style({
   fontWeight: 'bold',
   fontSize: '1rem',
   cursor: 'pointer',
+  boxShadow: '0 0 6px rgba(0, 0, 0, 0.2)',
   selectors: {
     '&:hover': {
       filter: 'brightness(1.05)',
