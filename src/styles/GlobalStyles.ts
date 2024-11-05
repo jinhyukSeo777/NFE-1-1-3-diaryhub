@@ -25,6 +25,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'NanumSquareNeo', sans-serif;
     color: ${g1};
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 `;
 

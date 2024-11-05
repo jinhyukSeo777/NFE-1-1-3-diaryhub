@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { b1 } from '../../utils/color';
 
 export const bannerContainer = style({
   display: 'flex',
@@ -26,7 +27,7 @@ export const imgWrap = style({
 
 export const titleStyle = style({
   fontSize: '24px',
-  color: '#5Caaf3', // 파란색 글씨
+  color: b1, // 파란색 글씨
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -35,5 +36,5 @@ export const titleStyle = style({
 
 export const subtitleStyle = style({
   fontSize: '16px',
-  color: '#5Caaf3',
+  color: b1,
 });
