@@ -25,7 +25,11 @@ const Card = ({ diary }: { diary: Diary }) => {
       <img
         src={diary.images[0].url}
         alt="Sample"
-        style={{ width: 270, height: 270, objectFit: 'cover' }}
+        style={{
+          width: 270,
+          height: 270,
+          objectFit: 'cover',
+        }}
       />
       <div className={margin}>
         <Count likes={diary.likes} comments={diary.comments} />

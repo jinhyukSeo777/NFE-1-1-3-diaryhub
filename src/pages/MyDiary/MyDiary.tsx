@@ -48,7 +48,7 @@ const MyDiary = () => {
       <TitleBanner title="나만의 일기" subtitle="나의 하루를 공유해보세요" />
       <div className={home}>
         {diaryData.length === 0 ? (
-          <div className={noteCon}>
+          <div style={{ marginTop: '13rem' }} className={noteCon}>
             <img src={note} alt="note" />
             <p>작성한 일기가 없습니다.</p>
           </div>

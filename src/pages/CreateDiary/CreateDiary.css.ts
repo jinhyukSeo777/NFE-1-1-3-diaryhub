@@ -6,6 +6,7 @@ export const main = style({
   width: '100%',
   display: 'flex',
   backgroundColor: `${b2}`,
+  paddingTop: '5rem',
 });
 
 export const h2 = style({

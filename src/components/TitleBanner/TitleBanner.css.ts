@@ -7,6 +7,7 @@ export const bannerContainer = style({
   textAlign: 'center',
   padding: '2rem',
   position: 'relative',
+  marginTop: '6rem',
 });
 
 export const imageStyle = style({

@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
-import { b2, g1, g2, g3 } from '../../utils/color';
+import { b1, b2, g1, g2, g3 } from '../../utils/color';
 export const commentContainer = style({
-  margin: '8rem 0',
+  margin: '5rem 0 8rem 0',
 });
 
 export const writeCommentBox = style({
@@ -13,6 +13,7 @@ export const writeCommentBox = style({
 
 export const writeCommentTitle = style({
   padding: '1rem',
+  paddingLeft: '0.5rem',
 });
 
 export const writeCommentForm = style({
@@ -35,12 +36,13 @@ export const writeCommentInput = style({
 });
 
 export const writeCommentButton = style({
-  padding: '0.8rem 2rem',
-  borderRadius: '0.7rem',
+  padding: '0.6rem 1.7rem',
+  borderRadius: '1.3rem',
   border: 'none',
   color: 'white',
-  backgroundColor: b2,
-  fontWeight: '500',
+  backgroundColor: b1,
+  fontWeight: 'bold',
+  fontSize: '1rem',
   cursor: 'pointer',
   selectors: {
     '&:hover': {
@@ -80,13 +82,12 @@ export const commentDeleteButton = style({
   cursor: 'pointer',
   selectors: {
     '&:hover': {
-      color: 'tomato',
+      color: b1,
       transition: 'all 0.2s',
     },
   },
 });
 
 export const commentBody = style({
-  marginLeft: '0.5rem',
-  padding: '1rem',
+  padding: '1rem 0.5rem',
 });

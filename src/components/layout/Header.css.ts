@@ -1,9 +1,24 @@
 import { style } from '@vanilla-extract/css';
+import { DESKTOP } from '../../utils/size';
+import { g1, g2, g3 } from '../../utils/color';
 
 export const headerStyle = style({
-  backgroundColor: '#f8f9fa',
-  padding: '1rem 2rem', // 여백 추가
-  borderBottom: '1px solid #ccc', // 밑줄 추가
+  width: '100%',
+  height: '5rem',
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  boxShadow: '0px 1px 15px 2px rgba(0, 0, 0, 0.05)',
+  zIndex: '999',
+  backgroundColor: 'white',
+});
+
+export const headerArea = style({
+  maxWidth: DESKTOP,
+  width: '90%',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -15,21 +30,20 @@ export const logoContainerStyle = style({
 });
 
 export const logoImageStyle = style({
-  width: '40px', // 로고 이미지 크기
-  height: '40px',
+  width: '45px', // 로고 이미지 크기
+  height: '45px',
   marginRight: '0.5rem',
 });
 
 export const h1Style = style({
   fontFamily: "'HakgyoansimNadeuri', sans-serif", // 폰트 적용
-  fontWeight: 700,
-  fontSize: '1.5rem',
+  fontWeight: 'bold',
+  fontSize: '1.8rem',
   margin: 0,
 });
 
 export const navStyle = style({
   display: 'flex',
-  justifyContent: 'flex-end',
   alignItems: 'center',
   '@media': {
     '(max-width: 768px)': {
@@ -41,14 +55,14 @@ export const mobileMenuStyle = style({
   display: 'none', // 기본적으로 숨김
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '1rem',
+  gap: '1.2rem',
   position: 'absolute',
-  top: '60px',
-  right: '20px',
-  backgroundColor: '#f8f9fa',
-  borderRadius: '8px',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  padding: '1rem',
+  top: '4rem',
+  right: '2rem',
+  backgroundColor: 'white',
+  borderRadius: '6px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
+  padding: '1rem 2.5rem',
   zIndex: 1,
   '@media': {
     '(max-width: 768px)': {
@@ -59,7 +73,7 @@ export const mobileMenuStyle = style({
 
 export const hamburgerButtonStyle = style({
   display: 'none',
-  fontSize: '1.5rem',
+  fontSize: '2rem',
   cursor: 'pointer',
   '@media': {
     '(max-width: 768px)': {
@@ -71,17 +85,21 @@ export const hamburgerButtonStyle = style({
 export const ulStyle = style({
   display: 'flex',
   listStyle: 'none',
-  margin: 0,
-  paddingRight: '8px',
-  gap: '16px',
 });
 
 export const liStyle = style({
-  marginRight: '2rem',
+  marginLeft: '2rem',
 });
 
 export const linkStyle = style({
   textDecoration: 'none',
-  color: '#000',
+  color: g1,
   fontWeight: 'bold',
+  paddingBottom: '0.5rem',
+  borderBottom: '2px solid white',
+  selectors: {
+    '&:hover': {
+      borderBottom: `2px solid ${g2}`,
+    },
+  },
 });

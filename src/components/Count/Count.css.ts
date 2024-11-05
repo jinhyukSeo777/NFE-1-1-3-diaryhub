@@ -7,6 +7,7 @@ export const container = style({
   padding: 8,
   gap: 4,
   borderRadius: 30,
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+  boxShadow: '0 0 6px rgba(0, 0, 0, 0.2)',
   fontSize: '12px',
+  marginTop: '0.5rem',
 });

@@ -1,5 +1,5 @@
 import { icons, text } from '../Article/Article.css';
-import { texts } from './Card.css';
+import { cardusername, texts } from './Card.css';
 
 interface CardHeadProps {
   username: string;
@@ -19,7 +19,7 @@ const CardHead = ({
   return (
     <div className={icons}>
       <div className={text}>
-        <p className={text}>{username}</p>
+        <p className={cardusername}>{username}</p>
         <p className={texts}>
           {state} {diaryDate}
         </p>
@@ -28,12 +28,12 @@ const CardHead = ({
         <img
           src={require(`../../assets/${weather}.svg`)}
           alt="weather"
-          style={{ width: '24px', height: 'auto' }}
+          style={{ width: '2.5rem', height: 'auto' }}
         />
         <img
           src={require(`../../assets/${mood}.svg`)}
           alt="emotion"
-          style={{ width: '24px', height: 'auto' }}
+          style={{ width: '2.5rem', height: 'auto' }}
         />
       </div>
     </div>
