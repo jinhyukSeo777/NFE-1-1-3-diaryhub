@@ -14,6 +14,7 @@ import { b2 } from '../utils/color';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
@@ -32,12 +33,12 @@ const LoginPage: React.FC = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ username, userId: id, password }),
         }
       );
 
       if (response.ok) {
-        alert('회원가입 성공!');
+        //alert('회원가입 성공!');
         navigate('/login'); // 회원가입 후 로그인 페이지로 이동
       } else {
         const data = await response.json();
@@ -77,9 +78,15 @@ const LoginPage: React.FC = () => {
         <h2>회원가입</h2>
         <Input
           type="text"
-          placeholder="user name"
+          placeholder="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="ID"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
         />
         <Input
           type="password"

@@ -14,7 +14,7 @@ import { useAuth } from '../../components/AuthContext';
 import { b2 } from '../../utils/color';
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            username,
+            userId: id,
             password,
           }),
         }
@@ -37,7 +37,6 @@ const LoginPage: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('로그인 성공:', data);
 
         // 로그인 성공 시 AuthContext의 login 호출
         login(data.token); // 받은 토큰을 login 함수에 전달
@@ -80,9 +79,9 @@ const LoginPage: React.FC = () => {
         <h2>로그인</h2>
         <Input
           type="text"
-          placeholder="User name"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="ID"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
         />
         <Input
           type="password"
