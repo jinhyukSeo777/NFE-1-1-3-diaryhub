@@ -157,6 +157,7 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>
           <div className={S.diaryStamp}>
+            <div className={S.diaryStampText}>스탬프를 찍어보세요!</div>
             <img
               src={stamp}
               alt="stamp"

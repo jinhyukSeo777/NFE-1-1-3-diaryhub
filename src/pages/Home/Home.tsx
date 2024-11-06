@@ -88,7 +88,6 @@ export default function Home() {
           const data = await response.json();
           setDiaryData(data);
           setFilteredDiaries(data);
-          console.log(data);
         } else {
           setError('데이터를 가져오는 데 실패했습니다.');
         }
