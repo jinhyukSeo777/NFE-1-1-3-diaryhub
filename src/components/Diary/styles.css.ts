@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { g2, g3, b1, b2, g1 } from '../../utils/color';
+import { g2, g3, b1, b2, g1, b3 } from '../../utils/color';
 
 export const diaryContainer = style({
   fontFamily: 'HakgyoansimNadeuri',
@@ -76,11 +76,21 @@ export const diaryBody = style({
   color: '#3A3A3A',
 });
 
-export const diaryAddress = style({
+export const diaryEtc = style({
   display: 'flex',
-  lineHeight: '3rem',
+  alignItems: 'center',
   color: g2,
   fontSize: '0.8rem',
+});
+
+export const DiaryAuthor = style({
+  cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      color: b1,
+      transition: 'all 0.3s',
+    },
+  },
 });
 
 export const diaryLine = style({
@@ -95,6 +105,7 @@ export const diaryLine = style({
       width: '98%',
     },
   },
+  zIndex: '-1',
 });
 
 export const diaryLineItem = style({

@@ -68,7 +68,6 @@ const DiaryDetail = () => {
         await getDiaryComments(param.id);
       setDiaryInfo(diaryInfo);
       setDiaryComments(diaryComments);
-
       if (diaryInfo && diaryComments) {
         const writer = diaryInfo.user._id;
         const token = localStorage.getItem('authToken');

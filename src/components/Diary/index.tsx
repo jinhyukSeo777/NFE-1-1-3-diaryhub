@@ -9,7 +9,6 @@ import rain from '../../assets/rain.svg';
 import thunder from '../../assets/thunder.svg';
 import wind from '../../assets/wind.svg';
 import stamp from '../../assets/stamp.svg';
-import location from '../../assets/location.svg';
 import { DiaryResponseType } from '../../pages/DiaryDetail';
 import likeDiary from '../../utils/likeDiary';
 import deleteDiary from '../../utils/deleteDiary';
@@ -18,6 +17,9 @@ import * as S from './styles.css';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 interface diaryProps {
   diaryInfo: DiaryResponseType;
   isMyDiary: boolean;
@@ -137,10 +139,20 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
         <div className={S.diaryBody}>
           <div ref={textRef}>{diaryInfo.content}</div>
           <div style={{ height: '3rem' }}></div>
-          <div className={S.diaryAddress}>
-            <img width={15} src={location} alt="location"></img>
-            <span style={{ marginLeft: '0.7rem' }}>
+          <div className={S.diaryEtc}>
+            <FontAwesomeIcon icon={faLocationDot} />
+            <span style={{ marginLeft: '0.5rem' }}>
               장소: {diaryInfo.location.state || ''}
+            </span>
+            <FontAwesomeIcon icon={faUser} style={{ marginLeft: '1rem' }} />
+            <span
+              style={{ marginLeft: '0.5rem' }}
+              className={S.DiaryAuthor}
+              onClick={() => {
+                alert('사용자 일기 목록으로 이동');
+              }}
+            >
+              작성자: {diaryInfo.user.username || ''}
             </span>
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>
