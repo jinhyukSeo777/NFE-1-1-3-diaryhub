@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
-import { g2, g3, b1, b2, g1 } from '../../utils/color';
+import { keyframes, style } from '@vanilla-extract/css';
+import { g2, g3, b1, b2, g1, b3 } from '../../utils/color';
 
 export const diaryContainer = style({
   fontFamily: 'HakgyoansimNadeuri',
@@ -76,11 +76,21 @@ export const diaryBody = style({
   color: '#3A3A3A',
 });
 
-export const diaryAddress = style({
+export const diaryEtc = style({
   display: 'flex',
-  lineHeight: '3rem',
+  alignItems: 'center',
   color: g2,
   fontSize: '0.8rem',
+});
+
+export const DiaryAuthor = style({
+  cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      color: b1,
+      transition: 'all 0.3s',
+    },
+  },
 });
 
 export const diaryLine = style({
@@ -95,6 +105,7 @@ export const diaryLine = style({
       width: '98%',
     },
   },
+  zIndex: '-1',
 });
 
 export const diaryLineItem = style({
@@ -103,10 +114,32 @@ export const diaryLineItem = style({
   borderBottom: `1.5px solid ${g3}`,
 });
 
+const shake = keyframes({
+  '0%': { transform: 'rotate(5deg)' },
+  '25%': { transform: 'rotate(-5deg)' },
+  '50%': { transform: 'rotate(5deg)' },
+  '75%': { transform: 'rotate(-5deg)' },
+  '100%': { transform: 'rotate(5deg)' },
+});
+const fadeOut = keyframes({
+  '99%': { opacity: '1' },
+  '100%': { opacity: '0' },
+});
+
 export const diaryStamp = style({
   position: 'absolute',
   bottom: '0',
   right: '1rem',
+});
+
+export const diaryStampText = style({
+  position: 'absolute',
+  fontSize: '0.7rem',
+  top: '-2rem',
+  left: '0.3rem',
+  color: g1,
+  animation: `${shake} 1s , ${fadeOut} 10s forwards`,
+  animationIterationCount: '10, 1',
 });
 
 export const diaryStampImage = style({
