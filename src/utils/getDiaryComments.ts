@@ -10,7 +10,7 @@ export default async function getDiaryComments(id: string) {
       throw new Error();
     }
     const data = await res.json();
-    return data;
+    return data.reverse();
   } catch (error) {
     return null;
   }
