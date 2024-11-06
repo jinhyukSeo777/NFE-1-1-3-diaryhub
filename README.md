@@ -16,12 +16,16 @@
 
 ## 1. UI
 ### 메인
-![Main UI](screenshots/main-ui.png)
+<img src="screenshots/main-ui.png" alt="UI Screenshot" width="500" height="300">
+
 ### 일기작성
-![CreateDiary UI](screenshots/create-diary-ui-1.png)
-![CreateDiary UI](screenshots/create-diary-ui-2.png)
+<div style="display: flex">
+  <img src="screenshots/create-diary-ui-1.png" alt="UI Screenshot" width="500" height="500">
+  <img src="screenshots/create-diary-ui-2.png" alt="UI Screenshot" width="500" height="500">
+</div>
+
 ### 일기보기
-![Detail UI](screenshots/detail-ui.png)
+<img src="screenshots/detail-ui.png" alt="UI Screenshot" width="500" height="500">
 <br>
 <br>
 
