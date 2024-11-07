@@ -69,7 +69,7 @@ export const fetchPublicDiariesByRegion = async (
   skip: number
 ) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries/location/${state}?limit=10&skip=${skip}`
+    `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries?state=${state}&limit=10&skip=${skip}`
   );
   return response.data;
 };
