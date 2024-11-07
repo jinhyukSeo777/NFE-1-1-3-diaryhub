@@ -5,6 +5,7 @@ import deleteComment from '../../utils/deleteComment';
 import * as S from './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
+import note from '../../assets/note.svg';
 
 interface DiaryCommentProps {
   commentsList: DiaryCommentResponseType[];
@@ -60,7 +61,7 @@ const DiaryComment = ({
         </form>
       </div>
       <ul className={S.commentList}>
-        {commentsList &&
+        {commentsList.length > 0 ? (
           commentsList.map((comment, index) => {
             return (
               <li className={S.commentItem} key={index}>
@@ -96,7 +97,14 @@ const DiaryComment = ({
                 </p>
               </li>
             );
-          })}
+          })
+        ) : (
+          <div className={S.emptyCommentBox}>
+            <p>아직 댓글이 없어요.</p>
+            <p>첫 번째 댓글을 달아보세요!</p>
+            <img src={note} alt="note"></img>
+          </div>
+        )}
       </ul>
     </div>
   );

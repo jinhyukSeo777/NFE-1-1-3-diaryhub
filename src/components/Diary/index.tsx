@@ -56,6 +56,7 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const [isStamp, setIsStamp] = useState(
     diaryInfo.likes.includes(userId) || isMyDiary
   );
+  const [showMent, setShowMent] = useState(false);
   const onStamp = async () => {
     if (isMyDiary) return;
 
@@ -64,6 +65,9 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
       const likes = await likeDiary(diaryInfo._id);
       setIsStamp(!isStamp);
       setStampCount(likes);
+      if (isStamp === false) {
+        setShowMent(true);
+      }
     } else {
       alert('스탬프를 찍으려면 로그인해야 합니다!');
     }
@@ -96,6 +100,7 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     };
     calculateLineCount();
     window.addEventListener('resize', calculateLineCount);
+    setShowMent(isStamp);
     return () => {
       window.removeEventListener('resize', calculateLineCount);
     };
@@ -157,7 +162,9 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
           </div>
           <div className={S.diaryLine}>{drawLine()}</div>
           <div className={S.diaryStamp}>
-            <div className={S.diaryStampText}>스탬프를 찍어보세요!</div>
+            <div className={`${S.diaryStampText} ${showMent && S.displayNone}`}>
+              스탬프를 찍어보세요!
+            </div>
             <img
               src={stamp}
               alt="stamp"
