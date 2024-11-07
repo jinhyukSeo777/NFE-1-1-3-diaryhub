@@ -19,6 +19,9 @@ export const LOCATION_OPTIONS: LocationOption[] = [
   { value: '부산', label: '부산', latitude: 35.1796, longitude: 129.0756 },
   { value: '전라', label: '전라', latitude: 35.8218, longitude: 127.148 },
   { value: '광주', label: '광주', latitude: 35.1595, longitude: 126.8526 },
+  { value: '강원', label: '강원', latitude: 37.8228, longitude: 128.1555 },
+  { value: '세종', label: '세종', latitude: 36.4804, longitude: 127.2891 },
+  { value: '제주', label: '제주', latitude: 33.4996, longitude: 126.5312 },
 ];
 
 export const DEFAULT_COORDINATES = {
