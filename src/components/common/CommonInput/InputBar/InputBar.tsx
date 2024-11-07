@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import {} from 'react-kakao-maps-sdk';
-import { IPosition } from '../../../../pages/CreateDiary/CreateDiary';
+import { Position } from '../../../../types/diaryTypes';
+import { getRegionName } from '../../../../utils/regionService';
 
 interface IProps {
-  setPosition: React.Dispatch<React.SetStateAction<IPosition>>;
+  setPosition: React.Dispatch<React.SetStateAction<Position>>;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface IResult {
@@ -23,7 +25,7 @@ interface IPagination {
   nextPage: () => void;
 }
 
-const InputBar = ({ setPosition }: IProps) => {
+const InputBar = ({ setPosition, setRegion }: IProps) => {
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState<IResult[]>([]); // 검색 결과
   const paginationRef = useRef<IPagination | null>(null); // pagination 객체를 저장하기 위한 useRef
@@ -54,8 +56,10 @@ const InputBar = ({ setPosition }: IProps) => {
     }
   };
 
-  const changePosition = (latitude: number, longitude: number) => {
+  const changePosition = async (latitude: number, longitude: number) => {
     setPosition({ latitude, longitude });
+    const region = await getRegionName({ latitude, longitude });
+    setRegion(region);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

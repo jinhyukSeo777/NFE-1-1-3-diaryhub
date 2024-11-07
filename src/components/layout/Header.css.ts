@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { DESKTOP } from '../../utils/size';
-import { g1, g2, g3 } from '../../utils/color';
+import { g1, g2 } from '../../utils/color';
 
 export const headerStyle = style({
   width: '100%',

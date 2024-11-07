@@ -1,5 +1,4 @@
 import { style, globalStyle } from '@vanilla-extract/css';
-import { DESKTOP } from '../../utils/size';
 
 export const pageContainer = style({
   width: '90%',

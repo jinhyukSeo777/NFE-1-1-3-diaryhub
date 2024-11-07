@@ -92,3 +92,9 @@ export const commentDeleteButton = style({
 export const commentBody = style({
   padding: '1rem 0.5rem',
 });
+
+export const emptyCommentBox = style({
+  margin: '5rem 0',
+  textAlign: 'center',
+  lineHeight: '2rem',
+});

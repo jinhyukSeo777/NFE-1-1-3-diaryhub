@@ -8,7 +8,7 @@ import {
   text,
   countPosition,
 } from './Article.css';
-import { Diary } from '../../pages/Home/Home';
+import { Diary } from '../../types/diaryTypes';
 import { useNavigate } from 'react-router-dom';
 import { DiaryDate } from '../../utils/date';
 
