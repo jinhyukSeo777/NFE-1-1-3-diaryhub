@@ -1,13 +1,3 @@
-import feel1 from '../../assets/feel1.svg';
-import feel2 from '../../assets/feel2.svg';
-import feel3 from '../../assets/feel3.svg';
-import feel4 from '../../assets/feel4.svg';
-import feel5 from '../../assets/feel5.svg';
-import sun from '../../assets/sun.svg';
-import cloud from '../../assets/cloud.svg';
-import rain from '../../assets/rain.svg';
-import thunder from '../../assets/thunder.svg';
-import wind from '../../assets/wind.svg';
 import stamp from '../../assets/stamp.svg';
 import likeDiary from '../../utils/likeDiary';
 import deleteDiary from '../../utils/deleteDiary';
@@ -20,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Diary } from '../../types/diaryTypes';
+import { DAY, DIARY_ICON } from '../../constants/diary';
 interface diaryProps {
   diaryInfo: Diary;
   isMyDiary: boolean;
@@ -29,27 +20,6 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const token = localStorage.getItem('authToken');
   const userId = token && JSON.parse(atob(token.split('.')[1])).userId;
   const date = new Date(diaryInfo.diaryDate);
-  const day = [
-    '일요일',
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-  ];
-  const icon: { [name: string]: string } = {
-    feel1: feel1,
-    feel2: feel2,
-    feel3: feel3,
-    feel4: feel4,
-    feel5: feel5,
-    sun: sun,
-    cloud: cloud,
-    wind: wind,
-    rain: rain,
-    thunder: thunder,
-  };
   const [lineCount, setLineCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
   const [stampCount, setStampCount] = useState(diaryInfo.likes.length);
@@ -112,7 +82,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
         <div className={S.diaryTitleBox}>
           <div className={S.diaryTitleText}>
             {date.getFullYear()}년 {date.getMonth() + 1}월 {date.getDate()}일{' '}
-            {day[date.getDay()]}
+            {DAY[date.getDay()]}
           </div>
           <div className={S.diaryTitleText}>제목: {diaryInfo.title}</div>
           <div className={S.diaryTitleIcon}>
@@ -121,7 +91,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
               <div className={S.diaryIcon}>
                 <img
                   className={S.diaryIconImg}
-                  src={icon[diaryInfo.weather] || sun}
+                  src={DIARY_ICON[diaryInfo.weather]}
                   alt="weather"
                 ></img>
               </div>
@@ -131,7 +101,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
               <div className={S.diaryIcon}>
                 <img
                   className={S.diaryIconImg}
-                  src={icon[diaryInfo.mood] || feel1}
+                  src={DIARY_ICON[diaryInfo.mood]}
                   alt="feel"
                 ></img>
               </div>

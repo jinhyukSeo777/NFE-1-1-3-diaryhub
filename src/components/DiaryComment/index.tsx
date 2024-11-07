@@ -1,4 +1,3 @@
-import getDiaryComments from '../../utils/getDiaryComments';
 import writeComment from '../../utils/writeComment';
 import deleteComment from '../../utils/deleteComment';
 import * as S from './styles.css';
@@ -6,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import note from '../../assets/note.svg';
 import { Comment } from '../../types/diaryTypes';
+import { getComment } from '../../utils/diaryApi';
 
 interface DiaryCommentProps {
   commentsList: Comment[];
@@ -36,7 +36,7 @@ const DiaryComment = ({
   const saveComment = async (comment: string | null) => {
     if (comment !== null && comment.length > 0) {
       await writeComment(diaryId, comment);
-      const commentInfo = await getDiaryComments(diaryId);
+      const commentInfo = await getComment(diaryId);
       setDiaryComments(commentInfo);
     } else {
       alert('댓글을 입력해주세요!');
@@ -44,7 +44,7 @@ const DiaryComment = ({
   };
   const delComment = async (commentId: string) => {
     await deleteComment(diaryId, commentId);
-    const commentInfo = await getDiaryComments(diaryId);
+    const commentInfo = await getComment(diaryId);
     setDiaryComments(commentInfo);
   };
   return (
