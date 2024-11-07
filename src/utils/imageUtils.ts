@@ -1,6 +1,6 @@
-import { ImageType } from '../pages/DiaryDetail';
+import { Image } from '../types/diaryTypes';
 
-export const urlsToFiles = async (images: ImageType[]) => {
+export const urlsToFiles = async (images: Image[]) => {
   const urls = images.map((image) => image.url);
   const filePromises = urls.map(async (url, index) => {
     const response = await fetch(url);

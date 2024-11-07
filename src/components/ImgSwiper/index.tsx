@@ -5,10 +5,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as S from './styles.css';
 import './sliderBtnStyle.css';
-import { ImageType } from '../../pages/DiaryDetail';
+import { Image } from '../../types/diaryTypes';
 
 interface ImgSwiperProps {
-  imgList: ImageType[];
+  imgList: Image[];
 }
 
 const ImgSwiper = ({ imgList }: ImgSwiperProps) => {

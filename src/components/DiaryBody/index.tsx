@@ -9,7 +9,6 @@ import rain from '../../assets/rain.svg';
 import thunder from '../../assets/thunder.svg';
 import wind from '../../assets/wind.svg';
 import stamp from '../../assets/stamp.svg';
-import { DiaryResponseType } from '../../pages/DiaryDetail';
 import likeDiary from '../../utils/likeDiary';
 import deleteDiary from '../../utils/deleteDiary';
 import ImgSwiper from '../ImgSwiper';
@@ -20,12 +19,13 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Diary } from '../../types/diaryTypes';
 interface diaryProps {
-  diaryInfo: DiaryResponseType;
+  diaryInfo: Diary;
   isMyDiary: boolean;
 }
 
-const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
+const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const token = localStorage.getItem('authToken');
   const userId = token && JSON.parse(atob(token.split('.')[1])).userId;
   const date = new Date(diaryInfo.diaryDate);
@@ -197,4 +197,4 @@ const Diary = ({ diaryInfo, isMyDiary }: diaryProps) => {
     </>
   );
 };
-export default Diary;
+export default DiaryBody;
