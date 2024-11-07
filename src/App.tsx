@@ -9,6 +9,7 @@ import DiaryDetail from './pages/DiaryDetail/index';
 import Error from './pages/Error/Error';
 import { AuthProvider } from './components/AuthContext';
 import EditDiary from './pages/EditDiary/EditDiary';
+import WriterDiary from './pages/WriterDiary';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/editdiary" element={<EditDiary />} />
           <Route path="/mydiary" element={<MyDiary />} />
           <Route path="/diarydetail/:id" element={<DiaryDetail />} />
+          <Route path="/writerdiary/:username" element={<WriterDiary />} />
           <Route path="/error" element={<Error />} />
           {/* 잘못된 URL에 대한 라우팅 처리 */}
           <Route path="*" element={<Error />} />
