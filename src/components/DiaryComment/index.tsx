@@ -1,4 +1,3 @@
-import { DiaryCommentResponseType } from '../../pages/DiaryDetail';
 import getDiaryComments from '../../utils/getDiaryComments';
 import writeComment from '../../utils/writeComment';
 import deleteComment from '../../utils/deleteComment';
@@ -6,11 +5,12 @@ import * as S from './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import note from '../../assets/note.svg';
+import { Comment } from '../../types/diaryTypes';
 
 interface DiaryCommentProps {
-  commentsList: DiaryCommentResponseType[];
+  commentsList: Comment[];
   setDiaryComments: React.Dispatch<
-    React.SetStateAction<DiaryCommentResponseType[] | undefined | null>
+    React.SetStateAction<Comment[] | undefined | null>
   >;
   diaryId: string;
 }
