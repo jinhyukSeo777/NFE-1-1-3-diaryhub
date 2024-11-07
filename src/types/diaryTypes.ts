@@ -5,7 +5,7 @@ export interface Comment {
     username: string;
   };
   content: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface Image {
