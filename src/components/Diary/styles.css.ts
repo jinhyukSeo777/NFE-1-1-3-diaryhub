@@ -116,9 +116,9 @@ export const diaryLineItem = style({
 
 const shake = keyframes({
   '0%': { transform: 'rotate(5deg)' },
-  '25%': { transform: 'rotate(-5deg)' },
+  '25%': { transform: 'rotate(0deg)' },
   '50%': { transform: 'rotate(5deg)' },
-  '75%': { transform: 'rotate(-5deg)' },
+  '75%': { transform: 'rotate(0deg)' },
   '100%': { transform: 'rotate(5deg)' },
 });
 const fadeOut = keyframes({
@@ -130,16 +130,27 @@ export const diaryStamp = style({
   position: 'absolute',
   bottom: '0',
   right: '1rem',
+  textAlign: 'center',
+});
+
+export const displayNone = style({
+  display: 'none',
 });
 
 export const diaryStampText = style({
   position: 'absolute',
   fontSize: '0.7rem',
   top: '-2rem',
-  left: '0.3rem',
+  width: '5rem',
   color: g1,
   animation: `${shake} 1s , ${fadeOut} 10s forwards`,
   animationIterationCount: '10, 1',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      width: '7rem',
+      fontSize: '1rem',
+    },
+  },
 });
 
 export const diaryStampImage = style({
@@ -152,6 +163,12 @@ export const diaryStampImage = style({
     '&:hover': {
       opacity: '1',
       transition: 'all 0.3s',
+    },
+  },
+  '@media': {
+    'screen and (min-width: 768px)': {
+      width: '7rem',
+      height: '7rem',
     },
   },
 });
