@@ -1,10 +1,11 @@
+import axios from 'axios';
 import { Diary } from '../types/diaryTypes';
 import { calculateDistance } from './calculateDistance';
 import { getRegionName } from './regionService';
 
-export const fetchData = async (): Promise<Diary[]> => {
+export const fetchData = async (skip: number): Promise<Diary[]> => {
   const response = await fetch(
-    `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries?limit=10&skip=0`,
+    `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries?limit=10&skip=${skip}`,
     {
       method: 'GET',
       headers: {
@@ -61,4 +62,14 @@ export const fetchDiariesByState = async (
   }
 
   return data;
+};
+
+export const fetchPublicDiariesByRegion = async (
+  state: string,
+  skip: number
+) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries?state=${state}&limit=10&skip=${skip}`
+  );
+  return response.data;
 };
