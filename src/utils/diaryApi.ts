@@ -26,25 +26,51 @@ export const getDiary = async (id: string) => {
     const data = await axios.get(`${BASE_URL}/diaries/${id}`);
     return data.data;
   } catch (error) {
-    console.error(error);
     return null;
   }
 };
 
-export const deleteDiary = async () => {};
+export const deleteDiary = async (id: string) => {
+  return axios.delete(`${BASE_URL}/diaries/${id}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
 
 export const getComment = async (id: string) => {
   try {
     const data = await axios.get(`${BASE_URL}/diaries/${id}/comments`);
     return data.data.reverse();
   } catch (error) {
-    console.error(error);
     return null;
   }
 };
 
 export const createComment = async () => {};
 
-export const deleteComment = async () => {};
+export const deleteComment = async (id: string) => {
+  return axios.delete(`${BASE_URL}/diaries/${id}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
 
-export const paintStamp = async () => {};
+export const paintStamp = async (id: string) => {
+  try {
+    if (!TOKEN) throw Error();
+    const data = await axios.post(
+      `${BASE_URL}/diaries/like/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      }
+    );
+    return data.data.likes;
+  } catch (error) {
+    return null;
+  }
+};
