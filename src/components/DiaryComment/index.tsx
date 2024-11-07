@@ -1,11 +1,10 @@
-import writeComment from '../../utils/writeComment';
-import deleteComment from '../../utils/deleteComment';
 import * as S from './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import note from '../../assets/note.svg';
 import { Comment } from '../../types/diaryTypes';
-import { getComment } from '../../utils/diaryApi';
+import { createComment, getComment, deleteComment } from '../../utils/diaryApi';
+import getUserId from '../../utils/getUserId';
 
 interface DiaryCommentProps {
   commentsList: Comment[];
@@ -20,42 +19,40 @@ const DiaryComment = ({
   setDiaryComments,
   diaryId,
 }: DiaryCommentProps) => {
-  const token = localStorage.getItem('authToken');
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const formData = new FormData(e.currentTarget);
-      const inputValue: string | null = formData.get('comment') + '';
-      saveComment(inputValue);
-    } else {
-      alert('댓글을 작성하려면 로그인해야 합니다!');
-    }
-    e.currentTarget.reset();
-  };
-  const saveComment = async (comment: string | null) => {
-    if (comment !== null && comment.length > 0) {
-      await writeComment(diaryId, comment);
-      const commentInfo = await getComment(diaryId);
-      setDiaryComments(commentInfo);
-    } else {
+    const form = e.currentTarget;
+    const formData = new FormData(e.currentTarget);
+    const content = formData.get('content')?.toString() || '';
+    if (content.trim().length < 1) {
       alert('댓글을 입력해주세요!');
+    } else {
+      const result = await createComment(diaryId, formData);
+      if (result === null) {
+        alert('댓글을 작성하려면 로그인해야 합니다!');
+      }
     }
+    const commentInfo = await getComment(diaryId);
+    setDiaryComments(commentInfo);
+    form.reset();
   };
-  const delComment = async (commentId: string) => {
+
+  const onDeleteCommentClick = (commentId: string) => async () => {
     await deleteComment(diaryId, commentId);
     const commentInfo = await getComment(diaryId);
     setDiaryComments(commentInfo);
   };
+
   return (
     <div className={S.commentContainer}>
       <div className={S.writeCommentBox}>
         <p className={S.writeCommentTitle}>댓글</p>
         <form className={S.writeCommentForm} onSubmit={(e) => onSubmit(e)}>
           <input
+            type="text"
+            name="content"
             placeholder="댓글을 입력해주세요"
             className={S.writeCommentInput}
-            name="comment"
           ></input>
           <button className={S.writeCommentButton}>작성</button>
         </form>
@@ -69,13 +66,10 @@ const DiaryComment = ({
                 <span className={S.commentDate}>
                   {comment.createdAt.split('T')[0]}
                 </span>
-                {comment.user._id ===
-                (token && JSON.parse(atob(token.split('.')[1])).userId) ? (
+                {comment.user._id === getUserId() ? (
                   <span
                     className={S.commentDeleteButton}
-                    onClick={() => {
-                      delComment(comment._id);
-                    }}
+                    onClick={onDeleteCommentClick(comment._id)}
                   >
                     삭제하기
                   </span>

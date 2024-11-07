@@ -47,10 +47,22 @@ export const getComment = async (id: string) => {
   }
 };
 
-export const createComment = async () => {};
+export const createComment = async (id: string, formData: FormData) => {
+  try {
+    return await axios.post(`${BASE_URL}/diaries/${id}/comments`, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
-export const deleteComment = async (id: string) => {
-  return axios.delete(`${BASE_URL}/diaries/${id}`, {
+export const deleteComment = async (diaryId: string, commentId: string) => {
+  return axios.delete(`${BASE_URL}/diaries/${diaryId}/comments/${commentId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
     },

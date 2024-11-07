@@ -58,7 +58,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
   };
 
   const onDeleteDiaryClick = () => async () => {
-    await deleteDiary(diaryInfo._id);
+    deleteDiary(diaryInfo._id);
     navigate('/');
   };
 
@@ -165,7 +165,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
             <div className={S.diaryEditButton} onClick={goEditPage}>
               일기 수정하기
             </div>
-            <div className={S.diaryEditButton} onClick={onDeleteDiaryClick}>
+            <div className={S.diaryEditButton} onClick={onDeleteDiaryClick()}>
               일기 삭제하기
             </div>
           </div>
