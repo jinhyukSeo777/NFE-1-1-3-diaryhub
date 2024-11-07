@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import * as styles from './CreateMap.css';
 import { Map } from 'react-kakao-maps-sdk';
-import { IPosition } from '../../pages/CreateDiary/CreateDiary';
+import { Position } from '../../types/diaryTypes';
+import { getRegionName } from '../../utils/regionService';
 
 interface IProps {
-  position: IPosition;
-  setPosition: React.Dispatch<React.SetStateAction<IPosition>>;
+  position: Position;
+  setPosition: React.Dispatch<React.SetStateAction<Position>>;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const CreateMap = ({ position, setPosition }: IProps) => {
+const CreateMap = ({ position, setPosition, setRegion }: IProps) => {
   const [map, setMap] = useState<any>();
 
   // 지도 위치 변경 시 호출
@@ -17,6 +19,11 @@ const CreateMap = ({ position, setPosition }: IProps) => {
       const center = map.getCenter(); // 지도 중심 좌표 가져오기
       setPosition({ latitude: center.Ma, longitude: center.La });
     }
+  };
+
+  const handleDragEnd = async () => {
+    const region = await getRegionName(position);
+    setRegion(region);
   };
 
   return (
@@ -30,6 +37,7 @@ const CreateMap = ({ position, setPosition }: IProps) => {
         level={3}
         onCreate={setMap}
         onCenterChanged={handleCenterChanged}
+        onDragEnd={handleDragEnd}
       ></Map>
       <div className={styles.centericon}>🚩</div>
     </div>
