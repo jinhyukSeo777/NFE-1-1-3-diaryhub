@@ -35,6 +35,7 @@ export const texts = style({
 });
 
 export const cardusername = style({
-  fontSize: '1.05rem',
+  fontSize: '0.9rem',
+  marginBottom: '0.6rem',
   fontWeight: 'bold',
 });
