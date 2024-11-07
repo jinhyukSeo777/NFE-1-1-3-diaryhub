@@ -26,7 +26,7 @@ export default function MainMap({ latitude, longitude, markers }: MapMarker) {
       const container = document.getElementById('map');
       const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
-        level: 3,
+        level: 5,
       };
 
       const newMap = new window.kakao.maps.Map(container, options);

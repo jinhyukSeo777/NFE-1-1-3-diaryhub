@@ -8,7 +8,7 @@ interface SelectBoxProps {
 
 const CustomSelectBox = ({ options, onChange }: SelectBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>('현재 위치');
+  const [selectedOption, setSelectedOption] = useState<string>('전체');
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
