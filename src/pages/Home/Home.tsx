@@ -4,47 +4,10 @@ import { home, article, map, homeCon, container } from './Home.css';
 import ArticleArea from '../../components/Article/ArticleArea';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import TitleBanner from '../../components/TitleBanner/TitleBanner';
-
-export interface Comment {
-  _id: string;
-  user: {
-    _id: string;
-    username: string;
-  };
-  content: string;
-  createdAt: Date;
-}
-
-interface Image {
-  public_id: string;
-  url: string;
-  _id: string;
-}
-
-export interface Diary {
-  _id: string;
-  title: string;
-  content: string;
-  diaryDate: Date;
-  user: {
-    _id: string;
-    username: string;
-  };
-  location: {
-    state: string;
-    coordinates: {
-      latitude: number;
-      longitude: number;
-    };
-  };
-  mood: string;
-  weather: string;
-  createdAt: Date;
-  isPublic: boolean;
-  images: Image[];
-  likes: string[];
-  comments: Comment[];
-}
+import { LOCATION_OPTIONS, DEFAULT_COORDINATES } from '../../utils/location';
+import { fetchData, fetchDiariesByState } from '../../utils/getDiary';
+import { Diary } from '../../types/diaryTypes';
+import { fetchGeolocation } from '../../utils/geolocation';
 
 export default function Home() {
   const [currentPosition, setCurrentPosition] = useState<{
@@ -56,153 +19,65 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [selectedState, setSelectedState] = useState<string>('');
 
-  const options = [
-    { value: '현재 위치', label: '현재 위치' },
-    { value: '서울', label: '서울' },
-    { value: '인천', label: '인천' },
-    { value: '경기', label: '경기' },
-    { value: '대전', label: '대전' },
-    { value: '충청', label: '충청' },
-    { value: '경상', label: '경상' },
-    { value: '대구', label: '대구' },
-    { value: '울산', label: '울산' },
-    { value: '부산', label: '부산' },
-    { value: '전라', label: '전라' },
-    { value: '광주', label: '광주' },
-  ];
+  const getDiaryData = async () => {
+    try {
+      const data = await fetchData();
+      setDiaryData(data);
+      setFilteredDiaries(data);
+    } catch (err) {
+      setError('데이터를 가져오는 데 오류가 발생했습니다.');
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setDiaryData(data);
-          setFilteredDiaries(data);
-        } else {
-          setError('데이터를 가져오는 데 실패했습니다.');
-        }
-      } catch (err) {
-        setError('데이터를 가져오는 데 오류가 발생했습니다.');
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (selectedState === '전체') {
+      getDiaryData();
+    }
+  }, [selectedState]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        setCurrentPosition({ latitude, longitude });
-        setSelectedState('현재 위치');
+    fetchGeolocation(
+      (position, region) => {
+        setCurrentPosition(position);
+        setSelectedState(region);
       },
-      () => alert('위치 정보를 가져오는 데 실패했습니다.'),
-      {
-        enableHighAccuracy: true,
-        maximumAge: 30000,
-        timeout: 27000,
-      }
+      () => alert('위치 정보를 가져오는 데 실패했습니다.')
     );
   }, []);
 
   // 지역별 검색
   useEffect(() => {
-    const fetchDiariesByState = async () => {
-      if (selectedState === '현재 위치') {
-        setFilteredDiaries(diaryData);
-        return;
-      }
-
-      if (selectedState) {
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_BASE_URL}/diaries/public-diaries/location/${selectedState}`,
-            {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            }
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            setFilteredDiaries(data);
-          } else {
-            setError('해당 주의 다이어리를 가져오는 데 실패했습니다.');
-          }
-        } catch (err) {
-          setError('데이터를 가져오는 데 오류가 발생했습니다.');
-        }
-      } else {
-        setFilteredDiaries(diaryData);
+    const diaryState = async () => {
+      try {
+        const data = await fetchDiariesByState(selectedState, currentPosition);
+        setFilteredDiaries(data);
+      } catch (err) {
+        setError('데이터를 가져오는 데 오류가 발생했습니다.');
       }
     };
 
-    fetchDiariesByState();
-  }, [selectedState, diaryData]);
+    diaryState();
+  }, [selectedState, currentPosition]);
 
-  const calculateDistance = (
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
-  ) => {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLon = (lon2 - lon1) * (Math.PI / 180);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * (Math.PI / 180)) *
-        Math.cos(lat2 * (Math.PI / 180)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  };
-  const sortedDiaryData = currentPosition
-    ? [...filteredDiaries]
-        .sort((a, b) => {
-          const distanceA = calculateDistance(
-            currentPosition.latitude,
-            currentPosition.longitude,
-            a.location.coordinates.latitude,
-            a.location.coordinates.longitude
-          );
-          const distanceB = calculateDistance(
-            currentPosition.latitude,
-            currentPosition.longitude,
-            b.location.coordinates.latitude,
-            b.location.coordinates.longitude
-          );
-          return distanceA - distanceB;
-        })
-        .slice(0, 5)
-    : filteredDiaries;
+  const sortedDiaryData = [...filteredDiaries].sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+
+    return dateB.getTime() - dateA.getTime();
+  });
 
   // 선택된 지역에 따라 지도 위치 변경
   const mapLatitude =
     selectedState === '현재 위치' && currentPosition
       ? currentPosition.latitude
-      : filteredDiaries.length > 0
-        ? filteredDiaries[0].location.coordinates.latitude
-        : currentPosition?.latitude || 37.5665;
+      : LOCATION_OPTIONS.find((opt) => opt.value === selectedState)?.latitude ||
+        DEFAULT_COORDINATES.latitude;
+
   const mapLongitude =
     selectedState === '현재 위치' && currentPosition
       ? currentPosition.longitude
-      : filteredDiaries.length > 0
-        ? filteredDiaries[0].location.coordinates.longitude
-        : currentPosition?.longitude || 126.978;
+      : LOCATION_OPTIONS.find((opt) => opt.value === selectedState)
+          ?.longitude || DEFAULT_COORDINATES.longitude;
 
   return (
     <div className={container}>
@@ -211,7 +86,7 @@ export default function Home() {
         subtitle="누군가의 하루를 함께 느껴보세요"
       />
       <div className={homeCon}>
-        <SelectBox options={options} onChange={setSelectedState} />
+        <SelectBox options={LOCATION_OPTIONS} onChange={setSelectedState} />
         <div className={home}>
           <section className={article}>
             <ArticleArea
