@@ -1,27 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as styles from './CreateDiary.css';
-import InputDate from '../../components/common/CommonInput/InputDate/InputDate';
-import InputTitle from '../../components/common/CommonInput/InputTitle/InputTitle';
-import InputContent from '../../components/common/CommonInput/InputContent/InputContent';
-import InputWeather from '../../components/common/CommonInput/InputWeather/InputWeather';
-import InputMood from '../../components/common/CommonInput/InputMood/InputMood';
 import InputBar from '../../components/common/CommonInput/InputBar/InputBar';
 import CreateMap from '../../components/CreateMap/CreateMap';
-import InputPublic from '../../components/common/CommonInput/InputPublic/InputPublic';
-import InputImg from '../../components/common/CommonInput/InputImg/InputImg';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-export interface IPosition {
-  latitude: number;
-  longitude: number;
-}
+import useLocationAndRegion from '../../hooks/useLocationAndRegion';
+import useAuthFilter from '../../hooks/useAuthFilter';
+import useFormValidation from '../../hooks/useFormValidation';
+import { createDiary } from '../../utils/diaryApi';
+import DiaryForm from '../../components/DiaryForm/DiaryForm';
 
 const CreateDiary = () => {
-  const [position, setPosition] = useState<IPosition>({
-    latitude: 37.566826,
-    longitude: 126.9786567,
-  });
+  const { position, setPosition, region, setRegion } = useLocationAndRegion();
   const [diaryDate, setDiaryDate] = useState(new Date());
   const [weather, setWeather] = useState('');
   const [mood, setMood] = useState('');
@@ -29,48 +18,22 @@ const CreateDiary = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [canSubmit, setCanSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // 비로그인 유저 필터
-  useEffect(() => {
-    const TOKEN = localStorage.getItem('authToken');
+  useAuthFilter('/error');
 
-    if (!TOKEN) navigate('/login');
+  const canSubmit = useFormValidation({
+    weather,
+    mood,
+    images,
+    title,
+    content,
   });
 
-  // 제출에 필요한 요소 전부 있는지 확인
-  useEffect(() => {
-    const canSubmit =
-      !!weather && !!mood && !!title && !!content && images.length !== 0;
-    setCanSubmit(canSubmit);
-  }, [weather, mood, images, title, content]);
-
-  const getRegionName = async () => {
-    const apiKey = process.env.REACT_APP_KAKAOMAP_API_KEY;
-    const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${position.longitude}&y=${position.latitude}&input_coord=WGS84`;
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `KakaoAK ${apiKey}`, // 인증 헤더 추가
-      },
-    });
-    const data = await response.json();
-
-    // 시군구 정보 가져오기
-    if (data.documents && data.documents.length > 0) {
-      const address = data.documents[0].address;
-      return address.region_1depth_name;
-    } else {
-      return '';
-    }
-  };
-
   const handleSubmit = async () => {
-    setCanSubmit(false);
-    const state = await getRegionName();
-    const TOKEN = localStorage.getItem('authToken');
-    const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    setIsLoading(true);
 
     // FormData 생성 및 파일 추가
     const formData = new FormData();
@@ -84,42 +47,51 @@ const CreateDiary = () => {
     formData.append('mood', mood);
     formData.append('weather', weather);
     formData.append('diaryDate', diaryDate.toISOString());
-    formData.append('state', state);
+    formData.append('state', region);
     formData.append('latitude', position.latitude.toString());
     formData.append('longitude', position.longitude.toString());
     formData.append('isPublic', isPublic.toString());
 
-    axios
-      .post(`${BASE_URL}/diaries`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // FormData 전송을 위한 헤더 설정
-
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      })
-      .then(() => navigate('/'))
-      .catch(() => navigate('/error'));
+    try {
+      await createDiary(formData);
+      navigate('/');
+    } catch (error) {
+      navigate('/error');
+    }
   };
 
   return (
     <main className={styles.main}>
       <div className={styles.container}>
         <h2 className={styles.h2}>일기를 작성해주세요</h2>
-        <InputBar setPosition={setPosition} />
-        <CreateMap position={position} setPosition={setPosition} />
-        <InputDate diaryDate={diaryDate} setDiaryDate={setDiaryDate} />
-        <InputWeather weather={weather} setWeather={setWeather} />
-        <InputMood mood={mood} setMood={setMood} />
-        <InputImg images={images} setImages={setImages} />
-        <InputTitle title={title} setTitle={setTitle} />
-        <InputContent content={content} setContent={setContent} />
-        <InputPublic isPublic={isPublic} setIsPublic={setIsPublic} />
+        <InputBar setPosition={setPosition} setRegion={setRegion} />
+        <CreateMap
+          position={position}
+          setPosition={setPosition}
+          setRegion={setRegion}
+        />
+        <DiaryForm
+          diaryDate={diaryDate}
+          setDiaryDate={setDiaryDate}
+          weather={weather}
+          setWeather={setWeather}
+          mood={mood}
+          setMood={setMood}
+          images={images}
+          setImages={setImages}
+          title={title}
+          setTitle={setTitle}
+          content={content}
+          setContent={setContent}
+          isPublic={isPublic}
+          setIsPublic={setIsPublic}
+        />
         <button
           disabled={!canSubmit}
           className={styles.submitbtn}
           onClick={handleSubmit}
         >
-          작성 완료
+          {isLoading ? 'Loading...' : '작성 완료'}
         </button>
       </div>
     </main>

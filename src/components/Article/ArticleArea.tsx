@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Article from './Article';
 import Card from '../CommonCard/Card';
-import { articleArea, ul, cardContainer, stateText } from './Article.css';
+import { articleArea, ul, cardContainer } from './Article.css';
 import { noteCon } from '../../pages/MyDiary/MyDiary.css';
 import { Diary } from '../../pages/Home/Home';
 import note from '../../assets/note.svg';
