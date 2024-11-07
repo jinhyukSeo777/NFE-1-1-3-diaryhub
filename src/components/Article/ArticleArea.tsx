@@ -3,7 +3,7 @@ import Article from './Article';
 import Card from '../CommonCard/Card';
 import { articleArea, ul, cardContainer } from './Article.css';
 import { noteCon } from '../../pages/MyDiary/MyDiary.css';
-import { Diary } from '../../pages/Home/Home';
+import { Diary } from '../../types/diaryTypes';
 import note from '../../assets/note.svg';
 interface ArticleAreaProps {
   diaries: Diary[];
@@ -22,16 +22,13 @@ const ArticleArea = ({ diaries, selectedState }: ArticleAreaProps) => {
 
   return (
     <section className={articleArea}>
-      {/* <p className={stateText}>{selectedState}의 일기입니다.</p> */}
       {diaries.length > 0 ? (
         <ul className={ul}>
           {windowWidth >= 950 ? (
-            diaries
-              .slice(0, 5)
-              .map((diary) => <Article key={diary._id} diary={diary} />)
+            diaries.map((diary) => <Article key={diary._id} diary={diary} />)
           ) : (
             <div className={cardContainer}>
-              {diaries.slice(0, 5).map((diary) => (
+              {diaries.map((diary) => (
                 <Card key={diary._id} diary={diary} />
               ))}
             </div>
