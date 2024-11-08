@@ -94,9 +94,8 @@ const DiaryComment = ({
           })
         ) : (
           <div className={S.emptyCommentBox}>
-            <p>아직 댓글이 없어요.</p>
-            <p>첫 번째 댓글을 달아보세요!</p>
             <img src={note} alt="note"></img>
+            <p>아직 댓글이 없어요.</p>
           </div>
         )}
       </ul>

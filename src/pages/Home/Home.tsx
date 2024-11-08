@@ -39,7 +39,7 @@ export default function Home() {
 
   // 지역 변경시 호출 되는 함수
   useEffect(() => {
-    if (initialRender.current) {
+    if (process.env.NODE_ENV === 'development' && initialRender.current) {
       initialRender.current = false; // 초기 렌더링이 끝났음을 표시
       return; // 초기 렌더링일 때는 호출하지 않음
     }
