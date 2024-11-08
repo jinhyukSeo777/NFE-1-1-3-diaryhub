@@ -173,7 +173,7 @@ export const diaryStampImage = style({
   },
 });
 
-export const diaryStamp2 = style({
+export const diaryPaintStamp = style({
   opacity: '1',
 });
 

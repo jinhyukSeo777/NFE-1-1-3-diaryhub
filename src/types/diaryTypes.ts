@@ -30,8 +30,8 @@ export interface Diary {
       longitude: number;
     };
   };
-  mood: string;
-  weather: string;
+  mood: 'feel1' | 'feel2' | 'feel3' | 'feel4' | 'feel5';
+  weather: 'sun' | 'cloud' | 'wind' | 'rain' | 'thunder';
   createdAt: Date;
   isPublic: boolean;
   images: Image[];

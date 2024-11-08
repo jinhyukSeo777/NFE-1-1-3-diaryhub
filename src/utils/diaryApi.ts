@@ -20,3 +20,69 @@ export const editDiary = async (id: string, formData: FormData) => {
     },
   });
 };
+
+export const getDiary = async (id: string) => {
+  try {
+    const data = await axios.get(`${BASE_URL}/diaries/${id}`);
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const deleteDiary = async (id: string) => {
+  return axios.delete(`${BASE_URL}/diaries/${id}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const getComment = async (id: string) => {
+  try {
+    const data = await axios.get(`${BASE_URL}/diaries/${id}/comments`);
+    return data.data.reverse();
+  } catch (error) {
+    return null;
+  }
+};
+
+export const createComment = async (id: string, formData: FormData) => {
+  try {
+    return await axios.post(`${BASE_URL}/diaries/${id}/comments`, formData, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const deleteComment = async (diaryId: string, commentId: string) => {
+  return axios.delete(`${BASE_URL}/diaries/${diaryId}/comments/${commentId}`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+};
+
+export const paintStamp = async (id: string) => {
+  try {
+    if (!TOKEN) throw Error();
+    const data = await axios.post(
+      `${BASE_URL}/diaries/like/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      }
+    );
+    return data.data.likes;
+  } catch (error) {
+    return null;
+  }
+};
