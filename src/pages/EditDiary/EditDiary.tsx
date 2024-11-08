@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import * as styles from './EditDiary.css';
 import InputBar from '../../components/common/CommonInput/InputBar/InputBar';
-import CreateMap from '../../components/CreateMap/CreateMap';
+import CreateMap from '../../components/common/CreateMap/CreateMap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Diary } from '../../types/diaryTypes';
-import DiaryForm from '../../components/DiaryForm/DiaryForm';
+import DiaryForm from '../../components/common/DiaryForm/DiaryForm';
 import { editDiary } from '../../utils/diaryApi';
 import useLocationAndRegion from '../../hooks/useLocationAndRegion';
 import useAuthFilter from '../../hooks/useAuthFilter';

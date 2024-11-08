@@ -1,16 +1,16 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import Header from './components/layout/Header';
+import Header from './components/layout/Header/Header';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import Signup from './pages/Signup';
+import Signup from './pages/Signup/Signup';
 import CreateDiary from './pages/CreateDiary/CreateDiary';
 import MyDiary from './pages/MyDiary/MyDiary';
 import DiaryDetail from './pages/DiaryDetail/index';
 import Error from './pages/Error/Error';
-import { AuthProvider } from './components/AuthContext';
+import { AuthProvider } from './components/common/AuthContext/AuthContext';
 import EditDiary from './pages/EditDiary/EditDiary';
-import WriterDiary from './pages/WriterDiary';
+import WriterDiary from './pages/WriterDiary/WriterDiary';
 import { ReactNode } from 'react';
 
 interface AnimatedRouteProps {

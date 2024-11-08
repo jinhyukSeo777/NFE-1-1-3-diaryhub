@@ -1,11 +1,7 @@
+import { Coordinates } from '../types/diaryTypes';
 import { getRegionName } from './regionService';
 
-interface Coordinates {
-  latitude: number;
-  longitude: number;
-}
-
-export const fetchGeolocation = async (
+export const fetchMyGeolocation = async (
   onSuccess: (position: Coordinates, region: string) => void,
   onError: () => void
 ) => {

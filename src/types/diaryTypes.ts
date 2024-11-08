@@ -39,7 +39,14 @@ export interface Diary {
   comments: Comment[];
 }
 
-export interface Position {
+export interface Coordinates {
   latitude: number;
   longitude: number;
+}
+
+export interface LocationOption {
+  value: string;
+  label: string;
+  latitude?: number;
+  longitude?: number;
 }

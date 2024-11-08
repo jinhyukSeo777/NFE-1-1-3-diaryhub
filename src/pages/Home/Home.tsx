@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import MainMap from '../../components/MainMap/MainMap';
+import MainMap from '../../components/common/MainMap/MainMap';
 import { home, article, map, homeCon, container } from './Home.css';
-import ArticleArea from '../../components/Article/ArticleArea';
-import SelectBox from '../../components/SelectBox/SelectBox';
-import TitleBanner from '../../components/TitleBanner/TitleBanner';
-import { LOCATION_OPTIONS } from '../../utils/location';
-import { fetchPublicDiariesByRegion } from '../../utils/getDiary';
+import ArticleArea from '../../components/common/Article/ArticleArea';
+import SelectBox from '../../components/common/SelectBox/SelectBox';
+import TitleBanner from '../../components/common/TitleBanner/TitleBanner';
+import { LOCATION_OPTIONS } from '../../constants/location';
+import { fetchPublicDiariesByRegion } from '../../utils/diaryApi';
 import { Diary } from '../../types/diaryTypes';
-import { fetchGeolocation } from '../../utils/geolocation';
+import { fetchMyGeolocation } from '../../utils/geolocation';
 import { DEFAULT_COORDINATES } from '../../constants/location';
 
 export default function Home() {
@@ -52,7 +52,7 @@ export default function Home() {
 
   // 내 위치 저장
   useEffect(() => {
-    fetchGeolocation(
+    fetchMyGeolocation(
       (position, region) => {
         setMyPosition(position);
         setMyRegion(region);

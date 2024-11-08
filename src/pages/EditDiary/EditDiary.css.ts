@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { b1, b2 } from '../../utils/color';
-import { TABLET } from '../../utils/size';
+import { b1, b2 } from '../../constants/color';
+import { TABLET } from '../../constants/size';
 
 export const main = style({
   width: '100%',

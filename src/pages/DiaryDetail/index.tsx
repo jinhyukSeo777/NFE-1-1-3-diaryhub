@@ -1,6 +1,6 @@
-import TitleBanner from '../../components/TitleBanner/TitleBanner';
-import DiaryBody from '../../components/DiaryBody';
-import DiaryComment from '../../components/DiaryComment';
+import TitleBanner from '../../components/common/TitleBanner/TitleBanner';
+import DiaryBody from '../../components/common/DiaryBody';
+import DiaryComment from '../../components/common/DiaryComment';
 import ErrorPage from '../Error/Error';
 import * as S from './styles.css';
 import { Diary, Comment } from '../../types/diaryTypes';

@@ -1,9 +1,9 @@
 import * as styles from './InputWeather.css';
-import { ReactComponent as Sun } from '../../../../assets/sun.svg';
-import { ReactComponent as Rain } from '../../../../assets/rain.svg';
-import { ReactComponent as Cloud } from '../../../../assets/cloud.svg';
-import { ReactComponent as Thunder } from '../../../../assets/thunder.svg';
-import { ReactComponent as Wind } from '../../../../assets/wind.svg';
+import { ReactComponent as Sun } from '../../../../assets/icons/sun.svg';
+import { ReactComponent as Rain } from '../../../../assets/icons/rain.svg';
+import { ReactComponent as Cloud } from '../../../../assets/icons/cloud.svg';
+import { ReactComponent as Thunder } from '../../../../assets/icons/thunder.svg';
+import { ReactComponent as Wind } from '../../../../assets/icons/wind.svg';
 
 interface IProps {
   weather: string;

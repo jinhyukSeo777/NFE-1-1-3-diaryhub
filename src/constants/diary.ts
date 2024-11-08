@@ -1,13 +1,13 @@
-import feel1 from '../assets/feel1.svg';
-import feel2 from '../assets/feel2.svg';
-import feel3 from '../assets/feel3.svg';
-import feel4 from '../assets/feel4.svg';
-import feel5 from '../assets/feel5.svg';
-import sun from '../assets/sun.svg';
-import cloud from '../assets/cloud.svg';
-import rain from '../assets/rain.svg';
-import thunder from '../assets/thunder.svg';
-import wind from '../assets/wind.svg';
+import feel1 from '../assets/icons/feel1.svg';
+import feel2 from '../assets/icons/feel2.svg';
+import feel3 from '../assets/icons/feel3.svg';
+import feel4 from '../assets/icons/feel4.svg';
+import feel5 from '../assets/icons/feel5.svg';
+import sun from '../assets/icons/sun.svg';
+import cloud from '../assets/icons/cloud.svg';
+import rain from '../assets/icons/rain.svg';
+import thunder from '../assets/icons/thunder.svg';
+import wind from '../assets/icons/wind.svg';
 
 export const DAY = [
   '일요일',

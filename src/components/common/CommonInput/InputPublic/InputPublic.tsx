@@ -1,4 +1,4 @@
-import { b1 } from '../../../../utils/color';
+import { b1 } from '../../../../constants/color';
 import * as styles from './InputPublic.css';
 
 interface IProps {

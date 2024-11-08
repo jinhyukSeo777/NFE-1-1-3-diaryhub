@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { g1 } from '../utils/color';
+import { g1 } from '../constants/color';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {

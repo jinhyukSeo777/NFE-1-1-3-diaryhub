@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import {} from 'react-kakao-maps-sdk';
-import { Position } from '../../../../types/diaryTypes';
+import { Coordinates } from '../../../../types/diaryTypes';
 import { getRegionName } from '../../../../utils/regionService';
 
 interface IProps {
-  setPosition: React.Dispatch<React.SetStateAction<Position>>;
+  setPosition: React.Dispatch<React.SetStateAction<Coordinates>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
 }
 

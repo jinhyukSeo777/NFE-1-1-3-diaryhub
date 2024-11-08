@@ -86,3 +86,43 @@ export const paintStamp = async (id: string) => {
     return null;
   }
 };
+
+export const fetchPublicDiariesByRegion = async (
+  state: string,
+  skip: number
+) => {
+  const response = await axios.get(
+    `${BASE_URL}/diaries/public-diaries?state=${state}&limit=10&skip=${skip}`
+  );
+  return response.data;
+};
+
+export const diaryAPI = {
+  getMyDiaries: async (skip: number) => {
+    const response = await axios.get(
+      `${BASE_URL}/diaries/my-diaries?limit=9&skip=${skip}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      }
+    );
+    return response.data;
+  },
+};
+
+export const getWriterApi = {
+  getMyDiaries: async (username: string, skip: number) => {
+    const response = await axios.get(
+      `${BASE_URL}/diaries/public-diaries/${username}?limit=9&skip=${skip}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      }
+    );
+    return response.data;
+  },
+};
