@@ -61,6 +61,17 @@ export default function Home() {
     );
   }, []);
 
+  const mapLatitude =
+    region === '현재 위치' && myPosition
+      ? myPosition.latitude
+      : LOCATION_OPTIONS.find((opt) => opt.value === region)?.latitude ||
+        DEFAULT_COORDINATES.latitude;
+  const mapLongitude =
+    region === '현재 위치' && myPosition
+      ? myPosition.longitude
+      : LOCATION_OPTIONS.find((opt) => opt.value === region)?.longitude ||
+        DEFAULT_COORDINATES.longitude;
+
   return (
     <div className={container}>
       <TitleBanner
@@ -79,8 +90,8 @@ export default function Home() {
           </section>
           <section className={map}>
             <MainMap
-              latitude={myPosition.latitude}
-              longitude={myPosition.longitude}
+              latitude={mapLatitude}
+              longitude={mapLongitude}
               markers={diaryData.map((diary) => ({
                 latitude: diary.location.coordinates.latitude,
                 longitude: diary.location.coordinates.longitude,
