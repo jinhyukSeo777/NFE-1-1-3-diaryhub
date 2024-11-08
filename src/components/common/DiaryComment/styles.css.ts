@@ -53,6 +53,39 @@ export const writeCommentButton = style({
   },
 });
 
+export const editCommentForm = style({
+  padding: '1rem 0',
+  textAlign: 'end',
+});
+
+export const editCommentTextArea = style({
+  padding: '0.5rem',
+  width: '100%',
+  border: `1px solid ${g3}`,
+  borderRadius: '0.7rem',
+  outline: 'none',
+  resize: 'none',
+  height: '5rem',
+  fontFamily: 'HakgyoansimGeurimilgi',
+});
+
+export const editCommentButton = style({
+  borderRadius: '0.7rem',
+  marginTop: '0.3rem',
+  padding: '0.5rem 1rem',
+  backgroundColor: b1,
+  border: 'none',
+  color: 'white',
+  cursor: 'pointer',
+  boxShadow: '0 0 6px rgba(0, 0, 0, 0.2)',
+  selectors: {
+    '&:hover': {
+      filter: 'brightness(1.05)',
+      transition: 'all 0.3s',
+    },
+  },
+});
+
 export const commentList = style({
   listStyle: 'none',
   padding: '0',
@@ -78,6 +111,7 @@ export const commentDate = style({
 });
 
 export const commentDeleteButton = style({
+  marginLeft: '0.5rem',
   fontSize: '0.7rem',
   color: g2,
   cursor: 'pointer',
