@@ -6,8 +6,7 @@ import * as S from './styles.css';
 import { Diary, Comment } from '../../types/diaryTypes';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import getDiaryDetail from '../../utils/getDiaryDetail';
-import getDiaryComments from '../../utils/getDiaryComments';
+import { getComment, getDiary } from '../../utils/diaryApi';
 
 const DiaryDetail = () => {
   const param: { id?: string } = useParams();
@@ -21,8 +20,8 @@ const DiaryDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (!param.id) return;
-      const diaryInfo: Diary | null = await getDiaryDetail(param.id);
-      const diaryComments: Comment[] | null = await getDiaryComments(param.id);
+      const diaryInfo: Diary | null = await getDiary(param.id);
+      const diaryComments: Comment[] | null = await getComment(param.id);
       setDiaryInfo(diaryInfo);
       setDiaryComments(diaryComments);
       if (diaryInfo && diaryComments) {
@@ -41,7 +40,6 @@ const DiaryDetail = () => {
         setDate(date.getMonth() + 1 + '월' + date.getDate() + '일의 일기');
       }
     };
-
     fetchData();
   }, [param.id]);
 
