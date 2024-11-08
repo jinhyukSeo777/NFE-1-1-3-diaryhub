@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Diary } from '../types/diaryTypes';
 import { home } from './Home/Home.css';
 import TitleBanner from '../components/TitleBanner/TitleBanner';
@@ -9,22 +9,64 @@ import DiaryContent from '../components/DiaryContent';
 const WriterDiary = () => {
   const { username } = useParams<{ username: string }>();
   const [diaryData, setDiaryData] = useState<Diary[]>([]);
+  const [skip, setSkip] = useState(0);
+  const [hasMoreData, setHasMoreData] = useState(true);
+  const initialRender = useRef(true); // 초기 렌더링 여부를 확인하는 ref
+  const loadingRef = useRef<HTMLSpanElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const navigate = useNavigate();
 
+  const getData = async (username: string | undefined, skip: number) => {
+    if (!username) return;
+    const data = await getWriterApi.getMyDiaries(username, skip);
+    if (data.length < 9) {
+      setHasMoreData(false);
+    }
+    setDiaryData((prev) => [...prev, ...data]);
+  };
+
+  const fetchMoreData = () => {
+    getData(username, skip + 9);
+    setSkip((prev) => prev + 9);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      if (username) {
-        try {
-          const data = await getWriterApi.getMyDiaries(username);
-          setDiaryData(data);
-        } catch (error) {
-          navigate('/error');
+    if (!username) navigate('/error'); // 비정상적 접근 체크
+
+    if (initialRender.current) {
+      initialRender.current = false; // 초기 렌더링이 끝났음을 표시
+      return; // 초기 렌더링일 때는 호출하지 않음
+    }
+
+    getData(username, 0);
+  }, [navigate, username]);
+
+  // loading이 화면에 보이면 추가 데이터 패칭하는 함수
+  useEffect(() => {
+    if (!loadingRef.current) return; // loadingRef가 없으면 실행하지 않음
+
+    const currentLoadingRef = loadingRef.current;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchMoreData();
         }
+      },
+      { root: null, threshold: 0.1 }
+    );
+
+    if (currentLoadingRef) {
+      observerRef.current.observe(currentLoadingRef);
+    }
+
+    return () => {
+      if (currentLoadingRef && observerRef.current) {
+        observerRef.current.unobserve(currentLoadingRef);
+        observerRef.current.disconnect();
       }
     };
-
-    fetchData();
-  }, [username, navigate]);
+  }, [diaryData]);
 
   return (
     <>
@@ -35,6 +77,14 @@ const WriterDiary = () => {
       <div className={home}>
         <DiaryContent diaryData={diaryData} />
       </div>
+      {hasMoreData && diaryData.length !== 0 && (
+        <span
+          style={{ marginBottom: '0.5rem', display: 'block' }}
+          ref={loadingRef}
+        >
+          loading...
+        </span>
+      )}
     </>
   );
 };
