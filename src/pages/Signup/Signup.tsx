@@ -20,7 +20,8 @@ const LoginPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = async () => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords don't match!");
       return;
@@ -68,36 +69,33 @@ const LoginPage: React.FC = () => {
       {/* 회원가입 폼 섹션 */}
       <div className={formSection}>
         <h2>회원가입</h2>
-        <Input
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <Input
-          type="text"
-          placeholder="ID"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Button
-          variant="login"
-          onClick={handleRegister} // 회원가입 함수 연결
-        >
-          Register
-        </Button>
+        <form onSubmit={handleRegister}>
+          <Input
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="ID"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button variant="login">Register</Button>
+        </form>
       </div>
     </div>
   );
