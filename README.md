@@ -1,9 +1,11 @@
 # <img style="position: relative; top: -20px" src="./public/assets/logo.svg" alt="로고" width="50" height="50">교환일기 프로젝트
+
 <a href="https://nfe-1-1-3-diaryhub.vercel.app/" style="text-decoration: none;">메인 서비스 주소</a>
 <br>
 <br>
 
 ## 0. 메인기능
+
 **교환일기 (Diary Hub)**는 사용자가 찍은 **사진과 글**을 통해 소중한 순간을 기록하고, 쉽게 돌아볼 수 있게 도와줍니다.
 
 작성된 일기는 **공개 또는 비공개**로 설정할 수 있어, 다른 사람들과 공유하거나 개인적으로 보관할 수 있습니다.
@@ -15,21 +17,43 @@
 <br>
 
 ## 1. UI
+
 ### 메인
-<img src="screenshots/main-ui.png" alt="UI Screenshot" width="500" height="300">
 
-### 일기작성
-<div style="display: flex">
-  <img src="screenshots/create-diary-ui-1.png" alt="UI Screenshot" width="500" height="500">
-  <img src="screenshots/create-diary-ui-2.png" alt="UI Screenshot" width="500" height="500">
-</div>
+<img src="screenshots/mainpage.png" alt="UI Screenshot" width="900" height="450">
 
-### 일기보기
-<img src="screenshots/detail-ui.png" alt="UI Screenshot" width="500" height="500">
+### 회원가입
+
+<img src="screenshots/signUp.png" alt="UI Screenshot" width="900" height="450">
+
+### 로그인
+
+<img src="screenshots/login.png" alt="UI Screenshot" width="900" height="450">
+
+### 일기 작성
+
+<img src="screenshots/createDiary.png" alt="UI Screenshot" width="900" height="450">
+
+### 일기 수정
+
+<img src="screenshots/editDiary.png" alt="UI Screenshot" width="900" height="450">
+
+### 일기 상세
+
+<img src="screenshots/detailDiary.png" alt="UI Screenshot" width="900" height="450">
+
+### 나의 일기
+
+<img src="screenshots/myDiary.png" alt="UI Screenshot" width="900" height="450">
+
+### 다른 사람의 일기
+
+<img src="screenshots/userDiary.png" alt="UI Screenshot" width="900" height="450">
 <br>
 <br>
 
 ## 2. 기술스택
+
 <div style="display: flex; justify-content: center; align-items: center;">
   <a href="https://ko.react.dev/learn" target="_blank"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg1MndL-Xp1JcnqaB0YOqTp6zDjrwYyGKsPA&s" alt="react" width="55" height="50"></a>
   <a href="https://www.typescriptlang.org/" target="_blank"><img src="https://blog.kakaocdn.net/dn/ba1PQr/btq3Ke1IOHs/vTmtOKn2EBRkqQT1JnY8j1/tfile.svg" alt="ts" width="50" height="50"></a>
@@ -42,16 +66,11 @@
 <br>
 
 ## 3. 설치방법
+
 ```javascript
 https://github.com/jinhyukSeo777/NFE-1-1-3-diaryhub.git
 npm install
 npm run start
 ```
+
 <br>
-
-
-
-
-
-
-
