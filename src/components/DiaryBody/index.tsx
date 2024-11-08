@@ -106,6 +106,13 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
     };
   }, []);
 
+  const handleAuthorClick = () => {
+    const username = diaryInfo.user.username;
+    if (username) {
+      navigate(`/writerdiary/${username}`);
+    }
+  };
+
   return (
     <>
       <div className={S.diaryContainer}>
@@ -153,9 +160,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
             <span
               style={{ marginLeft: '0.5rem' }}
               className={S.DiaryAuthor}
-              onClick={() => {
-                alert('사용자 일기 목록으로 이동');
-              }}
+              onClick={handleAuthorClick}
             >
               작성자: {diaryInfo.user.username || ''}
             </span>
