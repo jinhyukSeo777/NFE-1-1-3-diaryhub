@@ -1,6 +1,6 @@
-import { Position } from '../types/diaryTypes';
+import { Coordinates } from '@interfaces/diaryTypes';
 
-export const getRegionName = async ({ latitude, longitude }: Position) => {
+export const getRegionName = async ({ latitude, longitude }: Coordinates) => {
   const apiKey = process.env.REACT_APP_KAKAOMAP_API_KEY;
   const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${longitude}&y=${latitude}&input_coord=WGS84`;
 

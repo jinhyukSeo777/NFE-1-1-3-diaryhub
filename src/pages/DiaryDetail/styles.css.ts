@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { TABLET } from '../../utils/size';
+import { TABLET } from '@constants/size';
 
 export const diaryDetailWrapper = style({
   maxWidth: TABLET,
