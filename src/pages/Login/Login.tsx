@@ -8,10 +8,11 @@ import {
   welcomeSectionSpan,
   imgSectionSpan,
 } from './Login.css';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
-import { useAuth } from '../../components/AuthContext';
-import { b2 } from '../../utils/color';
+import Input from '@components/common/Input/Input';
+import Button from '@components/common/Button/Button';
+import { useAuth } from '@components/common/AuthContext/AuthContext';
+import { b2 } from '@constants/color';
+import { loginUser } from '@utils/userApi';
 
 const LoginPage: React.FC = () => {
   const [id, setId] = useState('');
@@ -21,19 +22,7 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId: id,
-            password,
-          }),
-        }
-      );
+      const response = await loginUser(id, password);
 
       if (response.ok) {
         const data = await response.json();

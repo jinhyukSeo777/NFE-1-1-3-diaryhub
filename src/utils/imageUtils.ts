@@ -1,4 +1,4 @@
-import { Image } from '../types/diaryTypes';
+import { Image } from '@interfaces/diaryTypes';
 
 export const urlsToFiles = async (images: Image[]) => {
   const urls = images.map((image) => image.url);

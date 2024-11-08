@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Diary } from '../../types/diaryTypes';
+import { Diary } from '@interfaces/diaryTypes';
 import { home } from '../Home/Home.css';
-import TitleBanner from '../../components/TitleBanner/TitleBanner';
-import { diaryAPI } from '../../utils/getMyDiary';
-import DiaryContent from '../../components/DiaryContent';
+import TitleBanner from '@components/common/TitleBanner/TitleBanner';
+import { diaryAPI } from '@utils/diaryApi';
+import DiaryContent from '@components/common/DiaryContent/DiaryContent';
 
 const MyDiary = () => {
   const [diaryData, setDiaryData] = useState<Diary[]>([]);

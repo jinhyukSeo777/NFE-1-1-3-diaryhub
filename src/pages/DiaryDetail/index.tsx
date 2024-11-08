@@ -1,12 +1,12 @@
-import TitleBanner from '../../components/TitleBanner/TitleBanner';
-import DiaryBody from '../../components/DiaryBody';
-import DiaryComment from '../../components/DiaryComment';
+import TitleBanner from '@components/common/TitleBanner/TitleBanner';
+import DiaryBody from '@components/common/DiaryBody';
+import DiaryComment from '@components/common/DiaryComment';
 import ErrorPage from '../Error/Error';
 import * as S from './styles.css';
-import { Diary, Comment } from '../../types/diaryTypes';
+import { Diary, Comment } from '@interfaces/diaryTypes';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getComment, getDiary } from '../../utils/diaryApi';
+import { getComment, getDiary } from '@utils/diaryApi';
 
 const DiaryDetail = () => {
   const param: { id?: string } = useParams();
