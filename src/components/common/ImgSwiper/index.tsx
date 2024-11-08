@@ -1,11 +1,11 @@
-import tape2 from '../../../assets/icons/tape2.svg';
-import tape3 from '../../../assets/icons/tape3.svg';
+import tape2 from '@assets/icons/tape2.svg';
+import tape3 from '@assets/icons/tape3.svg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as S from './styles.css';
 import './sliderBtnStyle.css';
-import { Image } from '../../../types/diaryTypes';
+import { Image } from '@interfaces/diaryTypes';
 
 interface ImgSwiperProps {
   imgList: Image[];

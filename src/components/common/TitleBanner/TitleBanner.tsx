@@ -6,7 +6,7 @@ import {
   imageStyle,
   imgWrap,
 } from './TitleBanner.css';
-import tapeImage from '../../../assets/icons/titleTape.svg';
+import tapeImage from '@assets/icons/titleTape.svg';
 
 type TitleBannerProps = {
   title: string;

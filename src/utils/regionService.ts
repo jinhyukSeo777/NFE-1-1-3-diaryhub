@@ -1,4 +1,4 @@
-import { Coordinates } from '../types/diaryTypes';
+import { Coordinates } from '@interfaces/diaryTypes';
 
 export const getRegionName = async ({ latitude, longitude }: Coordinates) => {
   const apiKey = process.env.REACT_APP_KAKAOMAP_API_KEY;

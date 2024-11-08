@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Diary } from '../../types/diaryTypes';
+import { Diary } from '@interfaces/diaryTypes';
 import { home } from '../Home/Home.css';
-import TitleBanner from '../../components/common/TitleBanner/TitleBanner';
-import { getWriterApi } from '../../utils/diaryApi';
+import TitleBanner from '@components/common/TitleBanner/TitleBanner';
+import { getWriterApi } from '@utils/diaryApi';
 import { useNavigate, useParams } from 'react-router-dom';
-import DiaryContent from '../../components/common/DiaryContent/DiaryContent';
+import DiaryContent from '@components/common/DiaryContent/DiaryContent';
 
 const WriterDiary = () => {
   const { username } = useParams<{ username: string }>();

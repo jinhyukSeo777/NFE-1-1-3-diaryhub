@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as styles from './MainMap.css';
-import backImg from '../../../assets/icons/markerBack.svg';
+import backImg from '@assets/icons/markerBack.svg';
 declare global {
   interface Window {
     kakao: any;

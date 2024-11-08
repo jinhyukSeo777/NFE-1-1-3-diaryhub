@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import {} from 'react-kakao-maps-sdk';
-import { Coordinates } from '../../../../types/diaryTypes';
-import { getRegionName } from '../../../../utils/regionService';
+import { Coordinates } from '@interfaces/diaryTypes';
+import { getRegionName } from '@utils/regionService';
 
 interface IProps {
   setPosition: React.Dispatch<React.SetStateAction<Coordinates>>;

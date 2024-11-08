@@ -1,7 +1,7 @@
-import { Diary } from '../../../types/diaryTypes';
+import { Diary } from '@interfaces/diaryTypes';
 import Card from '../CommonCard/Card';
-import { mydiary, noteCon } from '../../../pages/MyDiary/MyDiary.css';
-import note from '../../../assets/icons/note.svg';
+import { mydiary, noteCon } from '@pages/MyDiary/MyDiary.css';
+import note from '@assets/icons/note.svg';
 
 interface DiaryContentProps {
   diaryData: Diary[];

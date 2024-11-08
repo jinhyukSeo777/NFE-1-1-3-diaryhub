@@ -8,9 +8,9 @@ import {
   text,
   countPosition,
 } from './Article.css';
-import { Diary } from '../../../types/diaryTypes';
+import { Diary } from '@interfaces/diaryTypes';
 import { useNavigate } from 'react-router-dom';
-import { DiaryDate } from '../../../utils/formatDate';
+import { DiaryDate } from '@utils/formatDate';
 
 const Article = ({ diary }: { diary: Diary }) => {
   const navigate = useNavigate();

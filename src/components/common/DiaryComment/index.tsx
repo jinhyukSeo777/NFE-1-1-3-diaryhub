@@ -1,14 +1,10 @@
 import * as S from './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
-import note from '../../../assets/icons/note.svg';
-import { Comment } from '../../../types/diaryTypes';
-import {
-  createComment,
-  getComment,
-  deleteComment,
-} from '../../../utils/diaryApi';
-import getUserId from '../../../utils/getUserId';
+import note from '@assets/icons/note.svg';
+import { Comment } from '@interfaces/diaryTypes';
+import { createComment, getComment, deleteComment } from '@utils/diaryApi';
+import getUserId from '@utils/getUserId';
 
 interface DiaryCommentProps {
   commentsList: Comment[];

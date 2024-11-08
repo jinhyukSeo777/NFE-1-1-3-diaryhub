@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { b1 } from '../../../constants/color';
+import { b1 } from '@constants/color';
 
 export const bannerContainer = style({
   display: 'flex',

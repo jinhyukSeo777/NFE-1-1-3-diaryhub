@@ -1,10 +1,10 @@
 import CardContent from './CardContent';
 import CardHead from './CardHead';
-import { Diary } from '../../../types/diaryTypes';
+import { Diary } from '@interfaces/diaryTypes';
 import Count from '../Count/Count';
 import { card, margin } from './Card.css';
 import { useNavigate } from 'react-router-dom';
-import { DiaryDate } from '../../../utils/formatDate';
+import { DiaryDate } from '@utils/formatDate';
 
 const Card = ({ diary }: { diary: Diary }) => {
   const navigate = useNavigate();

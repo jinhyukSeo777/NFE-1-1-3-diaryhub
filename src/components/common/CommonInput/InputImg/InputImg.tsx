@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as styles from './InputImg.css';
-import { ReactComponent as Svg } from '../../../../assets/icons/addphoto.svg';
+import { ReactComponent as Svg } from '@assets/icons/addphoto.svg';
 
 interface IProps {
   images: File[];

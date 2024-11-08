@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { DESKTOP } from '../../constants/size';
+import { DESKTOP } from '@constants/size';
 
 export const home = style({
   display: 'flex',

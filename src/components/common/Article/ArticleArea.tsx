@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import Article from './Article';
 import Card from '../CommonCard/Card';
 import { articleArea, ul, cardContainer } from './Article.css';
-import { noteCon } from '../../../pages/MyDiary/MyDiary.css';
-import { Diary } from '../../../types/diaryTypes';
-import note from '../../../assets/icons/note.svg';
+import { noteCon } from '@pages/MyDiary/MyDiary.css';
+import { Diary } from '@interfaces/diaryTypes';
+import note from '@assets/icons/note.svg';
 interface ArticleAreaProps {
   diaries: Diary[];
   fetchMoreData: () => void;

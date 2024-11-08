@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Coordinates } from '../types/diaryTypes';
+import { Coordinates } from '@interfaces/diaryTypes';
 import { DEFAULT_COORDINATES } from '../constants/location';
 
 const useLocationAndRegion = () => {

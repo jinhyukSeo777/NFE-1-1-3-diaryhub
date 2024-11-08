@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { b2, b3 } from '../../../constants/color';
+import { b2, b3 } from '@constants/color';
 
 export const iconStyle = style({
   position: 'absolute',

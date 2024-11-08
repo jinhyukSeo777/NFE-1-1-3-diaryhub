@@ -1,4 +1,4 @@
-import { Coordinates } from '../types/diaryTypes';
+import { Coordinates } from '@interfaces/diaryTypes';
 import { getRegionName } from './regionService';
 
 export const fetchMyGeolocation = async (

@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { g3, g4 } from '../../../../constants/color';
+import { g3, g4 } from '@constants/color';
 
 // Container 스타일
 export const container = style({

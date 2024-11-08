@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { b1, g1, g2, g3 } from '../../../constants/color';
+import { b1, g1, g2, g3 } from '@constants/color';
 export const commentContainer = style({
   margin: '5rem 0 8rem 0',
 });

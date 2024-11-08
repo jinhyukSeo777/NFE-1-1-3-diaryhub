@@ -8,10 +8,10 @@ import {
   welcomeSectionSpan,
   imgSectionSpan,
 } from '../Login/Login.css';
-import Input from '../../components/common/Input/Input';
-import Button from '../../components/common/Button/Button';
-import { b2 } from '../../constants/color';
-import { signupUser } from '../../utils/userApi';
+import Input from '@components/common/Input/Input';
+import Button from '@components/common/Button/Button';
+import { b2 } from '@constants/color';
+import { signupUser } from '@utils/userApi';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import * as styles from './CreateMap.css';
 import { Map } from 'react-kakao-maps-sdk';
-import { Coordinates } from '../../../types/diaryTypes';
-import { getRegionName } from '../../../utils/regionService';
+import { Coordinates } from '@interfaces/diaryTypes';
+import { getRegionName } from '@utils/regionService';
 
 interface IProps {
   position: Coordinates;

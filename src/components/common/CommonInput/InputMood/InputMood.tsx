@@ -1,9 +1,9 @@
 import * as styles from './InputMood.css';
-import { ReactComponent as Feel1 } from '../../../../assets/icons/feel1.svg';
-import { ReactComponent as Feel2 } from '../../../../assets/icons/feel2.svg';
-import { ReactComponent as Feel3 } from '../../../../assets/icons/feel3.svg';
-import { ReactComponent as Feel4 } from '../../../../assets/icons/feel4.svg';
-import { ReactComponent as Feel5 } from '../../../../assets/icons/feel5.svg';
+import { ReactComponent as Feel1 } from '@assets/icons/feel1.svg';
+import { ReactComponent as Feel2 } from '@assets/icons/feel2.svg';
+import { ReactComponent as Feel3 } from '@assets/icons/feel3.svg';
+import { ReactComponent as Feel4 } from '@assets/icons/feel4.svg';
+import { ReactComponent as Feel5 } from '@assets/icons/feel5.svg';
 
 interface IProps {
   mood: string;

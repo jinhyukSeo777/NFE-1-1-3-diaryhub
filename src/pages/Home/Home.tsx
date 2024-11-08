@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import MainMap from '../../components/common/MainMap/MainMap';
+import MainMap from '@components/common/MainMap/MainMap';
 import { home, article, map, homeCon, container } from './Home.css';
-import ArticleArea from '../../components/common/Article/ArticleArea';
-import SelectBox from '../../components/common/SelectBox/SelectBox';
-import TitleBanner from '../../components/common/TitleBanner/TitleBanner';
-import { LOCATION_OPTIONS } from '../../constants/location';
-import { fetchPublicDiariesByRegion } from '../../utils/diaryApi';
-import { Diary } from '../../types/diaryTypes';
-import { fetchMyGeolocation } from '../../utils/geolocation';
-import { DEFAULT_COORDINATES } from '../../constants/location';
+import ArticleArea from '@components/common/Article/ArticleArea';
+import SelectBox from '@components/common/SelectBox/SelectBox';
+import TitleBanner from '@components/common/TitleBanner/TitleBanner';
+import { LOCATION_OPTIONS } from '@constants/location';
+import { fetchPublicDiariesByRegion } from '@utils/diaryApi';
+import { Diary } from '@interfaces/diaryTypes';
+import { fetchMyGeolocation } from '@utils/geolocation';
+import { DEFAULT_COORDINATES } from '@constants/location';
 
 export default function Home() {
   const [myPosition, setMyPosition] = useState(DEFAULT_COORDINATES);

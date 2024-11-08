@@ -1,4 +1,4 @@
-import { LocationOption } from '../types/diaryTypes';
+import { LocationOption } from '@interfaces/diaryTypes';
 
 export const DEFAULT_COORDINATES = {
   latitude: 37.5665,

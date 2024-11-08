@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import * as styles from './CreateDiary.css';
-import InputBar from '../../components/common/CommonInput/InputBar/InputBar';
-import CreateMap from '../../components/common/CreateMap/CreateMap';
+import InputBar from '@components/common/CommonInput/InputBar/InputBar';
+import CreateMap from '@components/common/CreateMap/CreateMap';
 import { useNavigate } from 'react-router-dom';
-import useLocationAndRegion from '../../hooks/useLocationAndRegion';
-import useAuthFilter from '../../hooks/useAuthFilter';
-import useFormValidation from '../../hooks/useFormValidation';
-import { createDiary } from '../../utils/diaryApi';
-import DiaryForm from '../../components/common/DiaryForm/DiaryForm';
+import useLocationAndRegion from '@hooks/useLocationAndRegion';
+import useAuthFilter from '@hooks/useAuthFilter';
+import useFormValidation from '@hooks/useFormValidation';
+import { createDiary } from '@utils/diaryApi';
+import DiaryForm from '@components/common/DiaryForm/DiaryForm';
 
 const CreateDiary = () => {
   const { position, setPosition, region, setRegion } = useLocationAndRegion();

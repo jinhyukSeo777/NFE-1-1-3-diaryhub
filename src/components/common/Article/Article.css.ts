@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { TABLET } from '../../../constants/size';
-import { g3, g4 } from '../../../constants/color';
+import { TABLET } from '@constants/size';
+import { g3, g4 } from '@constants/color';
 
 export const articleArea = style({
   padding: 20,

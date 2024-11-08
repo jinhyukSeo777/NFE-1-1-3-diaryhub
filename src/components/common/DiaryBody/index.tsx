@@ -1,4 +1,4 @@
-import stamp from '../../../assets/icons/stamp.svg';
+import stamp from '@assets/icons/stamp.svg';
 import ImgSwiper from '../ImgSwiper';
 import * as S from './styles.css';
 import { useEffect, useRef, useState } from 'react';
@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Diary } from '../../../types/diaryTypes';
-import { DAY, DIARY_ICON } from '../../../constants/diary';
-import { deleteDiary, paintStamp } from '../../../utils/diaryApi';
-import getUserId from '../../../utils/getUserId';
+import { Diary } from '@interfaces/diaryTypes';
+import { DAY, DIARY_ICON } from '@constants/diary';
+import { deleteDiary, paintStamp } from '@utils/diaryApi';
+import getUserId from '@utils/getUserId';
 
 interface diaryProps {
   diaryInfo: Diary;

@@ -1,5 +1,5 @@
-import stamp from '../../../assets/icons/stamp.svg';
-import chat from '../../../assets/icons/chat.svg';
+import stamp from '@assets/icons/stamp.svg';
+import chat from '@assets/icons/chat.svg';
 import { container } from './Count.css';
 
 interface CountProps {
