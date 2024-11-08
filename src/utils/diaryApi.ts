@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
-const TOKEN = localStorage.getItem('authToken');
 
 export const createDiary = async (formData: FormData) => {
+  const TOKEN = localStorage.getItem('authToken');
   return axios.post(`${BASE_URL}/diaries`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -13,6 +13,7 @@ export const createDiary = async (formData: FormData) => {
 };
 
 export const editDiary = async (id: string, formData: FormData) => {
+  const TOKEN = localStorage.getItem('authToken');
   return axios.put(`${BASE_URL}/diaries/${id}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -31,6 +32,7 @@ export const getDiary = async (id: string) => {
 };
 
 export const deleteDiary = async (id: string) => {
+  const TOKEN = localStorage.getItem('authToken');
   return axios.delete(`${BASE_URL}/diaries/${id}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -49,6 +51,7 @@ export const getComment = async (id: string) => {
 
 export const createComment = async (id: string, formData: FormData) => {
   try {
+    const TOKEN = localStorage.getItem('authToken');
     return await axios.post(`${BASE_URL}/diaries/${id}/comments`, formData, {
       headers: {
         'Content-Type': 'application/json',
@@ -62,6 +65,7 @@ export const createComment = async (id: string, formData: FormData) => {
 };
 
 export const deleteComment = async (diaryId: string, commentId: string) => {
+  const TOKEN = localStorage.getItem('authToken');
   return axios.delete(`${BASE_URL}/diaries/${diaryId}/comments/${commentId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -71,6 +75,7 @@ export const deleteComment = async (diaryId: string, commentId: string) => {
 
 export const paintStamp = async (id: string) => {
   try {
+    const TOKEN = localStorage.getItem('authToken');
     if (!TOKEN) throw Error();
     const data = await axios.post(
       `${BASE_URL}/diaries/like/${id}`,
@@ -99,6 +104,7 @@ export const fetchPublicDiariesByRegion = async (
 
 export const diaryAPI = {
   getMyDiaries: async (skip: number) => {
+    const TOKEN = localStorage.getItem('authToken');
     const response = await axios.get(
       `${BASE_URL}/diaries/my-diaries?limit=9&skip=${skip}`,
       {
@@ -114,6 +120,7 @@ export const diaryAPI = {
 
 export const getWriterApi = {
   getMyDiaries: async (username: string, skip: number) => {
+    const TOKEN = localStorage.getItem('authToken');
     const response = await axios.get(
       `${BASE_URL}/diaries/public-diaries/${username}?limit=9&skip=${skip}`,
       {
