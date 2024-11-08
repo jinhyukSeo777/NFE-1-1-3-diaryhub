@@ -3,8 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import note from '@assets/icons/note.svg';
 import { Comment } from '@interfaces/diaryTypes';
-import { createComment, getComment, deleteComment } from '@utils/diaryApi';
+import {
+  createComment,
+  getComment,
+  deleteComment,
+  editComment,
+} from '@utils/diaryApi';
 import getUserId from '@utils/getUserId';
+import { useState } from 'react';
 
 interface DiaryCommentProps {
   commentsList: Comment[];
@@ -19,6 +25,8 @@ const DiaryComment = ({
   setDiaryComments,
   diaryId,
 }: DiaryCommentProps) => {
+  const [editDiaryId, setEditDiaryId] = useState('');
+  const [editDiaryContent, setEditDiaryContent] = useState('');
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -37,6 +45,25 @@ const DiaryComment = ({
     form.reset();
   };
 
+  const onEditCommentClick = async (
+    commentId: string,
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(e.currentTarget);
+    const content = formData.get('content')?.toString() || '';
+    if (content.trim().length < 1) {
+      alert('댓글을 입력해주세요!');
+    } else {
+      await editComment(diaryId, commentId, formData);
+      const commentInfo = await getComment(diaryId);
+      setDiaryComments(commentInfo);
+      setEditDiaryId('');
+      form.reset();
+    }
+  };
+
   const onDeleteCommentClick = (commentId: string) => async () => {
     await deleteComment(diaryId, commentId);
     const commentInfo = await getComment(diaryId);
@@ -53,6 +80,7 @@ const DiaryComment = ({
             name="content"
             placeholder="댓글을 입력해주세요"
             className={S.writeCommentInput}
+            maxLength={100}
           ></input>
           <button className={S.writeCommentButton}>작성</button>
         </form>
@@ -66,29 +94,57 @@ const DiaryComment = ({
                 <span className={S.commentDate}>
                   {comment.createdAt.split('T')[0]}
                 </span>
-                {comment.user._id === getUserId() ? (
-                  <span
-                    className={S.commentDeleteButton}
-                    onClick={onDeleteCommentClick(comment._id)}
-                  >
-                    삭제하기
-                  </span>
-                ) : (
-                  <></>
+                {comment.user._id === getUserId() && (
+                  <>
+                    <span
+                      className={S.commentDeleteButton}
+                      onClick={onDeleteCommentClick(comment._id)}
+                    >
+                      삭제하기
+                    </span>
+                    {editDiaryId !== comment._id && (
+                      <span
+                        className={S.commentDeleteButton}
+                        onClick={() => {
+                          setEditDiaryId(comment._id);
+                          setEditDiaryContent(comment.content);
+                        }}
+                      >
+                        수정하기
+                      </span>
+                    )}
+                  </>
                 )}
-                <p className={S.commentBody}>
-                  <FontAwesomeIcon
-                    style={{
-                      marginRight: '0.7rem',
-                      opacity: '0.5',
-                      position: 'relative',
-                      top: '3px',
-                      fontSize: '0.95rem',
-                    }}
-                    icon={faComments}
-                  />
-                  {comment.content}
-                </p>
+                {editDiaryId === comment._id ? (
+                  <form
+                    className={S.editCommentForm}
+                    onSubmit={(e) => onEditCommentClick(comment._id, e)}
+                  >
+                    <textarea
+                      name="content"
+                      value={editDiaryContent}
+                      className={S.editCommentTextArea}
+                      onChange={(e) => {
+                        setEditDiaryContent(e.target.value);
+                      }}
+                    ></textarea>
+                    <button className={S.editCommentButton}>수정</button>
+                  </form>
+                ) : (
+                  <p className={S.commentBody}>
+                    <FontAwesomeIcon
+                      style={{
+                        marginRight: '0.7rem',
+                        opacity: '0.5',
+                        position: 'relative',
+                        top: '3px',
+                        fontSize: '0.95rem',
+                      }}
+                      icon={faComments}
+                    />
+                    {comment.content}
+                  </p>
+                )}
               </li>
             );
           })

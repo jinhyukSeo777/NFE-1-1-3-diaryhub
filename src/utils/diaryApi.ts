@@ -64,6 +64,24 @@ export const createComment = async (id: string, formData: FormData) => {
   }
 };
 
+export const editComment = async (
+  diaryId: string,
+  commentId: string,
+  formData: FormData
+) => {
+  const TOKEN = localStorage.getItem('authToken');
+  return axios.put(
+    `${BASE_URL}/diaries/${diaryId}/comments/${commentId}`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+};
+
 export const deleteComment = async (diaryId: string, commentId: string) => {
   const TOKEN = localStorage.getItem('authToken');
   return axios.delete(`${BASE_URL}/diaries/${diaryId}/comments/${commentId}`, {
