@@ -143,8 +143,8 @@ export const diaryStampText = style({
   top: '-2rem',
   width: '5rem',
   color: g1,
-  animation: `${shake} 1s , ${fadeOut} 10s forwards`,
-  animationIterationCount: '10, 1',
+  animation: `${shake} 1s , ${fadeOut} 5s forwards`,
+  animationIterationCount: '5, 1',
   '@media': {
     'screen and (min-width: 768px)': {
       width: '7rem',
