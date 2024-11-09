@@ -20,7 +20,8 @@ const LoginPage: React.FC = () => {
   const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       const response = await loginUser(id, password);
 
@@ -66,21 +67,21 @@ const LoginPage: React.FC = () => {
 
       <div className={formSection}>
         <h2>로그인</h2>
-        <Input
-          type="text"
-          placeholder="ID"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button variant="login" onClick={handleLogin}>
-          Login
-        </Button>
+        <form onSubmit={handleLogin}>
+          <Input
+            type="text"
+            placeholder="ID"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button variant="login">Login</Button>
+        </form>
       </div>
     </div>
   );
