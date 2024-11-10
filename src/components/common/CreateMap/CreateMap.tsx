@@ -34,7 +34,7 @@ const CreateMap = ({ position, setPosition, setRegion }: IProps) => {
           width: '100%',
           height: '100%',
         }}
-        level={3}
+        level={5}
         onCreate={setMap}
         onCenterChanged={handleCenterChanged}
         onDragEnd={handleDragEnd}
