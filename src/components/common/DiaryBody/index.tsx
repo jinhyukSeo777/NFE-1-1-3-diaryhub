@@ -106,7 +106,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: DiaryProps) => {
                 <WeatherIcon className={S.iconImg} />
               </div>
             </div>
-            <div className={S.iconItem}>
+            <div className={S.icon}>
               <div className={S.iconText}>그날의 기분</div>
               <div className={S.iconDiv}>
                 <MoodIcon className={S.iconImg} />
