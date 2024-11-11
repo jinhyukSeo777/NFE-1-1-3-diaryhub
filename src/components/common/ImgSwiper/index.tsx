@@ -1,11 +1,11 @@
-import tape2 from '@assets/icons/tape2.svg';
-import tape3 from '@assets/icons/tape3.svg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as S from './styles.css';
 import './sliderBtnStyle.css';
 import { Image } from '@interfaces/diaryTypes';
+import { ReactComponent as Tape3 } from '@assets/icons/tape3.svg';
+import { ReactComponent as Tape2 } from '@assets/icons/tape2.svg';
 
 interface ImgSwiperProps {
   imgList: Image[];
@@ -29,8 +29,8 @@ const ImgSwiper = ({ imgList }: ImgSwiperProps) => {
               <img className={S.slideImg} src={img.url} alt="img"></img>
             </div>
             <div className={S.slideTape}>
-              <img src={tape3} className={S.slideTape1} alt="tape"></img>
-              <img src={tape2} className={S.slideTape2} alt="tape"></img>
+              <Tape3 className={S.slideTape1} />
+              <Tape2 className={S.slideTape2} />
             </div>
           </div>
         );
