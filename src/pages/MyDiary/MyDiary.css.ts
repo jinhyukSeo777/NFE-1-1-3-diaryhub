@@ -7,7 +7,7 @@ export const mydiary = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: 20,
-
+  marginBottom: '1rem',
   '@media': {
     'screen and (max-width: 1000px)': {
       gridTemplateColumns: 'repeat(2, 1fr)',
