@@ -12,7 +12,7 @@ import { DEFAULT_COORDINATES } from '@constants/location';
 
 export default function Home() {
   const [myPosition, setMyPosition] = useState(DEFAULT_COORDINATES);
-  const [myRegion, setMyRegion] = useState('');
+  const [mapPosition, setMapPosition] = useState(DEFAULT_COORDINATES);
   const [diaryData, setDiaryData] = useState<Diary[]>([]);
   const [region, setRegion] = useState('전체');
   const [skip, setSkip] = useState(0);
@@ -32,11 +32,6 @@ export default function Home() {
     setSkip((prev) => prev + 10);
   };
 
-  const setResolvedRegion = (value: string) => {
-    if (value === '현재 위치') setRegion(myRegion);
-    else setRegion(value);
-  };
-
   // 지역 변경시 호출 되는 함수
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' && initialRender.current) {
@@ -53,24 +48,26 @@ export default function Home() {
   // 내 위치 저장
   useEffect(() => {
     fetchMyGeolocation(
-      (position, region) => {
+      (position) => {
         setMyPosition(position);
-        setMyRegion(region);
       },
       () => alert('위치 정보를 가져오는 데 실패했습니다.')
     );
   }, []);
 
-  const mapLatitude =
-    region === '현재 위치' && myPosition
-      ? myPosition.latitude
-      : LOCATION_OPTIONS.find((opt) => opt.value === region)?.latitude ||
-        DEFAULT_COORDINATES.latitude;
-  const mapLongitude =
-    region === '현재 위치' && myPosition
-      ? myPosition.longitude
-      : LOCATION_OPTIONS.find((opt) => opt.value === region)?.longitude ||
-        DEFAULT_COORDINATES.longitude;
+  useEffect(() => {
+    const mapLatitude =
+      region === '현재 위치'
+        ? myPosition.latitude
+        : LOCATION_OPTIONS.find((opt) => opt.value === region)?.latitude ||
+          DEFAULT_COORDINATES.latitude;
+    const mapLongitude =
+      region === '현재 위치'
+        ? myPosition.longitude
+        : LOCATION_OPTIONS.find((opt) => opt.value === region)?.longitude ||
+          DEFAULT_COORDINATES.longitude;
+    setMapPosition({ latitude: mapLatitude, longitude: mapLongitude });
+  }, [myPosition, region]);
 
   return (
     <div className={container}>
@@ -79,7 +76,7 @@ export default function Home() {
         subtitle="누군가의 하루를 함께 느껴보세요"
       />
       <div className={homeCon}>
-        <SelectBox options={LOCATION_OPTIONS} onChange={setResolvedRegion} />
+        <SelectBox options={LOCATION_OPTIONS} onChange={setRegion} />
         <div className={home}>
           <section className={article}>
             <ArticleArea
@@ -90,8 +87,8 @@ export default function Home() {
           </section>
           <section className={map}>
             <MainMap
-              latitude={mapLatitude}
-              longitude={mapLongitude}
+              latitude={mapPosition.latitude}
+              longitude={mapPosition.longitude}
               markers={diaryData.map((diary) => ({
                 latitude: diary.location.coordinates.latitude,
                 longitude: diary.location.coordinates.longitude,
