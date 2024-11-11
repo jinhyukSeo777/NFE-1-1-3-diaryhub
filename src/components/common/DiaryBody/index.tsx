@@ -27,6 +27,8 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const navigate = useNavigate();
   const [lineCount, setLineCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
+  const WeatherIcon = DIARY_ICON[diaryInfo.weather];
+  const MoodIcon = DIARY_ICON[diaryInfo.mood];
 
   const drawLine = () => {
     const elements = [];
@@ -100,21 +102,13 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
             <div className={S.diaryIconInfo}>
               <div className={S.diaryIconTitle}>그날의 날씨</div>
               <div className={S.diaryIcon}>
-                <img
-                  className={S.diaryIconImg}
-                  src={DIARY_ICON[diaryInfo.weather]}
-                  alt="weather"
-                ></img>
+                <WeatherIcon className={S.diaryIconImg} />
               </div>
             </div>
             <div className={S.diaryIconInfo}>
               <div className={S.diaryIconTitle}>그날의 기분</div>
               <div className={S.diaryIcon}>
-                <img
-                  className={S.diaryIconImg}
-                  src={DIARY_ICON[diaryInfo.mood]}
-                  alt="feel"
-                ></img>
+                <MoodIcon className={S.diaryIconImg} />
               </div>
             </div>
           </div>
