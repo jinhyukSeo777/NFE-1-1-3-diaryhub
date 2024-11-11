@@ -28,10 +28,11 @@ const DiaryComment = ({
   const [editDiaryId, setEditDiaryId] = useState('');
   const [editDiaryContent, setEditDiaryContent] = useState('');
 
-  const saveComment = async (
+  const onSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
     commentId?: string
   ) => {
+    e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(e.currentTarget);
     const content = formData.get('content')?.toString() || '';
@@ -53,20 +54,6 @@ const DiaryComment = ({
     const commentInfo = await getComment(diaryId);
     setDiaryComments(commentInfo);
     form.reset();
-  };
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    saveComment(e);
-  };
-
-  const onEditCommentClick = async (
-    e: React.FormEvent<HTMLFormElement>,
-    commentId: string
-  ) => {
-    e.preventDefault();
-    console.log(e.currentTarget);
-    saveComment(e, commentId);
   };
 
   const onDeleteCommentClick = (commentId: string) => async () => {
@@ -125,7 +112,7 @@ const DiaryComment = ({
                 {editDiaryId === comment._id ? (
                   <form
                     className={S.editForm}
-                    onSubmit={(e) => onEditCommentClick(e, comment._id)}
+                    onSubmit={(e) => onSubmit(e, comment._id)}
                   >
                     <textarea
                       name="content"

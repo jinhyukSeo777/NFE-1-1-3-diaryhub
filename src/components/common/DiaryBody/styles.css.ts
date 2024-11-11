@@ -77,7 +77,7 @@ export const body = style({
   overflow: 'hidden',
 });
 
-export const smText = style({
+export const text = style({
   display: 'flex',
   alignItems: 'center',
   color: g2,
@@ -94,7 +94,7 @@ export const hover = style({
   },
 });
 
-export const line = style({
+export const lineList = style({
   position: 'absolute',
   top: 0,
   left: '50%',
@@ -109,7 +109,7 @@ export const line = style({
   zIndex: '-1',
 });
 
-export const diaryLineItem = style({
+export const lineItem = style({
   height: '3rem',
   boxSizing: 'border-box',
   borderBottom: `1.5px solid ${g3}`,
@@ -139,7 +139,7 @@ export const displayNone = style({
   display: 'none',
 });
 
-export const diaryStampText = style({
+export const stampText = style({
   position: 'absolute',
   fontSize: '0.7rem',
   top: '-2rem',
@@ -155,7 +155,7 @@ export const diaryStampText = style({
   },
 });
 
-export const diaryStampImage = style({
+export const stampImg = style({
   width: '5rem',
   height: '5rem',
   objectFit: 'contain',
@@ -179,12 +179,12 @@ export const diaryPaintStamp = style({
   opacity: '1',
 });
 
-export const diaryInfoButton = style({
+export const infoBox = style({
   display: 'flex',
   margin: '1rem 0',
 });
 
-export const diaryStampCount = style({
+export const stampCount = style({
   display: 'flex',
   borderRadius: '1rem',
   padding: '0 0.8rem',
@@ -215,13 +215,13 @@ export const diaryshare = style({
   fontFamily: 'HakgyoansimNadeuri',
 });
 
-export const diaryButtons = style({
+export const editButtonBox = style({
   display: 'flex',
   gap: '0.5rem',
   fontSize: '0.8rem',
 });
 
-export const diaryEditButton = style({
+export const editButton = style({
   display: 'flex',
   borderRadius: '1.1rem',
   width: '6rem',

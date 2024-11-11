@@ -1,7 +1,7 @@
 import stamp from '@assets/icons/stamp.svg';
 import ImgSwiper from '../ImgSwiper';
 import * as S from './styles.css';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -11,12 +11,12 @@ import { DAY, DIARY_ICON } from '@constants/diary';
 import { deleteDiary, paintStamp } from '@utils/diaryApi';
 import getUserId from '@utils/getUserId';
 
-interface diaryProps {
+interface DiaryProps {
   diaryInfo: Diary;
   isMyDiary: boolean;
 }
 
-const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
+const DiaryBody = ({ diaryInfo, isMyDiary }: DiaryProps) => {
   const userId = getUserId();
   const [isPaintedStamp, setIsPaintedStamp] = useState(
     diaryInfo.likes.includes(userId) || isMyDiary
@@ -33,7 +33,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
   const drawLine = () => {
     const elements = [];
     for (let i = 0; i < lineCount; i++) {
-      elements.push(<div className={S.diaryLineItem} key={i}></div>);
+      elements.push(<div className={S.lineItem} key={i}></div>);
     }
     return elements;
   };
@@ -42,7 +42,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
     navigate('/editdiary', { state: { diaryInfo } });
   };
 
-  const onStampClick = () => async () => {
+  const handleStampClick = async () => {
     if (isMyDiary) return;
 
     const likes = await paintStamp(diaryInfo._id);
@@ -58,7 +58,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
     }
   };
 
-  const onDeleteDiaryClick = () => async () => {
+  const handleDeleteDiaryClick = async () => {
     deleteDiary(diaryInfo._id);
     navigate('/');
   };
@@ -70,17 +70,18 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
     }
   };
 
+  const calculateLineCount = useCallback(() => {
+    if (textRef.current) {
+      const lineHeight = parseInt(
+        window.getComputedStyle(textRef.current).lineHeight
+      );
+      const height = textRef.current.clientHeight;
+      const lines = Math.floor(height / lineHeight);
+      setLineCount(lines + 2);
+    }
+  }, []);
+
   useEffect(() => {
-    const calculateLineCount = () => {
-      if (textRef.current) {
-        const lineHeight = parseInt(
-          window.getComputedStyle(textRef.current).lineHeight
-        );
-        const height = textRef.current.clientHeight;
-        const lines = Math.floor(height / lineHeight);
-        setLineCount(lines + 2);
-      }
-    };
     calculateLineCount();
     window.addEventListener('resize', calculateLineCount);
     setIsShowStampMent(isPaintedStamp);
@@ -108,7 +109,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
             <div className={S.iconItem}>
               <div className={S.iconText}>그날의 기분</div>
               <div className={S.iconDiv}>
-                <WeatherIcon className={S.iconImg} />
+                <MoodIcon className={S.iconImg} />
               </div>
             </div>
           </div>
@@ -119,7 +120,7 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
         <div className={S.body}>
           <div ref={textRef}>{diaryInfo.content}</div>
           <div style={{ height: '3rem' }}></div>
-          <div className={S.smText}>
+          <div className={S.text}>
             <FontAwesomeIcon icon={faLocationDot} />
             <span style={{ marginLeft: '0.5rem' }}>
               장소: {diaryInfo.location.state || ''}
@@ -133,24 +134,24 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
               작성자: {diaryInfo.user.username || ''}
             </span>
           </div>
-          <div className={S.line}>{drawLine()}</div>
+          <div className={S.lineList}>{drawLine()}</div>
           <div className={S.stamp}>
             <div
-              className={`${S.diaryStampText} ${isShowStampMent && S.displayNone}`}
+              className={`${S.stampText} ${isShowStampMent && S.displayNone}`}
             >
               스탬프를 찍어보세요!
             </div>
             <img
               src={stamp}
               alt="stamp"
-              className={`${S.diaryStampImage} ${isPaintedStamp && S.diaryPaintStamp}`}
-              onClick={onStampClick()}
+              className={`${S.stampImg} ${isPaintedStamp && S.diaryPaintStamp}`}
+              onClick={handleStampClick}
             ></img>
           </div>
         </div>
       </div>
-      <div className={S.diaryInfoButton}>
-        <div className={S.diaryStampCount}>
+      <div className={S.infoBox}>
+        <div className={S.stampCount}>
           <img src={stamp} alt="stampCount" className={S.diaryStampbtn} />
           <span>{stampCount}</span>
         </div>
@@ -159,11 +160,11 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
         </div>
         <div style={{ flexGrow: '1' }}></div>
         {isMyDiary && (
-          <div className={S.diaryButtons}>
-            <div className={S.diaryEditButton} onClick={goEditPage}>
+          <div className={S.editButtonBox}>
+            <div className={S.editButton} onClick={goEditPage}>
               일기 수정하기
             </div>
-            <div className={S.diaryEditButton} onClick={onDeleteDiaryClick()}>
+            <div className={S.editButton} onClick={handleDeleteDiaryClick}>
               일기 삭제하기
             </div>
           </div>
