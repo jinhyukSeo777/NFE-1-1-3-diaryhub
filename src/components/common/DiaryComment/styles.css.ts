@@ -70,7 +70,7 @@ export const editCommentTextArea = style({
 });
 
 export const editCommentButton = style({
-  borderRadius: '0.7rem',
+  borderRadius: '1rem',
   marginTop: '0.3rem',
   padding: '0.5rem 1rem',
   backgroundColor: b1,
