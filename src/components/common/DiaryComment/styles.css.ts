@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { b1, g1, g2, g3 } from '@constants/color';
+import { b1, b2, g1, g2, g3 } from '@constants/color';
 export const commentContainer = style({
   margin: '5rem 0 8rem 0',
 });
@@ -67,6 +67,24 @@ export const editCommentTextArea = style({
   resize: 'none',
   height: '5rem',
   fontFamily: 'HakgyoansimGeurimilgi',
+});
+
+export const editCommentCancelButton = style({
+  borderRadius: '0.7rem',
+  marginTop: '0.3rem',
+  marginRight: '0.3rem',
+  padding: '0.5rem 1rem',
+  backgroundColor: 'white',
+  border: 'none',
+  color: g2,
+  cursor: 'pointer',
+  boxShadow: '0 0 6px rgba(0, 0, 0, 0.2)',
+  selectors: {
+    '&:hover': {
+      color: b1,
+      transition: 'all 0.3s',
+    },
+  },
 });
 
 export const editCommentButton = style({

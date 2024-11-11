@@ -128,7 +128,18 @@ const DiaryComment = ({
                         setEditDiaryContent(e.target.value);
                       }}
                     ></textarea>
-                    <button className={S.editCommentButton}>수정</button>
+                    <button
+                      type="button"
+                      className={S.editCommentCancelButton}
+                      onClick={() => {
+                        setEditDiaryId('');
+                      }}
+                    >
+                      취소
+                    </button>
+                    <button type="submit" className={S.editCommentButton}>
+                      수정
+                    </button>
                   </form>
                 ) : (
                   <p className={S.commentBody}>
