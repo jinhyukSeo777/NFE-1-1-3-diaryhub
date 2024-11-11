@@ -1,10 +1,10 @@
 import { style } from '@vanilla-extract/css';
 import { TABLET } from '@constants/size';
 
-export const diaryDetailWrapper = style({
-  maxWidth: TABLET,
-  width: '80%',
+export const wrapper = style({
   margin: 'auto',
   marginTop: '5rem',
+  maxWidth: TABLET,
+  width: '80%',
   cursor: 'default',
 });

@@ -7,6 +7,7 @@ import { Diary, Comment } from '@interfaces/diaryTypes';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getComment, getDiary } from '@utils/diaryApi';
+import getUserId from '@utils/getUserId';
 
 const DiaryDetail = () => {
   const param: { id?: string } = useParams();
@@ -26,9 +27,8 @@ const DiaryDetail = () => {
       setDiaryComments(diaryComments);
       if (diaryInfo && diaryComments) {
         const writer = diaryInfo.user._id;
-        const token = localStorage.getItem('authToken');
-        const isMine =
-          token && JSON.parse(atob(token.split('.')[1])).userId === writer;
+        const userId = getUserId();
+        const isMine = userId === writer;
         if (isMine) {
           setIsMyDiary(true);
         }
@@ -44,7 +44,7 @@ const DiaryDetail = () => {
   }, [param.id]);
 
   return diaryInfo && diaryComments && param.id ? (
-    <div className={S.diaryDetailWrapper}>
+    <div className={S.wrapper}>
       <TitleBanner
         title={date}
         subtitle="생각과 감정을 기록한 일기를 만나보세요"
