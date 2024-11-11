@@ -1,5 +1,5 @@
 import * as styles from './Loading.css';
-import { ReactComponent as Logo } from '@assets/logo.svg';
+import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 
 const Loading = () => {
   return (
