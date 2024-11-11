@@ -27,17 +27,27 @@ const DiaryComment = ({
 }: DiaryCommentProps) => {
   const [editDiaryId, setEditDiaryId] = useState('');
   const [editDiaryContent, setEditDiaryContent] = useState('');
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const saveComment = async (
+    e: React.FormEvent<HTMLFormElement>,
+    commentId?: string
+  ) => {
     const form = e.currentTarget;
     const formData = new FormData(e.currentTarget);
     const content = formData.get('content')?.toString() || '';
     if (content.trim().length < 1) {
       alert('댓글을 입력해주세요!');
+      return;
+    }
+    if (commentId) {
+      await editComment(diaryId, commentId, formData);
+      setEditDiaryId('');
+      setEditDiaryContent('');
     } else {
       const result = await createComment(diaryId, formData);
       if (result === null) {
         alert('댓글을 작성하려면 로그인해야 합니다!');
+        return;
       }
     }
     const commentInfo = await getComment(diaryId);
@@ -45,23 +55,18 @@ const DiaryComment = ({
     form.reset();
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    saveComment(e);
+  };
+
   const onEditCommentClick = async (
-    commentId: string,
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
+    commentId: string
   ) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(e.currentTarget);
-    const content = formData.get('content')?.toString() || '';
-    if (content.trim().length < 1) {
-      alert('댓글을 입력해주세요!');
-    } else {
-      await editComment(diaryId, commentId, formData);
-      const commentInfo = await getComment(diaryId);
-      setDiaryComments(commentInfo);
-      setEditDiaryId('');
-      form.reset();
-    }
+    console.log(e.currentTarget);
+    saveComment(e, commentId);
   };
 
   const onDeleteCommentClick = (commentId: string) => async () => {
@@ -71,40 +76,42 @@ const DiaryComment = ({
   };
 
   return (
-    <div className={S.commentContainer}>
-      <div className={S.writeCommentBox}>
-        <p className={S.writeCommentTitle}>댓글</p>
-        <form className={S.writeCommentForm} onSubmit={(e) => onSubmit(e)}>
+    <div className={S.container}>
+      <div className={S.box}>
+        <p className={S.title}>댓글</p>
+        <form className={S.form} onSubmit={(e) => onSubmit(e)}>
           <input
             type="text"
             name="content"
             placeholder="댓글을 입력해주세요"
-            className={S.writeCommentInput}
+            className={S.input}
             maxLength={100}
           ></input>
-          <button className={S.writeCommentButton}>작성</button>
+          <button className={S.button}>작성</button>
         </form>
       </div>
-      <ul className={S.commentList}>
+      <ul className={S.list}>
         {commentsList.length > 0 ? (
           commentsList.map((comment, index) => {
             return (
-              <li className={S.commentItem} key={index}>
-                <span className={S.commentUser}>{comment.user.username} </span>
-                <span className={S.commentDate}>
+              <li className={S.listItem} key={index}>
+                <span className={S.span_darkGray}>
+                  {comment.user.username}{' '}
+                </span>
+                <span className={S.span_gray}>
                   {comment.createdAt.split('T')[0]}
                 </span>
                 {comment.user._id === getUserId() && (
                   <>
                     <span
-                      className={S.commentDeleteButton}
+                      className={S.button_text}
                       onClick={onDeleteCommentClick(comment._id)}
                     >
                       삭제하기
                     </span>
                     {editDiaryId !== comment._id && (
                       <span
-                        className={S.commentDeleteButton}
+                        className={S.button_text}
                         onClick={() => {
                           setEditDiaryId(comment._id);
                           setEditDiaryContent(comment.content);
@@ -117,32 +124,30 @@ const DiaryComment = ({
                 )}
                 {editDiaryId === comment._id ? (
                   <form
-                    className={S.editCommentForm}
-                    onSubmit={(e) => onEditCommentClick(comment._id, e)}
+                    className={S.editForm}
+                    onSubmit={(e) => onEditCommentClick(e, comment._id)}
                   >
                     <textarea
                       name="content"
                       value={editDiaryContent}
-                      className={S.editCommentTextArea}
+                      className={S.textArea}
                       onChange={(e) => {
                         setEditDiaryContent(e.target.value);
                       }}
                     ></textarea>
                     <button
                       type="button"
-                      className={S.editCommentCancelButton}
+                      className={S.button_white}
                       onClick={() => {
                         setEditDiaryId('');
                       }}
                     >
                       취소
                     </button>
-                    <button type="submit" className={S.editCommentButton}>
-                      수정
-                    </button>
+                    <button className={S.button_blue}>수정</button>
                   </form>
                 ) : (
-                  <p className={S.commentBody}>
+                  <p className={S.text}>
                     <FontAwesomeIcon
                       style={{
                         marginRight: '0.7rem',
@@ -160,7 +165,7 @@ const DiaryComment = ({
             );
           })
         ) : (
-          <div className={S.emptyCommentBox}>
+          <div className={S.emptyBox}>
             <img src={note} alt="note"></img>
             <p>아직 댓글이 없어요.</p>
           </div>

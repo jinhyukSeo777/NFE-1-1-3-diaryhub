@@ -1,27 +1,28 @@
 import { style } from '@vanilla-extract/css';
-import { b1, b2, g1, g2, g3 } from '@constants/color';
-export const commentContainer = style({
+import { b1, g1, g2, g3 } from '@constants/color';
+
+export const container = style({
   margin: '5rem 0 8rem 0',
 });
 
-export const writeCommentBox = style({
+export const box = style({
   border: `1px solid ${g3}`,
   padding: '1rem',
   borderRadius: '1rem',
   fontWeight: '700',
 });
 
-export const writeCommentTitle = style({
+export const title = style({
   padding: '1rem',
   paddingLeft: '0.5rem',
 });
 
-export const writeCommentForm = style({
+export const form = style({
   display: 'flex',
   justifyContent: 'space-between',
 });
 
-export const writeCommentInput = style({
+export const input = style({
   flexGrow: '1',
   marginRight: '1rem',
   padding: '0.8rem',
@@ -35,7 +36,7 @@ export const writeCommentInput = style({
   },
 });
 
-export const writeCommentButton = style({
+export const button = style({
   padding: '0.6rem 1.7rem',
   borderRadius: '1.3rem',
   border: 'none',
@@ -53,12 +54,12 @@ export const writeCommentButton = style({
   },
 });
 
-export const editCommentForm = style({
+export const editForm = style({
   padding: '1rem 0',
   textAlign: 'end',
 });
 
-export const editCommentTextArea = style({
+export const textArea = style({
   padding: '0.5rem',
   width: '100%',
   border: `1px solid ${g3}`,
@@ -69,7 +70,7 @@ export const editCommentTextArea = style({
   fontFamily: 'HakgyoansimGeurimilgi',
 });
 
-export const editCommentCancelButton = style({
+export const button_white = style({
   borderRadius: '0.7rem',
   marginTop: '0.3rem',
   marginRight: '0.3rem',
@@ -87,7 +88,7 @@ export const editCommentCancelButton = style({
   },
 });
 
-export const editCommentButton = style({
+export const button_blue = style({
   borderRadius: '1rem',
   marginTop: '0.3rem',
   padding: '0.5rem 1rem',
@@ -104,31 +105,31 @@ export const editCommentButton = style({
   },
 });
 
-export const commentList = style({
+export const list = style({
   listStyle: 'none',
   padding: '0',
   marginTop: '2rem',
 });
 
-export const commentItem = style({
+export const listItem = style({
   marginTop: '1rem',
   paddingTop: '1rem',
   borderBottom: `1px solid ${g3}`,
 });
 
-export const commentUser = style({
+export const span_darkGray = style({
   margin: '0 0.5rem',
   fontWeight: '500',
   color: g1,
 });
 
-export const commentDate = style({
+export const span_gray = style({
   margin: '0 0.5rem',
   fontSize: '0.8rem',
   color: g2,
 });
 
-export const commentDeleteButton = style({
+export const button_text = style({
   marginLeft: '0.5rem',
   fontSize: '0.7rem',
   color: g2,
@@ -141,11 +142,11 @@ export const commentDeleteButton = style({
   },
 });
 
-export const commentBody = style({
+export const text = style({
   padding: '1rem 0.5rem',
 });
 
-export const emptyCommentBox = style({
+export const emptyBox = style({
   margin: '5rem 0',
   textAlign: 'center',
   lineHeight: '2rem',

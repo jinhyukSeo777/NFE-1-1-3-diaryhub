@@ -63,6 +63,13 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
     navigate('/');
   };
 
+  const handleAuthorClick = () => {
+    const username = diaryInfo.user.username;
+    if (username) {
+      navigate(`/writerdiary/${username}`);
+    }
+  };
+
   useEffect(() => {
     const calculateLineCount = () => {
       if (textRef.current) {
@@ -82,44 +89,37 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
     };
   }, []);
 
-  const handleAuthorClick = () => {
-    const username = diaryInfo.user.username;
-    if (username) {
-      navigate(`/writerdiary/${username}`);
-    }
-  };
-
   return (
     <>
-      <div className={S.diaryContainer}>
-        <div className={S.diaryTitleBox}>
-          <div className={S.diaryTitleText}>
+      <div className={S.container}>
+        <div className={S.grid}>
+          <div className={S.textItem}>
             {diaryDate.getFullYear()}년 {diaryDate.getMonth() + 1}월{' '}
             {diaryDate.getDate()}일 {DAY[diaryDate.getDay()]}
           </div>
-          <div className={S.diaryTitleText}>제목: {diaryInfo.title}</div>
-          <div className={S.diaryTitleIcon}>
-            <div className={S.diaryIconInfo}>
-              <div className={S.diaryIconTitle}>그날의 날씨</div>
-              <div className={S.diaryIcon}>
-                <WeatherIcon className={S.diaryIconImg} />
+          <div className={S.textItem}>제목: {diaryInfo.title}</div>
+          <div className={S.iconItem}>
+            <div className={S.icon}>
+              <div className={S.iconText}>그날의 날씨</div>
+              <div className={S.iconDiv}>
+                <WeatherIcon className={S.iconImg} />
               </div>
             </div>
-            <div className={S.diaryIconInfo}>
-              <div className={S.diaryIconTitle}>그날의 기분</div>
-              <div className={S.diaryIcon}>
-                <MoodIcon className={S.diaryIconImg} />
+            <div className={S.iconItem}>
+              <div className={S.iconText}>그날의 기분</div>
+              <div className={S.iconDiv}>
+                <WeatherIcon className={S.iconImg} />
               </div>
             </div>
           </div>
         </div>
-        <div className={S.diaryslide}>
+        <div className={S.slide}>
           <ImgSwiper imgList={diaryInfo.images} />
         </div>
-        <div className={S.diaryBody}>
+        <div className={S.body}>
           <div ref={textRef}>{diaryInfo.content}</div>
           <div style={{ height: '3rem' }}></div>
-          <div className={S.diaryEtc}>
+          <div className={S.smText}>
             <FontAwesomeIcon icon={faLocationDot} />
             <span style={{ marginLeft: '0.5rem' }}>
               장소: {diaryInfo.location.state || ''}
@@ -127,14 +127,14 @@ const DiaryBody = ({ diaryInfo, isMyDiary }: diaryProps) => {
             <FontAwesomeIcon icon={faUser} style={{ marginLeft: '1rem' }} />
             <span
               style={{ marginLeft: '0.5rem' }}
-              className={S.DiaryAuthor}
+              className={S.hover}
               onClick={handleAuthorClick}
             >
               작성자: {diaryInfo.user.username || ''}
             </span>
           </div>
-          <div className={S.diaryLine}>{drawLine()}</div>
-          <div className={S.diaryStamp}>
+          <div className={S.line}>{drawLine()}</div>
+          <div className={S.stamp}>
             <div
               className={`${S.diaryStampText} ${isShowStampMent && S.displayNone}`}
             >
