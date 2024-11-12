@@ -1,18 +1,18 @@
 import { keyframes, style } from '@vanilla-extract/css';
 import { g2, g3, b1, b2, g1 } from '../../../constants/color';
 
-export const diaryContainer = style({
+export const container = style({
   fontFamily: 'HakgyoansimNadeuri',
   border: `1px solid ${g3}`,
   marginTop: '2.5rem',
 });
 
-export const diaryTitleBox = style({
+export const grid = style({
   display: 'grid',
   gridTemplateColumns: '2fr 1fr',
 });
 
-export const diaryTitleText = style({
+export const textItem = style({
   padding: '0 1rem',
   border: `1px solid ${g3}`,
   lineHeight: '3rem',
@@ -20,7 +20,7 @@ export const diaryTitleText = style({
   color: '#3A3A3A',
 });
 
-export const diaryTitleIcon = style({
+export const iconItem = style({
   border: `1px solid ${g3}`,
   padding: '1rem 0',
   gridColumn: '2 / 3',
@@ -30,11 +30,12 @@ export const diaryTitleIcon = style({
   justifyContent: 'center',
   textAlign: 'center',
 });
-export const diaryIconInfo = style({
+
+export const icon = style({
   width: '50%',
 });
 
-export const diaryIconTitle = style({
+export const iconText = style({
   fontSize: '0.5rem',
   color: '#3A3A3A',
   '@media': {
@@ -44,14 +45,14 @@ export const diaryIconTitle = style({
   },
 });
 
-export const diaryIcon = style({
+export const iconDiv = style({
   position: 'relative',
-  width: '3rem',
-  paddingTop: '3rem',
   margin: 'auto',
+  paddingTop: '3rem',
+  width: '3rem',
 });
 
-export const diaryIconImg = style({
+export const iconImg = style({
   position: 'absolute',
   top: '0',
   left: '0',
@@ -60,30 +61,30 @@ export const diaryIconImg = style({
   objectFit: 'cover',
 });
 
-export const diaryslide = style({
+export const slide = style({
   border: `1px solid ${g3}`,
   padding: '3rem 0',
   overflow: 'hidden',
 });
 
-export const diaryBody = style({
-  padding: '1rem',
+export const body = style({
   position: 'relative',
+  padding: '1rem',
+  color: '#3A3A3A',
+  fontSize: '1.2rem',
+  lineHeight: '3rem',
   border: `1px solid ${g3}`,
   overflow: 'hidden',
-  lineHeight: '3rem',
-  fontSize: '1.2rem',
-  color: '#3A3A3A',
 });
 
-export const diaryEtc = style({
+export const text = style({
   display: 'flex',
   alignItems: 'center',
   color: g2,
   fontSize: '0.8rem',
 });
 
-export const DiaryAuthor = style({
+export const hover = style({
   cursor: 'pointer',
   selectors: {
     '&:hover': {
@@ -93,7 +94,7 @@ export const DiaryAuthor = style({
   },
 });
 
-export const diaryLine = style({
+export const lineList = style({
   position: 'absolute',
   top: 0,
   left: '50%',
@@ -108,7 +109,7 @@ export const diaryLine = style({
   zIndex: '-1',
 });
 
-export const diaryLineItem = style({
+export const lineItem = style({
   height: '3rem',
   boxSizing: 'border-box',
   borderBottom: `1.5px solid ${g3}`,
@@ -121,12 +122,13 @@ const shake = keyframes({
   '75%': { transform: 'rotate(0deg)' },
   '100%': { transform: 'rotate(5deg)' },
 });
+
 const fadeOut = keyframes({
   '99%': { opacity: '1' },
   '100%': { opacity: '0' },
 });
 
-export const diaryStamp = style({
+export const stamp = style({
   position: 'absolute',
   bottom: '0',
   right: '1rem',
@@ -137,7 +139,7 @@ export const displayNone = style({
   display: 'none',
 });
 
-export const diaryStampText = style({
+export const stampText = style({
   position: 'absolute',
   fontSize: '0.7rem',
   top: '-2rem',
@@ -153,7 +155,7 @@ export const diaryStampText = style({
   },
 });
 
-export const diaryStampImage = style({
+export const stampImg = style({
   width: '5rem',
   height: '5rem',
   objectFit: 'contain',
@@ -177,12 +179,12 @@ export const diaryPaintStamp = style({
   opacity: '1',
 });
 
-export const diaryInfoButton = style({
+export const infoBox = style({
   display: 'flex',
   margin: '1rem 0',
 });
 
-export const diaryStampCount = style({
+export const stampCount = style({
   display: 'flex',
   borderRadius: '1rem',
   padding: '0 0.8rem',
@@ -213,13 +215,13 @@ export const diaryshare = style({
   fontFamily: 'HakgyoansimNadeuri',
 });
 
-export const diaryButtons = style({
+export const editButtonBox = style({
   display: 'flex',
   gap: '0.5rem',
   fontSize: '0.8rem',
 });
 
-export const diaryEditButton = style({
+export const editButton = style({
   display: 'flex',
   borderRadius: '1.1rem',
   width: '6rem',

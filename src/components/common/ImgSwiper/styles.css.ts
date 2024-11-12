@@ -4,7 +4,7 @@ export const slide = style({
   position: 'relative',
 });
 
-export const slideItem = style({
+export const div = style({
   position: 'relative',
   width: '50%',
   paddingTop: '50%',
@@ -23,7 +23,7 @@ export const slideItem = style({
   },
 });
 
-export const slideImg = style({
+export const img = style({
   position: 'absolute',
   top: 0,
   width: '100%',
@@ -31,7 +31,7 @@ export const slideImg = style({
   objectFit: 'cover',
 });
 
-export const slideTape = style({
+export const cover = style({
   position: 'absolute',
   width: '50%',
   paddingTop: '50%',
@@ -52,14 +52,14 @@ export const slideTape = style({
   },
 });
 
-export const slideTape1 = style({
+export const tape1 = style({
   position: 'absolute',
   top: '-4rem',
   left: '-4rem',
   transform: 'scale(0.7)',
 });
 
-export const slideTape2 = style({
+export const tape2 = style({
   position: 'absolute',
   bottom: '-0rem',
   right: '-6rem',
