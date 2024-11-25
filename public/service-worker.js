@@ -1,7 +1,14 @@
 /* eslint-disable no-restricted-globals */
 
 const CACHE_NAME = 'diaryhub-cache-v1';
-const urlsToCache = ['/', '/index.html', '/manifest.json'];
+const DYNAMIC_CACHE = 'diaryhub-dynamic-v1';
+
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  // 실제 프로젝트의 정적 파일들...
+];
 
 // 설치 단계에서 리소스 캐싱
 self.addEventListener('install', (event) => {
@@ -17,7 +24,38 @@ self.addEventListener('fetch', (event) => {
       if (response) {
         return response;
       }
-      return fetch(event.request);
+
+      return fetch(event.request)
+        .then((response) => {
+          // HTML 요청인 경우 (네비게이션 요청)
+          if (event.request.mode === 'navigate') {
+            return caches.match('/');
+          }
+
+          // 다른 리소스들에 대한 처리
+          if (
+            !response ||
+            response.status !== 200 ||
+            response.type !== 'basic'
+          ) {
+            return response;
+          }
+
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+
+          return response;
+        })
+        .catch(() => {
+          // 오프라인이고 HTML 요청인 경우
+          if (event.request.mode === 'navigate') {
+            return caches.match('/');
+          }
+          // 다른 리소스들에 대한 오프라인 폴백
+          return new Response('오프라인 상태입니다.');
+        });
     })
   );
 });
