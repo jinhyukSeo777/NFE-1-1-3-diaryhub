@@ -5,6 +5,7 @@ import GlobalStyle from './styles/GlobalStyles';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ScrollToTop from './utils/ScrollToTop';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const queryClient = new QueryClient();
 
@@ -22,3 +23,5 @@ root.render(
     </React.StrictMode>
   </BrowserRouter>
 );
+
+serviceWorkerRegistration.register();
